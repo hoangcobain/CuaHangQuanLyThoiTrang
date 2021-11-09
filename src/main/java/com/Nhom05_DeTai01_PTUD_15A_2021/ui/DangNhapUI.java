@@ -2,6 +2,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,6 +35,7 @@ public class DangNhapUI extends JFrame {
 	private JPasswordField pwdMatKhau;
 	private int mouseX , mouseY;
 	private JPanel contentPane;
+	protected JLabel lblQuenMatKHau;
 	
 	@Autowired
 	private TaiKhoanController controller;
@@ -106,6 +108,7 @@ public class DangNhapUI extends JFrame {
 		lblMatKhau.setForeground(Color.WHITE);
 		
 		KButton btnDangNhap = new KButton();
+		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDangNhap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -181,6 +184,28 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.add(lblInstagram);
 		gradientPanel.add(lblYoutube);
 		contentPane.add(gradientPanel);
+		
+		lblQuenMatKHau = new JLabel("Quên mật khẩu...?");
+		lblQuenMatKHau.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				try {
+					QuenMatKhauUI frame = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(QuenMatKhauUI.class);
+					frame.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		lblQuenMatKHau.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblQuenMatKHau.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblQuenMatKHau.setForeground(Color.WHITE);
+		lblQuenMatKHau.setBounds(477, 451, 125, 14);
+		gradientPanel.add(lblQuenMatKHau);
 	}
 
 	protected void dangNhap() {
@@ -197,5 +222,4 @@ public class DangNhapUI extends JFrame {
 			this.dispose();
 		}
 	}
-
 }

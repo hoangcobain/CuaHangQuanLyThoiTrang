@@ -14,8 +14,8 @@ public interface KhachHangDAO extends JpaRepository<KhachHang, String>{
 	List<KhachHang> search(String ten, String sdt, int gioiTinh);
 	
 	
-	@Query(value = "SELECT * FROM [dbo].[khach_hang] WHERE ?1=[so_dien_thoai]",
+	@Query(value = "SELECT * FROM [dbo].[khach_hang] WHERE ?1=[so_dien_thoai] OR ?2=[ten_khach_hang]",
 			nativeQuery = true)
-	List<KhachHang> searchHoaDonBySDT(String sdt);
+	List<KhachHang> searchHoaDonBySDT(String sdt,String ten);
 	
 }

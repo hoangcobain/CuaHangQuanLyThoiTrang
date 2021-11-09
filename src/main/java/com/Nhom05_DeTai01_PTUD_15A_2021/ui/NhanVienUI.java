@@ -31,7 +31,7 @@ public class NhanVienUI extends JPanel {
 	protected JTextField txtDiaChi;
 	protected final ButtonGroup buttonGroup = new ButtonGroup();
 	protected JTable tblDSNhanVien;
-	protected JButton btnThem, btnSua, btnXoaTrang,btnTimTheoSDT,btnTimNV,btnLamMoi;
+	protected JButton btnThem, btnSua, btnXoaTrang,btnTimNV,btnLamMoi;
 	protected JRadioButton radNam, radNu;
 	protected DefaultTableModel listNhanVien;
 	protected JComboBox<String> cmbTimKiem;
@@ -221,9 +221,6 @@ public class NhanVienUI extends JPanel {
 		cmbTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cmbTimKiem.setEditable(true);
 		
-		btnTimTheoSDT = new JButton("SDT");
-		btnTimTheoSDT.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
 		btnTimNV = new JButton("");
 		btnTimNV.setIcon(new ImageIcon(NhanVienUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_search_20px.png")));
 		btnTimNV.setToolTipText("Tìm khách hàng");
@@ -242,16 +239,14 @@ public class NhanVienUI extends JPanel {
 					.addContainerGap()
 					.addComponent(lblTimKiem, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cmbTimKiem, 0, 153, Short.MAX_VALUE)
+					.addComponent(cmbTimKiem, 0, 93, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addGap(35))
 				.addGroup(gl_pnlTimKiem.createSequentialGroup()
-					.addGap(74)
-					.addComponent(btnTimTheoSDT)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(153)
 					.addComponent(btnLamMoi)
-					.addContainerGap(110, Short.MAX_VALUE))
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		gl_pnlTimKiem.setVerticalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
@@ -265,9 +260,7 @@ public class NhanVienUI extends JPanel {
 								.addComponent(lblTimKiem)))
 						.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnLamMoi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnTimTheoSDT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(btnLamMoi)
 					.addContainerGap(155, Short.MAX_VALUE))
 		);
 		pnlTimKiem.setLayout(gl_pnlTimKiem);

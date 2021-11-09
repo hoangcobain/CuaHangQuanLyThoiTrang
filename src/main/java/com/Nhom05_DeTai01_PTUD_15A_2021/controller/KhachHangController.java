@@ -3,7 +3,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 import java.util.Iterator;
 import java.util.List;
 
-
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,26 +37,13 @@ public class KhachHangController {
 		return khachHangDAO.findAll();
 	}
 	
-	public void loadTKKH(JComboBox<String> cmbTimKiemKH) {
-		List<KhachHang> listL = khachHangDAO.findAll();
-		cmbTimKiemKH.removeAllItems();
-		for (Iterator<KhachHang> iterator = listL.iterator(); iterator.hasNext();) {
-			KhachHang khachHang = iterator.next();
-			cmbTimKiemKH.addItem(khachHang.getMaKhachHang());
-		}	
-	}
-	public void loadTKKHTheoSDT(JComboBox<String> cmbTimKiemKH) {
-		List<KhachHang> listL = khachHangDAO.findAll();
-		cmbTimKiemKH.removeAllItems();
-		for (Iterator<KhachHang> iterator = listL.iterator(); iterator.hasNext();) {
-			KhachHang khachHang = iterator.next();
-			cmbTimKiemKH.addItem(khachHang.getSoDienThoai());
-		}	
-	}
 
-	public void loadKhachHang(DefaultTableModel listKhachHang) {
+	public void loadKhachHang(DefaultTableModel listKhachHang,JComboBox<String> cmbTimKiemKH) {
 		List<KhachHang> list = khachHangDAO.findAll();
 		listKhachHang.setRowCount(0);
+		cmbTimKiemKH.removeAllItems();
+		cmbTimKiemKH.setModel(new DefaultComboBoxModel<String>(new String[] {"---Tìm theo tên,số điện thoại---"}));
+		cmbTimKiemKH.setEditable(true);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();
 			String gioiTinh = "Nam";
@@ -64,21 +51,15 @@ public class KhachHangController {
 				gioiTinh = "Nữ";
 			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai()
 					,khachHang.getDiaChi(),gioiTinh};
-			listKhachHang.addRow(row);
+				cmbTimKiemKH.addItem(khachHang.getSoDienThoai());
+				cmbTimKiemKH.addItem(khachHang.getTenKhachHang());
+				listKhachHang.addRow(row);			
 		}
 	}
 	
-//	public void searchKhachHangById(DefaultTableModel listKhachHang, String id) {
-//		List<KhachHang> list = khachHangDAO.searchHoaDonByKH(id);
-//		listKhachHang.setRowCount(0);
-//		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
-//			KhachHang khachHang = (KhachHang) iterator.next();
-//			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai(),khachHang.getDiaChi()};
-//			listKhachHang.addRow(row);
-//		}
-//	}
-	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt) {
-		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt);
+	
+	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt,String ten) {
+		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt,ten);
 		listKhachHang.setRowCount(0);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();

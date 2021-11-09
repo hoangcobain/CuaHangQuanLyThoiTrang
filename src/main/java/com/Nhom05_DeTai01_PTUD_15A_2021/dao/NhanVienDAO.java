@@ -13,7 +13,10 @@ public interface NhanVienDAO extends JpaRepository<NhanVien, String>{
 			nativeQuery = true)
 	List<NhanVien> search(String ten, String sdt, String email);
 	
-	@Query(value = "SELECT * FROM [dbo].[nhan_vien] WHERE ?1=[so_dien_thoai]",
+	@Query(value = "SELECT * FROM [dbo].[nhan_vien] WHERE ?1=[so_dien_thoai] OR ?2=[ten_nhan_vien]",
 			nativeQuery = true)
-	List<NhanVien> searchBySDTNV(String sdt);
+	List<NhanVien> searchBySDTNV(String sdt,String ten);
+	
+
+	
 }

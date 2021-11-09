@@ -1,7 +1,9 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Image;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -74,7 +76,7 @@ public class HomePageUI extends JFrame {
 	private KhachHangUI pnlKhachHang = new KhachHangUI();
 	private NhanVienUI pnlNhanVien = new NhanVienUI();
 	private ChiTietHoaDonUI pnlChiTietHoaDon = new ChiTietHoaDonUI();
-	
+	private NguonHangUI pnlNguonHang= new NguonHangUI();
 	private byte[] personalImage;
 	SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
@@ -138,23 +140,27 @@ public class HomePageUI extends JFrame {
 					paneContent.setViewportView(pnlLoaiSanPham);
 					loadLoaiSanPham();
 					break;
-				case 5:
+				case 3:
+					paneContent.setViewportView(pnlNguonHang);
+		
+					break;
+				case 6:
 					paneContent.setViewportView(pnlKhachHang);
 					loadKhachHang();
 					break;
-				case 6:
+				case 7:
 					paneContent.setViewportView(pnlNhanVien);
 					loadNhanVien();
 					break;
-				case 9:
+				case 10:
 					paneContent.setViewportView(pnlhoaDon);
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 					break;
-				case 10:
+				case 11:
 					paneContent.setViewportView(pnlLapHoaDon);
 					loadHoaDon();
 					break;
-				case 11:
+				case 12:
 					paneContent.setViewportView(pnlThongKe);
 					break;
 				default:
@@ -382,7 +388,6 @@ public class HomePageUI extends JFrame {
 				String tenSP = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
 				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
 				
-				pnlLapHoaDon.txtDonGia.setText(donGia);
 				pnlLapHoaDon.txtMaSanPham.setText(id);
 				pnlLapHoaDon.txtTenNCC.setText(tenNcc);
 				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
@@ -405,13 +410,6 @@ public class HomePageUI extends JFrame {
 				pnlLapHoaDon.txtMaSanPham.setText(table.getModel().getValueAt(index, 0).toString());
 				pnlLapHoaDon.txtSoLuong.setText(soLuong);
 				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
-				try {
-					int sl = Integer.parseInt(soLuong);
-					double gt = Double.parseDouble(giaThanh);
-					pnlLapHoaDon.txtDonGia.setText(gt/sl+"");
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
 			}
 		});
 		pnlLapHoaDon.btnXoaTrang.addMouseListener(new MouseAdapter() {
@@ -422,7 +420,8 @@ public class HomePageUI extends JFrame {
 		});
 		pnlLapHoaDon.txtSoLuong.getDocument().addDocumentListener(new DocumentListener() {
 			private void nhapSoLuong() {
-				String donGia = pnlLapHoaDon.txtDonGia.getText();
+				int index = pnlLapHoaDon.tblSanPham.getSelectedRow();
+				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
 				try {
 					int soLuong = Integer.parseInt(pnlLapHoaDon.txtSoLuong.getText());
 					double dg = Double.parseDouble(donGia);
@@ -532,9 +531,11 @@ public class HomePageUI extends JFrame {
 				khachHang = khachHangController.themKhachHang(khachHang);
 				if(khachHang.getMaKhachHang().equals(""))
 					JOptionPane.showMessageDialog(null, "Thêm không thành công :((");
-				else
+				else 
 					pnlKhachHang.txtMaKhachHang.setText(khachHang.getMaKhachHang());
-				loadKhachHang();
+				
+					loadKhachHang();
+				
 				}
 			}
 		});
@@ -556,19 +557,15 @@ public class HomePageUI extends JFrame {
 			}
 		});
 
-		pnlKhachHang.btnTimTheoSDT.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				loadTKKHTheoSDT();	
-				}
-			});
 		
 		pnlKhachHang.btnTimKH.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getSource().equals(pnlKhachHang.btnTimKH)) {		
 					String id = pnlKhachHang.cmbTimKiem.getSelectedItem().toString();
-					khachHangController.searchKhachHangBySDT(pnlKhachHang.listKhachHang, id);
+					String ten = pnlKhachHang.cmbTimKiem.getSelectedItem().toString();
+					khachHangController.searchKhachHangBySDT(pnlKhachHang.listKhachHang, id,ten);
+					pnlKhachHang.cmbTimKiem.setSelectedIndex(0);
 				}
 			}
 		});
@@ -958,10 +955,10 @@ public class HomePageUI extends JFrame {
 					pnlNhanVien.radNam.isSelected();
 			}
 		});
-		 pnlNhanVien.btnTimTheoSDT.addActionListener(new ActionListener() {
+		 pnlNhanVien.btnTimNV.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loadTKKHTheoSDTNV();
+				loadNhanVien();
 				}
 			});
 		 pnlNhanVien.btnLamMoi.addActionListener(new ActionListener() {
@@ -975,7 +972,8 @@ public class HomePageUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 					String sdt = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
-					nhanVienController.searchNhanVienBySDT(pnlNhanVien.listNhanVien, sdt);
+					String ten = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
+					nhanVienController.searchNhanVienBySDT(pnlNhanVien.listNhanVien, sdt,ten);
 			}
 		});
 		//Xu ly hinh anh trong san pham
@@ -1014,6 +1012,7 @@ public class HomePageUI extends JFrame {
 				}
 			}
 		});
+		
 	}
 	
 	protected void xoaTrangNhanVien() {
@@ -1025,7 +1024,9 @@ public class HomePageUI extends JFrame {
 	}
 
 	protected void loadNhanVien() {
-		nhanVienController.loadNhanVien(pnlNhanVien.listNhanVien);
+		pnlNhanVien.cmbTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		nhanVienController.loadNhanVien(pnlNhanVien.listNhanVien,pnlNhanVien.cmbTimKiem);
+		AutoCompleteDecorator.decorate(pnlNhanVien.cmbTimKiem);
 	}
 
 	protected void xoaTrangSanPham() {
@@ -1150,9 +1151,10 @@ public class HomePageUI extends JFrame {
 	}
 
 	protected void loadKhachHang() {
-		khachHangController.loadKhachHang(pnlKhachHang.listKhachHang);
+		pnlKhachHang.cmbTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		khachHangController.loadKhachHang(pnlKhachHang.listKhachHang,pnlKhachHang.cmbTimKiem);
+		AutoCompleteDecorator.decorate(pnlKhachHang.cmbTimKiem);
 	}
-
 	protected void loadTongTien() {
 		DefaultTableModel model = (DefaultTableModel) pnlLapHoaDon.tblCTHD.getModel();
 		double tongTien = 0;
@@ -1178,13 +1180,12 @@ public class HomePageUI extends JFrame {
 	protected void xoaTrangLapHoaDon() {
 		pnlLapHoaDon.txtMaSanPham.setText("");
 		pnlLapHoaDon.txtSoLuong.setText("");
-		pnlLapHoaDon.txtDonGia.setText("");
 		pnlLapHoaDon.txtGiaThanh.setText("");
 		pnlLapHoaDon.txtTienKhachDua.setText("");
 	}
 
 	private void loadHoaDon() {
-		pnlLapHoaDon.txtNgayLap.setText(new Date().toString());
+//		pnlLapHoaDon.txtNgayLap.setText(new Date().toString());
 		pnlLapHoaDon.txtMaKhachHang.setText(pnlKhachHang.txtMaKhachHang.getText());
 	}
 
@@ -1204,14 +1205,7 @@ public class HomePageUI extends JFrame {
 		pnlChiTietHoaDon.txtMaNhanVien.setText(hoaDon.getNhanVien().getMaNhanVien());
 		pnlChiTietHoaDon.txtNgayLap.setText(hoaDon.getNgayLapHoaDon().toString());
 	}
-	protected void loadTKKHTheoSDT() {
-		khachHangController.loadTKKHTheoSDT(pnlKhachHang.cmbTimKiem);
-		AutoCompleteDecorator.decorate(pnlKhachHang.cmbTimKiem);
-	}
-	protected void loadTKKHTheoSDTNV() {
-		nhanVienController.loadTKNVTheoSDT(pnlNhanVien.cmbTimKiem);
-		AutoCompleteDecorator.decorate(pnlNhanVien.cmbTimKiem);
-	}
+
 	protected void xoaTrangHoaDon(JButton btnCTHD) {
 		pnlhoaDon.txtMaHoaDon.setText("");
 		pnlhoaDon.txtMaKhachHang.setText("");
@@ -1241,4 +1235,5 @@ public class HomePageUI extends JFrame {
 		}			
 		this.dispose();
 	}
+	
 }

@@ -31,7 +31,7 @@ public class KhachHangUI extends JPanel {
 	protected JTextField txtDiaChi;
 	protected final ButtonGroup buttonGroup = new ButtonGroup();
 	protected JTable tblDSNhanVien;
-	protected JButton btnThem, btnSua, btnLapHoaDon, btnXoaTrang, btnTimKH,btnTimTheoSDT,btnLamMoi;
+	protected JButton btnThem, btnSua, btnLapHoaDon, btnXoaTrang, btnTimKH,btnLamMoi;
 	protected JRadioButton radNam, radNu;
 	protected DefaultTableModel listKhachHang;
 	protected JComboBox<String> cmbTimKiem;
@@ -216,28 +216,23 @@ public class KhachHangUI extends JPanel {
 		btnTimKH.setFocusable(false);
 		btnTimKH.setBorder(BorderFactory.createEmptyBorder());
 		
-		btnTimTheoSDT = new JButton("SDT");
-		btnTimTheoSDT.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
 		btnLamMoi = new JButton("Làm Mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_pnlTimKiem = new GroupLayout(pnlTimKiem);
 		gl_pnlTimKiem.setHorizontalGroup(
-			gl_pnlTimKiem.createParallelGroup(Alignment.TRAILING)
+			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlTimKiem.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblTimKiem, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cmbTimKiem, 0, 178, Short.MAX_VALUE)
+					.addComponent(cmbTimKiem, 0, 121, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnTimKH, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addGap(23))
-				.addGroup(Alignment.LEADING, gl_pnlTimKiem.createSequentialGroup()
-					.addGap(91)
-					.addComponent(btnTimTheoSDT)
-					.addGap(26)
+				.addGroup(gl_pnlTimKiem.createSequentialGroup()
+					.addGap(186)
 					.addComponent(btnLamMoi)
-					.addContainerGap(94, Short.MAX_VALUE))
+					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		gl_pnlTimKiem.setVerticalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
@@ -249,9 +244,7 @@ public class KhachHangUI extends JPanel {
 							.addComponent(lblTimKiem)
 							.addComponent(cmbTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
-					.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnTimTheoSDT)
-						.addComponent(btnLamMoi))
+					.addComponent(btnLamMoi)
 					.addContainerGap(138, Short.MAX_VALUE))
 		);
 		pnlTimKiem.setLayout(gl_pnlTimKiem);

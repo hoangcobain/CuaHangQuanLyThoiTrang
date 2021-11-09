@@ -3,6 +3,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.SwingConstants;
 import java.awt.Component;
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 
 public class SanPhamUI extends JPanel {
@@ -49,19 +52,32 @@ public class SanPhamUI extends JPanel {
 		
 		btnThemSanPham = new JButton("Thêm mới");
 		btnThemSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnThemSanPham.setFocusPainted(false);
+		btnThemSanPham.setFocusable(false);
+		btnThemSanPham.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnCapNhatSanPham = new JButton("Cập nhật");
 		btnCapNhatSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCapNhatSanPham.setFocusPainted(false);
+		btnCapNhatSanPham.setFocusable(false);
+		btnCapNhatSanPham.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnXoaSanPham = new JButton("Xóa");
 		btnXoaSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaSanPham.setFocusPainted(false);
+		btnXoaSanPham.setFocusable(false);
+		btnXoaSanPham.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnXoaTrangSanPham = new JButton("Xóa trắng");
 		btnXoaTrangSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaTrangSanPham.setFocusPainted(false);
+		btnXoaTrangSanPham.setFocusable(false);
+		btnXoaTrangSanPham.setBorder(BorderFactory.createEmptyBorder());
 		
 		cmbTimSanPham = new JComboBox<String>();
 		cmbTimSanPham.setEditable(true);
 		cmbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cmbTimSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblDanhSachSanPham = new JLabel("Danh sách sản phẩm");
 		lblDanhSachSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -142,41 +158,49 @@ public class SanPhamUI extends JPanel {
 		
 		btnThemThuocTinh = new JButton("Thêm mới");
 		btnThemThuocTinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnThemThuocTinh.setFocusPainted(false);
+		btnThemThuocTinh.setFocusable(false);
+		btnThemThuocTinh.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnXoaRong = new JButton("Xóa Rỗng");
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaRong.setFocusPainted(false);
+		btnXoaRong.setFocusable(false);
+		btnXoaRong.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnXoaThuocTinh = new JButton("Xóa");
 		btnXoaThuocTinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaThuocTinh.setFocusPainted(false);
+		btnXoaThuocTinh.setFocusable(false);
+		btnXoaThuocTinh.setBorder(BorderFactory.createEmptyBorder());
 		
 		btnXoaTrangThuocTinh = new JButton("Xóa trắng");
 		btnXoaTrangThuocTinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaTrangThuocTinh.setFocusPainted(false);
+		btnXoaTrangThuocTinh.setFocusable(false);
+		btnXoaTrangThuocTinh.setBorder(BorderFactory.createEmptyBorder());
 		
 		JScrollPane scrThuocTinh = new JScrollPane();
 		GroupLayout gl_pnlRightSanPham = new GroupLayout(pnlRightSanPham);
 		gl_pnlRightSanPham.setHorizontalGroup(
 			gl_pnlRightSanPham.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlRightSanPham.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pnlRightSanPham.createSequentialGroup()
-							.addContainerGap(10, Short.MAX_VALUE)
-							.addComponent(lblThuocTinh, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_pnlRightSanPham.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrThuocTinh, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_pnlRightSanPham.createSequentialGroup()
-									.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnThemThuocTinh, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-										.addComponent(lblGiaTri, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblTenThuocTinh)
-										.addComponent(btnXoaThuocTinh, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtGiaTri, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtTenThuocTinh, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnXoaRong, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-										.addComponent(btnXoaTrangThuocTinh, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))))
+						.addComponent(lblThuocTinh, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrThuocTinh, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, gl_pnlRightSanPham.createSequentialGroup()
+							.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnThemThuocTinh, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+								.addComponent(lblGiaTri, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTenThuocTinh)
+								.addComponent(btnXoaThuocTinh, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_pnlRightSanPham.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtGiaTri, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtTenThuocTinh, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnXoaRong, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+								.addComponent(btnXoaTrangThuocTinh, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_pnlRightSanPham.setVerticalGroup(
@@ -201,14 +225,15 @@ public class SanPhamUI extends JPanel {
 						.addComponent(btnXoaThuocTinh, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnXoaTrangThuocTinh, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(scrThuocTinh, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+					.addComponent(scrThuocTinh, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
 					.addGap(5))
 		);
-		gl_pnlRightSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {lblTenThuocTinh, lblGiaTri});
+		gl_pnlRightSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {btnThemThuocTinh, btnXoaRong});
 		gl_pnlRightSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenThuocTinh, txtGiaTri});
-		gl_pnlRightSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblThuocTinh, scrThuocTinh});
-		gl_pnlRightSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblTenThuocTinh, lblGiaTri});
+		gl_pnlRightSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {lblTenThuocTinh, lblGiaTri});
 		gl_pnlRightSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {txtTenThuocTinh, txtGiaTri});
+		gl_pnlRightSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblTenThuocTinh, lblGiaTri});
+		gl_pnlRightSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblThuocTinh, scrThuocTinh});
 		
 		tblThuocTinh = new JTable();
 		tblThuocTinh.setSurrendersFocusOnKeystroke(true);
@@ -262,13 +287,18 @@ public class SanPhamUI extends JPanel {
 		cmbTenLoai = new JComboBox<String>();
 		cmbTenLoai.setEditable(true);
 		cmbTenLoai.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cmbTenLoai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		lblImage = new JLabel("");
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImage.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_product_127px.png")));
 		
 		btnImage = new JButton("Mở hình");
+		btnImage.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_opened_folder_25px.png")));
 		btnImage.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnImage.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnImage.setFocusPainted(false);
+		btnImage.setFocusable(false);
 		GroupLayout gl_pnlLeftSanPham = new GroupLayout(pnlLeftSanPham);
 		gl_pnlLeftSanPham.setHorizontalGroup(
 			gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)

@@ -43,6 +43,7 @@ public class Menu extends JPanel {
 		lstMenu.addItem(new ModelMenu(""," Sản Phẩm",MenuType.TITLE));
 		lstMenu.addItem(new ModelMenu("gift","Sản Phẩm",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("product","Loại Sản Phẩm",MenuType.MENU));
+		lstMenu.addItem(new ModelMenu("product","Nguồn Hàng",MenuType.MENU));
 		
 		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
 		lstMenu.addItem(new ModelMenu(""," Con Người",MenuType.TITLE));
@@ -130,7 +131,7 @@ public class Menu extends JPanel {
 	protected void paintChildren(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D) g;
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		GradientPaint gradientPaint = new GradientPaint(0, 0, Color.decode("#f700ff"), 0, getHeight(), Color.decode("#7b00ff"));
+		GradientPaint gradientPaint = new GradientPaint(0, 0, new Color(255,51,153), 0, getHeight(), new Color(255,51,153));
 		graphics2d.setPaint(gradientPaint);
 		graphics2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
 		graphics2d.fillRect(0, 0, getWidth(), getHeight());

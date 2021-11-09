@@ -3,6 +3,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,10 +35,14 @@ public class NhanVienController {
 	public NhanVien getNhanVienById(String id) {
 		return nhanVienDAO.findById(id).get();
 	}
+	
 
-	public void loadNhanVien(DefaultTableModel listNhanVien) {
+	public void loadNhanVien(DefaultTableModel listNhanVien,JComboBox<String> cmbTimKiemKH) {
 		listNhanVien.setRowCount(0);
 		List<NhanVien> list = nhanVienDAO.findAll();
+		cmbTimKiemKH.removeAllItems();
+		cmbTimKiemKH.setModel(new DefaultComboBoxModel<String>(new String[] {"---Tìm theo tên,số điện thoại---"}));
+		cmbTimKiemKH.setEditable(true);
 		for (Iterator<NhanVien> iterator = list.iterator(); iterator.hasNext();) {
 			NhanVien nhanVien = iterator.next();
 			String gioiTinh = "Nam";
@@ -46,20 +51,13 @@ public class NhanVienController {
 			String[] row = {nhanVien.getMaNhanVien(),nhanVien.getTenNhanVien(),nhanVien.getSoDienThoai(),nhanVien.getDiaChi(),
 					nhanVien.getEmail().toString(),gioiTinh
 			};
+			cmbTimKiemKH.addItem(nhanVien.getSoDienThoai());
+			cmbTimKiemKH.addItem(nhanVien.getTenNhanVien());
 			listNhanVien.addRow(row);
 		}
 	}
-	public void loadTKNVTheoSDT(JComboBox<String> cmbTimKiemKH) {
-		List<NhanVien> listL = nhanVienDAO.findAll();
-		cmbTimKiemKH.removeAllItems();
-		for (Iterator<NhanVien> iterator  = listL.iterator(); iterator.hasNext();) {
-			NhanVien nhanVien = iterator.next();
-			cmbTimKiemKH.addItem(nhanVien.getSoDienThoai());
-		}	
-	}
-	
-	public void searchNhanVienBySDT(DefaultTableModel listNhanVien, String sdt) {
-		List<NhanVien> list = nhanVienDAO.searchBySDTNV(sdt);
+	public void searchNhanVienBySDT(DefaultTableModel listNhanVien, String sdt,String ten) {
+		List<NhanVien> list = nhanVienDAO.searchBySDTNV(sdt, ten);
 		listNhanVien.setRowCount(0);
 		for (Iterator<NhanVien> iterator = list.iterator(); iterator.hasNext();) {
 			NhanVien nhanVien = (NhanVien) iterator.next();
