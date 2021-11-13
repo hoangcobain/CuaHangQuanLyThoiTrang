@@ -59,7 +59,7 @@ public class NguonHangUI extends JPanel {
 		
 		tblNhaCungCap = new JTable();
 		tblNhaCungCap.setShowHorizontalLines(false);
-		tblNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tblNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		listNhaCC = new DefaultTableModel(null, new String[] {"Mã nhà cung cấp","Tên NCC", "Địa chỉ","Số điện thoại"});
 		tblNhaCungCap.setModel(listNhaCC);
 		scrNhaCungCap.setViewportView(tblNhaCungCap);

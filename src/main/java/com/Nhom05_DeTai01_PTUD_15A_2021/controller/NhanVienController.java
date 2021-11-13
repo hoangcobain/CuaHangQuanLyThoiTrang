@@ -17,6 +17,10 @@ import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhanVien;
 public class NhanVienController {
 	@Autowired
 	private NhanVienDAO nhanVienDAO;
+	private NhanVien nhanVien;
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
 
 	public void searchNhanVien(DefaultTableModel listNhanVien, String ten, String sdt, String email) {
 		List<NhanVien> list;
@@ -35,7 +39,7 @@ public class NhanVienController {
 	public NhanVien getNhanVienById(String id) {
 		return nhanVienDAO.findById(id).get();
 	}
-	
+
 
 	public void loadNhanVien(DefaultTableModel listNhanVien,JComboBox<String> cmbTimKiemKH) {
 		listNhanVien.setRowCount(0);
@@ -65,12 +69,21 @@ public class NhanVienController {
 			if(nhanVien.isGioiTinh())
 				gioiTinh = "Nữ";
 			String[] row = {nhanVien.getMaNhanVien(),nhanVien.getTenNhanVien(),nhanVien.getSoDienThoai(),nhanVien.getDiaChi(),
-							nhanVien.getEmail().toString(),gioiTinh};
+					nhanVien.getEmail().toString(),gioiTinh};
 			listNhanVien.addRow(row);
 		}
 	}
 	public NhanVien saveNhanVien(NhanVien nhanVien) {
 		return nhanVienDAO.save(nhanVien);
+	}
+
+	public NhanVien getNhanVienByEmail(String email) {
+		List<NhanVien> list = nhanVienDAO.findByEmail(email);
+		nhanVien = null;
+		if (list.size()!=0) {
+			nhanVien = list.get(0);
+		}		
+		return nhanVien;
 	}
 
 }

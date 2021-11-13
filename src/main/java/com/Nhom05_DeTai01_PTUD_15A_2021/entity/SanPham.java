@@ -27,7 +27,7 @@ public class SanPham {
 	@GenericGenerator(name = "SPGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.SanPhamGenerator")
 	private String maSanPham;
 	
-	@Column(nullable = false, columnDefinition = "VARCHAR(30)")
+	@Column(nullable = false, columnDefinition = "NVARCHAR(30)")
 	private String tenSanPham;
 	private double giaThanh;
 	

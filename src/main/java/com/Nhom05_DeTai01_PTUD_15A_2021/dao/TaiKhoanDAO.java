@@ -12,4 +12,6 @@ public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String>{
 	@Query(value = "SELECT * FROM [dbo].[tai_khoan] WHERE [tai_khoan] = ?1",
 			nativeQuery = true)
 	List<TaiKhoan> LayTaiKhoan(String username);
+	
+	
 }

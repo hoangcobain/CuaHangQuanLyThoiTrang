@@ -53,11 +53,11 @@ public class Nhom05DeTai01Ptud15A2021Application {
 //		return (args ->{
 //			
 ////			Nhan Vien
-//			TaiKhoan taiKhoan = new TaiKhoan("taikhoan", encoder.encode("123"), Quyen.ROLE_QUANLY);			
+//					
 //			Email email = new Email("abc@gmail.com");
 //			NhanVien nhanVien = new NhanVien("Nguyen Van A", false, "Dia Chi A", "0123456", email, null);
 //			nhanVien = nhanVienDAO.save(nhanVien);
-//			
+//			TaiKhoan taiKhoan = new TaiKhoan("QuanLyCuaHang", encoder.encode("123"), Quyen.ROLE_QUANLY);	
 //			taiKhoan.setNhanVien(nhanVien);
 //			taiKhoan = taiKhoanDAO.save(taiKhoan);
 //			

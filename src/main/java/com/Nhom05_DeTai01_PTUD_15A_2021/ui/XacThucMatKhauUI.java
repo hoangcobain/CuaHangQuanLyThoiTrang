@@ -20,29 +20,26 @@ import javax.swing.border.MatteBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.Nhom05_DeTai01_PTUD_15A_2021.controller.TaiKhoanController;
+import com.Nhom05_DeTai01_PTUD_15A_2021.controller.NhanVienController;
+import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhanVien;
 import com.k33ptoo.components.KButton;
 import com.k33ptoo.components.KGradientPanel;
-
-
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 @SpringBootApplication
 public class XacThucMatKhauUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private int mouseX ,mouseY;
-	private JTextField txtMatKhauMoi;
-	
-	@Autowired
-	private TaiKhoanController controller;
-	
-	
-	/**
-	 * Launch the application.
-	 */
+	private JPasswordField txtMatKhauMoi;
+	private JPasswordField txtMatKhauLai;
 
+	@Autowired
+	private NhanVienController controller;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	/**
 	 * Create the frame.
@@ -91,22 +88,26 @@ public class XacThucMatKhauUI extends JFrame {
 		gradientPanel.add(lblDoiMatKHau);
 
 		JLabel lblMatKhauMoi = new JLabel("Nhập Mật Khẩu ");
+		lblMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMatKhauMoi.setForeground(Color.WHITE);
-		lblMatKhauMoi.setBounds(324, 209, 115, 14);
+		lblMatKhauMoi.setBounds(320, 114, 164, 34);
 		gradientPanel.add(lblMatKhauMoi);
 
 		KButton btnVerify = new KButton();
 		btnVerify.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String matKhauMoi = txtMatKhauMoi.getText();
-				controller.xacthucMatKhau(matKhauMoi);
-				JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công");
+				String matKhauMoi = String.valueOf(txtMatKhauMoi.getPassword());
+				String matKhauLai = String.valueOf(txtMatKhauLai.getPassword());
+				if(matKhauLai.compareTo(matKhauMoi)!=0) {
+					JOptionPane.showMessageDialog(null, "Nhập mật khẩu không khớp");
+					return;
+				}
+				NhanVien nhanVien = controller.getNhanVien();
+				nhanVien.getTaiKhoan().setMatKhau(encoder.encode(matKhauLai));
+				controller.saveNhanVien(nhanVien);
+				JOptionPane.showMessageDialog(null, "Tài khoản: "+ nhanVien.getTaiKhoan().getTaiKhoan()+" đổi mật khẩu thành công");
 				dispose();
-					
-//					}else
-//						JOptionPane.showMessageDialog(null, "Mật khẩu không khớp");
-				
 			}
 		});
 
@@ -146,13 +147,29 @@ public class XacThucMatKhauUI extends JFrame {
 		btnTatManHinh.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		btnTatManHinh.setBounds(647, 0, 12, 25);
 		gradientPanel.add(btnTatManHinh);
-		
-		txtMatKhauMoi = new JTextField();
+
+		txtMatKhauMoi = new JPasswordField();
+		txtMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtMatKhauMoi.setForeground(Color.WHITE);
 		txtMatKhauMoi.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		txtMatKhauMoi.setOpaque(false);
-		txtMatKhauMoi.setBounds(324, 234, 238, 20);
+		txtMatKhauMoi.setBounds(320, 159, 238, 39);
 		gradientPanel.add(txtMatKhauMoi);
 		txtMatKhauMoi.setColumns(10);
+
+		txtMatKhauLai = new JPasswordField();
+		txtMatKhauLai.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtMatKhauLai.setOpaque(false);
+		txtMatKhauLai.setForeground(Color.WHITE);
+		txtMatKhauLai.setColumns(10);
+		txtMatKhauLai.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		txtMatKhauLai.setBounds(320, 247, 238, 39);
+		gradientPanel.add(txtMatKhauLai);
+
+		JLabel lblMatKhauLai = new JLabel("Nhập lại mật khẩu:");
+		lblMatKhauLai.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblMatKhauLai.setForeground(Color.WHITE);
+		lblMatKhauLai.setBounds(320, 208, 206, 34);
+		gradientPanel.add(lblMatKhauLai);
 	}
 }

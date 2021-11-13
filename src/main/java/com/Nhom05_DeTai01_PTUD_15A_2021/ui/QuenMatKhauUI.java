@@ -25,10 +25,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+import com.Nhom05_DeTai01_PTUD_15A_2021.Nhom05DeTai01Ptud15A2021Application;
+import com.Nhom05_DeTai01_PTUD_15A_2021.controller.NhanVienController;
+import com.Nhom05_DeTai01_PTUD_15A_2021.controller.TaiKhoanController;
+import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhanVien;
 import com.k33ptoo.components.KButton;
 import com.k33ptoo.components.KGradientPanel;
 
@@ -41,26 +44,14 @@ public class QuenMatKhauUI extends JFrame {
 	private JPanel contentPane;
 	private int mouseX ,mouseY;
 	private int randomCode;
-
-	
-	
 	private JTextField txtEmail;
 	private JTextField txtMaXacNhan;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					QuenMatKhauUI frame = new QuenMatKhauUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String to;
+	
+	@Autowired
+	private TaiKhoanController controller;
+	@Autowired
+	private NhanVienController nhanVienController;
 
 	/**
 	 * Create the frame.
@@ -121,13 +112,19 @@ public class QuenMatKhauUI extends JFrame {
 		KButton btnGui = new KButton();
 		btnGui.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				to = txtEmail.getText();
+				NhanVien nhanVien = nhanVienController.getNhanVienByEmail(to);
+				if (nhanVien == null) {
+					JOptionPane.showMessageDialog(null, "Email khong dung");
+					return;
+				}
+				
 				try {
 				Random rand = new Random();
 				randomCode	= rand.nextInt(999999);
 				String host = "smtp.gmail.com";
-				String user = "hoang21062001@gmail.com";
-				String password = "anhdao21";
-				String to = txtEmail.getText();
+				String user = "cuahangHandL@gmail.com";
+				String password = "HL123456789";
 				String subject = "Resting Code";
 				String message = "Your code is " +randomCode;
 				boolean sessionDebug = false;
@@ -189,7 +186,7 @@ public class QuenMatKhauUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(Integer.valueOf(txtMaXacNhan.getText()) == randomCode) {
-						XacThucMatKhauUI rs = new XacThucMatKhauUI();
+						XacThucMatKhauUI rs = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(XacThucMatKhauUI.class);
 						rs.setVisible(true);
 						setVisible(false);
 					}
@@ -200,8 +197,6 @@ public class QuenMatKhauUI extends JFrame {
 					e2.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Mã phải là số");
 				}
-				
-
 			}
 		});
 

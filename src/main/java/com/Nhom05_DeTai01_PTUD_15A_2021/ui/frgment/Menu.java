@@ -43,7 +43,7 @@ public class Menu extends JPanel {
 		lstMenu.addItem(new ModelMenu(""," Sản Phẩm",MenuType.TITLE));
 		lstMenu.addItem(new ModelMenu("gift","Sản Phẩm",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("product","Loại Sản Phẩm",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("product","Nguồn Hàng",MenuType.MENU));
+		lstMenu.addItem(new ModelMenu("supplier","Nguồn Hàng",MenuType.MENU));
 		
 		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
 		lstMenu.addItem(new ModelMenu(""," Thông Tin",MenuType.TITLE));
@@ -52,7 +52,7 @@ public class Menu extends JPanel {
 		
 		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
 		lstMenu.addItem(new ModelMenu(""," Cửa Hàng",MenuType.TITLE));
-		lstMenu.addItem(new ModelMenu("bill","Hóa Đơn",MenuType.MENU));
+		lstMenu.addItem(new ModelMenu("bill","Quản Lý Hóa Đơn",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("page","Lập Hóa Đơn",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("trend","Thống Kế",MenuType.MENU));
 		
