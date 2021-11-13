@@ -23,10 +23,10 @@ public class NhanVien {
 	@GenericGenerator(name = "NVGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.NhanVienGenerator")
 	private String maNhanVien;
 	
-	@Column(nullable = false, columnDefinition = "VARCHAR(30)")
+	@Column(nullable = false, columnDefinition = "NVARCHAR(30)")
 	private String tenNhanVien;
 	private boolean gioiTinh;
-	@Column(nullable = true, columnDefinition = "VARCHAR(50)")
+	@Column(nullable = true, columnDefinition = "NVARCHAR(50)")
 	private String diaChi;
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
 	private String soDienThoai;

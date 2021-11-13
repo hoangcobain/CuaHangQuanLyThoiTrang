@@ -30,11 +30,17 @@ public class SanPham {
 	@Column(nullable = false, columnDefinition = "VARCHAR(30)")
 	private String tenSanPham;
 	private double giaThanh;
-	@Column(nullable = true, columnDefinition = "VARCHAR(30)")
-	private String tenNhaCungCap;
+	
+	@ManyToOne
+	@JoinColumn(name = "maNhaCungCap", nullable = false)
+	private NhaCungCap nhaCungCap;
+	
 	private int soLuong;
+	@Column(nullable = false, columnDefinition = "NVARCHAR(10)")
+	private String size;
 	
-	
+	@Column(nullable = false, columnDefinition = "NVARCHAR(10)")
+	private String mauSac;
 	
 	@ElementCollection
 	@CollectionTable(name = "thuoc_tinh", joinColumns = @JoinColumn(name = "ma_san_pham"))
@@ -43,6 +49,8 @@ public class SanPham {
 	@ManyToOne
 	@JoinColumn(name = "maLoaiSanPham", nullable = false)
 	private LoaiSanPham loaiSanPham;
+	
+	
 	
 	@OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
 	private List<ChiTietHoaDon> listChiTietHoaDons = new ArrayList<ChiTietHoaDon>();
@@ -65,27 +73,48 @@ public class SanPham {
 //		this.loaiSanPham = loaiSanPham;
 //	}
 	
-	public SanPham(String tenSanPham, double giaThanh, String tenNhaCungCap, int soLuong, Set<ThuocTinh> listThuocTinh,
-			LoaiSanPham loaiSanPham, byte[] hinh) {
-		super();
-		this.tenSanPham = tenSanPham;
-		this.giaThanh = giaThanh;
-		this.tenNhaCungCap = tenNhaCungCap;
-		this.soLuong = soLuong;
-		this.listThuocTinh = listThuocTinh;
-		this.loaiSanPham = loaiSanPham;
-		this.hinh = hinh;
-	}
-	
 
 	
-	
+
 	public byte[] getHinh() {
 		return hinh;
 	}
 
 
 
+
+
+
+	
+	public SanPham(String tenSanPham, double giaThanh, NhaCungCap nhaCungCap, int soLuong, String size, String mauSac,
+		Set<ThuocTinh> listThuocTinh, LoaiSanPham loaiSanPham, byte[] hinh) {
+	super();
+	this.tenSanPham = tenSanPham;
+	this.giaThanh = giaThanh;
+	this.nhaCungCap = nhaCungCap;
+	this.soLuong = soLuong;
+	this.size = size;
+	this.mauSac = mauSac;
+	this.listThuocTinh = listThuocTinh;
+	this.loaiSanPham = loaiSanPham;
+	this.hinh = hinh;
+}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getMauSac() {
+		return mauSac;
+	}
+
+	public void setMauSac(String mauSac) {
+		this.mauSac = mauSac;
+	}
 
 	public void setHinh(byte[] hinh) {
 		this.hinh = hinh;
@@ -138,15 +167,15 @@ public class SanPham {
 	/**
 	 * @return the tenNhaCungCap
 	 */
-	public String getTenNhaCungCap() {
-		return tenNhaCungCap;
+	public NhaCungCap getNhaCungCap() {
+		return nhaCungCap;
 	}
 
 	/**
 	 * @param tenNhaCungCap the tenNhaCungCap to set
 	 */
-	public void setTenNhaCungCap(String tenNhaCungCap) {
-		this.tenNhaCungCap = tenNhaCungCap;
+	public void setNhaCungCap(NhaCungCap nhaCungCap) {
+		this.nhaCungCap = nhaCungCap;
 	}
 
 	/**
@@ -208,9 +237,11 @@ public class SanPham {
 	@Override
 	public String toString() {
 		return "SanPham [maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", giaThanh=" + giaThanh
-				+ ", tenNhaCungCap=" + tenNhaCungCap + ", soLuong=" + soLuong + ", listThuocTinh=" + listThuocTinh
-				+ ", loaiSanPham=" + loaiSanPham + "]";
+				+ ", nhaCungCap=" + nhaCungCap + ", soLuong=" + soLuong + ", listThuocTinh=" + listThuocTinh
+				+ ", loaiSanPham=" + loaiSanPham + ", listChiTietHoaDons=" + listChiTietHoaDons + "]";
 	}
+
+
 	
 	
 }

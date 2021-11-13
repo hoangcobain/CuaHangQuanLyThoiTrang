@@ -25,7 +25,7 @@ public class ChiTietHoaDonController {
 		for (Iterator<ChiTietHoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			ChiTietHoaDon chiTietHoaDon = iterator.next();
 			sanPham = chiTietHoaDon.getSanPham();
-			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getTenNhaCungCap(),
+			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
 					chiTietHoaDon.getSoLuong()+"",chiTietHoaDon.getDonGia()+""};
 			listCTHD.addRow(row);
 		}

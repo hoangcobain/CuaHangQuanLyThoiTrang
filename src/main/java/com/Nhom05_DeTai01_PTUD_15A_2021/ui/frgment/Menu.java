@@ -46,7 +46,7 @@ public class Menu extends JPanel {
 		lstMenu.addItem(new ModelMenu("product","Nguồn Hàng",MenuType.MENU));
 		
 		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
-		lstMenu.addItem(new ModelMenu(""," Con Người",MenuType.TITLE));
+		lstMenu.addItem(new ModelMenu(""," Thông Tin",MenuType.TITLE));
 		lstMenu.addItem(new ModelMenu("customer","Khách Hàng",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("employees","Nhân Viên",MenuType.MENU));
 		

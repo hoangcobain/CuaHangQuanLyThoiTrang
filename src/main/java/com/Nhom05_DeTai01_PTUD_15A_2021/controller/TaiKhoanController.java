@@ -62,10 +62,9 @@ public class TaiKhoanController {
 		}
 		return false;
 	}
-	public boolean xacthucMatKhau(String password) {
+	public void xacthucMatKhau(String password) {
 			taiKhoan.setMatKhau(encoder.encode(password));
 			taiKhoanDAO.save(taiKhoan);
-			return true;
 	}
 	public String layMatKhau() {	
 		return taiKhoan.getMatKhau();

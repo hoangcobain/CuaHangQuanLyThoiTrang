@@ -22,7 +22,7 @@ public class LoaiSanPham {
 	@GenericGenerator(name = "LSPGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.LoaiSanPhamGenerator")
 	private String maLoaiSanPham;
 
-	@Column(nullable = false, columnDefinition = "VARCHAR(30)", unique = true)
+	@Column(nullable = false, columnDefinition = "NVARCHAR(30)", unique = true)
 	private String tenLoaiSanPham;
 
 	@OneToMany(mappedBy = "loaiSanPham", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

@@ -362,7 +362,7 @@ public class LapHoaDonUI extends JPanel {
 		
 		tblSanPham = new JTable();
 		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
-		listSanPham = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Đơn giá","Thuộc tính"});
+		listSanPham = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng","Kích cỡ","Màu sắc","Đơn giá","Thuộc tính"});
 		tblSanPham.setModel(listSanPham);
 		scrCTHD.setViewportView(tblSanPham);
 		pnlCenTer.setLayout(gl_pnlCenTer);

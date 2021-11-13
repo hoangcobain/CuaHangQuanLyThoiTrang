@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Nhom05_DeTai01_PTUD_15A_2021.dao.LoaiSanPhamDAO;
+import com.Nhom05_DeTai01_PTUD_15A_2021.dao.NhaCungCapDAO;
 import com.Nhom05_DeTai01_PTUD_15A_2021.dao.SanPhamDAO;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.LoaiSanPham;
+import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhaCungCap;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.SanPham;
 
 @Service
@@ -21,6 +23,8 @@ public class SanPhamController {
 	private SanPhamDAO sanPhamDAO;
 	@Autowired
 	private LoaiSanPhamDAO loaiSanPhamDAO;
+	@Autowired
+	private NhaCungCapDAO nhaCungCapDAO;
 
 	public void searchByTenNCC(DefaultTableModel listSanPham, String ten, String ncc) {
 		listSanPham.setRowCount(0);
@@ -31,8 +35,8 @@ public class SanPhamController {
 			list = sanPhamDAO.searchByTenNCC(ten, ncc);
 		for (Iterator<SanPham> iterator = list.iterator(); iterator.hasNext();) {
 			SanPham sanPham = iterator.next();
-			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getTenNhaCungCap(),
-					sanPham.getSoLuong()+"",sanPham.getGiaThanh()+""};
+			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
+					sanPham.getSoLuong()+"",sanPham.getSize(),sanPham.getMauSac(),sanPham.getGiaThanh()+""};
 			listSanPham.addRow(row);
 		}
 	}
@@ -41,19 +45,26 @@ public class SanPhamController {
 		return sanPhamDAO.getById(maSP);
 	}
 
-	public void load(JComboBox<String> cmbTenLoai, DefaultTableModel listSanPham) {
+	public void load(JComboBox<String> cmbTenLoai,JComboBox<String> cmbTenNCC, DefaultTableModel listSanPham) {
 		List<LoaiSanPham> listL = loaiSanPhamDAO.findAll();
+		
 		cmbTenLoai.removeAllItems();
+		cmbTenNCC.removeAllItems();
 		for (Iterator<LoaiSanPham> iterator = listL.iterator(); iterator.hasNext();) {
 			LoaiSanPham loaiSanPham = iterator.next();
 			cmbTenLoai.addItem(loaiSanPham.getTenLoaiSanPham());
+		}
+		List<NhaCungCap> listC = nhaCungCapDAO.findAll();
+		for (Iterator<NhaCungCap> iterator = listC.iterator(); iterator.hasNext();) {
+			NhaCungCap nhaCungCap = iterator.next();
+			cmbTenNCC.addItem(nhaCungCap.getTenNCC());
 		}
 		List<SanPham> listSP = sanPhamDAO.findAll();
 		listSanPham.setRowCount(0);
 		for (Iterator<SanPham> iterator = listSP.iterator(); iterator.hasNext();) {
 			SanPham sanPham = iterator.next();
-			String row[] = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getTenNhaCungCap(),sanPham.getSoLuong()+"",
-					sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""
+			String row[] = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),sanPham.getSoLuong()+"",
+					sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""
 			};
 			listSanPham.addRow(row);
 		}		

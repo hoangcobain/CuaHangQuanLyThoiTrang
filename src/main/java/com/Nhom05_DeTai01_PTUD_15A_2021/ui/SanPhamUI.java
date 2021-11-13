@@ -28,8 +28,8 @@ public class SanPhamUI extends JPanel {
 	protected JTextField txtSoLuong;
 	protected JTextField txtGiaThanh;
 	protected JTextField txtTenSanPham;
-	protected JTextField txtTenNCC;
-	protected JComboBox<String> cmbTenLoai, cmbTimSanPham;
+//	protected JTextField cmbTenNCC;
+	protected JComboBox<String> cmbTenLoai, cmbTimSanPham,cmbTenNCC;
 	protected JTextField txtTenThuocTinh;
 	protected JTextField txtGiaTri;
 	protected JTable tblSanPham;
@@ -38,6 +38,8 @@ public class SanPhamUI extends JPanel {
 	protected JButton btnThemSanPham, btnCapNhatSanPham, btnXoaSanPham, btnXoaTrangSanPham, 
 	btnThemThuocTinh, btnXoaRong, btnXoaThuocTinh, btnXoaTrangThuocTinh,btnImage;
 	protected JLabel lblImage;
+	protected JTextField txtKichCo;
+	protected JTextField txtMauSac;
 
 	/**
 	 * Create the panel.
@@ -89,20 +91,20 @@ public class SanPhamUI extends JPanel {
 				.addGroup(gl_pnlSanPham.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+						.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 867, Short.MAX_VALUE)
+						.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
 							.addComponent(lblDanhSachSanPham, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cmbTimSanPham, 0, 458, Short.MAX_VALUE))
+							.addComponent(cmbTimSanPham, 0, 652, Short.MAX_VALUE))
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
-							.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+							.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCapNhatSanPham, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+							.addComponent(btnCapNhatSanPham, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+							.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-						.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 673, Short.MAX_VALUE))
+							.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(pnlRightSanPham, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -110,10 +112,10 @@ public class SanPhamUI extends JPanel {
 		gl_pnlSanPham.setVerticalGroup(
 			gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlSanPham.createSequentialGroup()
-					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
-						.addComponent(pnlRightSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlRightSanPham, GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
-							.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
@@ -124,14 +126,14 @@ public class SanPhamUI extends JPanel {
 							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblDanhSachSanPham)
 								.addComponent(cmbTimSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(scrSanPham, 0, 0, Short.MAX_VALUE)))
-					.addContainerGap())
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)))
+					.addGap(0))
 		);
 		
 		tblSanPham = new JTable();
 		listSanPham = new DefaultTableModel(null,new String[] {
-				"M\u00E3 s\u1EA3n ph\u1EA9m", "T\u00EAn s\u1EA3n ph\u1EA9m", "T\u00EAn NCC", "S\u1ED1 l\u01B0\u1EE3ng", "T\u00EAn lo\u1EA1i", "Gi\u00E1 th\u00E0nh"
+				"M\u00E3 s\u1EA3n ph\u1EA9m", "T\u00EAn s\u1EA3n ph\u1EA9m", "T\u00EAn NCC", "S\u1ED1 l\u01B0\u1EE3ng","Kích cỡ","Màu sắc", "T\u00EAn lo\u1EA1i", "Gi\u00E1 th\u00E0nh"
 			});
 		tblSanPham.setModel(listSanPham);
 		tblSanPham.setShowHorizontalLines(false);
@@ -280,9 +282,9 @@ public class SanPhamUI extends JPanel {
 		JLabel lblTenLoai = new JLabel("Tên loại");
 		lblTenLoai.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		txtTenNCC = new JTextField();
-		txtTenNCC.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTenNCC.setColumns(10);
+		cmbTenNCC = new JComboBox<String>();
+		cmbTenNCC.setEditable(true);
+		cmbTenNCC.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		cmbTenLoai = new JComboBox<String>();
 		cmbTenLoai.setEditable(true);
@@ -299,36 +301,55 @@ public class SanPhamUI extends JPanel {
 		btnImage.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnImage.setFocusPainted(false);
 		btnImage.setFocusable(false);
+		
+		JLabel lblKichCo = new JLabel("Kích cỡ");
+		lblKichCo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		txtKichCo = new JTextField();
+		txtKichCo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtKichCo.setColumns(10);
+		
+		JLabel lblMauSac = new JLabel("Màu sắc");
+		lblMauSac.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		txtMauSac = new JTextField();
+		txtMauSac.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtMauSac.setColumns(10);
 		GroupLayout gl_pnlLeftSanPham = new GroupLayout(pnlLeftSanPham);
 		gl_pnlLeftSanPham.setHorizontalGroup(
 			gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlLeftSanPham.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblMaSanPham, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblGiạThanh, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblKichCo))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(txtMaSanPham, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-						.addComponent(txtGiaThanh)
-						.addComponent(txtTenSanPham))
+					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.TRAILING)
+						.addComponent(txtKichCo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.LEADING, gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(txtMaSanPham, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+							.addComponent(txtGiaThanh)
+							.addComponent(txtTenSanPham)))
 					.addGap(54)
 					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblSoLuong, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTenNCC, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTenLoai, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblTenLoai, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMauSac))
 					.addGap(27)
-					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtTenNCC, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtSoLuong, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cmbTenLoai, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(txtMauSac)
+						.addComponent(cmbTenNCC, 0, 207, Short.MAX_VALUE)
+						.addComponent(txtSoLuong, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+						.addComponent(cmbTenLoai, 0, 207, Short.MAX_VALUE))
+					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_pnlLeftSanPham.createSequentialGroup()
 							.addGap(59)
-							.addComponent(lblImage, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblImage, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
 							.addGap(58))
-						.addGroup(Alignment.TRAILING, gl_pnlLeftSanPham.createSequentialGroup()
+						.addGroup(gl_pnlLeftSanPham.createSequentialGroup()
 							.addGap(145)
 							.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 							.addGap(134))))
@@ -349,7 +370,7 @@ public class SanPhamUI extends JPanel {
 								.addComponent(lblGiạThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtGiaThanh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblTenNCC, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtTenNCC, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cmbTenNCC, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(56)
 							.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
@@ -361,10 +382,17 @@ public class SanPhamUI extends JPanel {
 							.addComponent(lblImage, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnImage)))
-					.addContainerGap(14, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+					.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_pnlLeftSanPham.createParallelGroup(Alignment.BASELINE)
+							.addComponent(txtKichCo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblKichCo))
+						.addComponent(lblMauSac, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
-		gl_pnlLeftSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblSoLuong, lblTenNCC, lblTenLoai});
 		gl_pnlLeftSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaSanPham, lblGiạThanh, lblTenSanPham});
+		gl_pnlLeftSanPham.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblSoLuong, lblTenNCC, lblTenLoai});
 		pnlLeftSanPham.setLayout(gl_pnlLeftSanPham);
 		setLayout(gl_pnlSanPham);
 	}

@@ -19,12 +19,12 @@ public class KhachHang {
 	@GenericGenerator(name = "khachHangGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.KhachHangGenerator")
 	private String maKhachHang;
 
-	@Column(nullable = false, columnDefinition = "VARCHAR(30)")
+	@Column(nullable = false, columnDefinition = "NVARCHAR(30)")
 	private String tenKhachHang;
 	private boolean gioiTinh;
 	@Column(nullable = false, columnDefinition = "VARCHAR(10)")
 	private String soDienThoai;
-	@Column(nullable = false, columnDefinition = "VARCHAR(50)")
+	@Column(nullable = false, columnDefinition = "NVARCHAR(50)")
 	private String diaChi;
 	
 	@OneToMany(mappedBy = "khachHang")

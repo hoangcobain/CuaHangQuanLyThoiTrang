@@ -1,7 +1,6 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import java.awt.event.MouseAdapter;
@@ -34,27 +33,16 @@ public class XacThucMatKhauUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private int mouseX ,mouseY;
+	private JTextField txtMatKhauMoi;
 	
 	@Autowired
 	private TaiKhoanController controller;
 	
-	private JTextField txtMatKhauMoi;
-	private JTextField txtLaiMatKhau;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					XacThucMatKhauUI frame = new XacThucMatKhauUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -104,30 +92,21 @@ public class XacThucMatKhauUI extends JFrame {
 
 		JLabel lblMatKhauMoi = new JLabel("Nhập Mật Khẩu ");
 		lblMatKhauMoi.setForeground(Color.WHITE);
-		lblMatKhauMoi.setBounds(325, 128, 115, 14);
+		lblMatKhauMoi.setBounds(324, 209, 115, 14);
 		gradientPanel.add(lblMatKhauMoi);
-
-		JLabel lblLaiMatKhau = new JLabel("Nhập lại mật khẩu");
-		lblLaiMatKhau.setForeground(Color.WHITE);
-		lblLaiMatKhau.setBounds(325, 228, 115, 14);
-		gradientPanel.add(lblLaiMatKhau);
 
 		KButton btnVerify = new KButton();
 		btnVerify.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String matKhauMoi = txtMatKhauMoi.getText().toString();
-				String matKhauLai = txtLaiMatKhau.getText().toString();
-				if(matKhauMoi.equals(matKhauLai)) {
-					if(controller.xacthucMatKhau(txtMatKhauMoi.getText())) {
-						JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công");
-						dispose();
-					}
+				String matKhauMoi = txtMatKhauMoi.getText();
+				controller.xacthucMatKhau(matKhauMoi);
+				JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công");
+				dispose();
+					
 //					}else
 //						JOptionPane.showMessageDialog(null, "Mật khẩu không khớp");
-				}
-				else
-					JOptionPane.showMessageDialog(null, "Mật khẩu nhập lại không khớp");
+				
 			}
 		});
 
@@ -172,16 +151,8 @@ public class XacThucMatKhauUI extends JFrame {
 		txtMatKhauMoi.setForeground(Color.WHITE);
 		txtMatKhauMoi.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		txtMatKhauMoi.setOpaque(false);
-		txtMatKhauMoi.setBounds(325, 160, 238, 20);
+		txtMatKhauMoi.setBounds(324, 234, 238, 20);
 		gradientPanel.add(txtMatKhauMoi);
 		txtMatKhauMoi.setColumns(10);
-		
-		txtLaiMatKhau = new JTextField();
-		txtLaiMatKhau.setForeground(Color.WHITE);
-		txtLaiMatKhau.setOpaque(false);
-		txtLaiMatKhau.setColumns(10);
-		txtLaiMatKhau.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		txtLaiMatKhau.setBounds(325, 253, 238, 20);
-		gradientPanel.add(txtLaiMatKhau);
 	}
 }
