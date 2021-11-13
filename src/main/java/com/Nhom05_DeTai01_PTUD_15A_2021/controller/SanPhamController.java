@@ -26,13 +26,13 @@ public class SanPhamController {
 	@Autowired
 	private NhaCungCapDAO nhaCungCapDAO;
 
-	public void searchByTenNCC(DefaultTableModel listSanPham, String ten, String ncc) {
+	public void searchByTenNCC(DefaultTableModel listSanPham, String ten, String ncc, String size, String mauSac) {
 		listSanPham.setRowCount(0);
 		List<SanPham> list;
-		if (ten.equals(ncc) && ten.equals("")) 
+		if (ten.equals(ncc) && ten.equals("") && size.equals("") && mauSac.equals("")) 
 			list = sanPhamDAO.findAll();
 		else
-			list = sanPhamDAO.searchByTenNCC(ten, ncc);
+			list = sanPhamDAO.searchByTenNCC(ten, ncc, size, mauSac);
 		for (Iterator<SanPham> iterator = list.iterator(); iterator.hasNext();) {
 			SanPham sanPham = iterator.next();
 			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),

@@ -1,5 +1,6 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
+import java.time.Month;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -36,13 +37,10 @@ public class HoaDonController {
 		return hoaDonDAO.findById(id).get();
 	}
 
-	public void search(DefaultTableModel listHoaDon, String maNV, String maKH) {
+	public void search(DefaultTableModel listHoaDon, String maNV, String maKH, int day, Month month, int year) {
 		listHoaDon.setRowCount(0);
 		List<HoaDon> list;
-		if(maNV.equals(maKH))
-			list = hoaDonDAO.findAll();
-		else
-			list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH);
+		list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH, day, month, year);
 		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			HoaDon hoaDon = iterator.next();
 			Object[] row = {hoaDon.getMaHoaDon(),hoaDon.getNgayLapHoaDon(),hoaDon.getKhachHang().getTenKhachHang(),

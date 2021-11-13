@@ -124,6 +124,12 @@ public class HoaDonUI extends JPanel {
 		btnTimKiem.setBackground(Color.decode("#E2A6FF"));
 		btnTimKiem.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searching.png")));
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JButton btnXemPhiu = new JButton("Xem Phiếu");
+		btnXemPhiu.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/report.png")));
+		btnXemPhiu.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXemPhiu.setEnabled(false);
+		btnXemPhiu.setBackground(new Color(255, 234, 182));
 
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
@@ -137,44 +143,46 @@ public class HoaDonUI extends JPanel {
 								.addComponent(lblMaHoaDon)
 								.addComponent(lblMaNhanVien))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(txtMaNhanVien, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(txtMaHoaDon)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblNgayLap)))))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(pnlKhachHang, GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+							.addComponent(pnlKhachHang, GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
 							.addGap(9))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(txtNgayLap, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblTongTien, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtTongTien, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
+									.addComponent(txtTongTien, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblMaKhachHang)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)))
+									.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(0))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnCapNhat, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+					.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXoa, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXoaTrang, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+					.addComponent(btnXoaTrang, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+					.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnTimKiem, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addComponent(scrHoaDon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1137, Short.MAX_VALUE)
+				.addComponent(scrHoaDon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -200,22 +208,28 @@ public class HoaDonUI extends JPanel {
 						.addComponent(pnlKhachHang, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
 						.addComponent(pnlNhanVien, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCapNhat)
-						.addComponent(btnXoa)
-						.addComponent(btnXoaTrang)
-						.addComponent(btnCTHD)
-						.addComponent(btnTimKiem))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnCapNhat)
+							.addComponent(btnXoa)
+							.addComponent(btnXoaTrang))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnTimKiem)
+							.addComponent(btnCTHD)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrHoaDon, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+					.addComponent(scrHoaDon, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem});
 		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {txtMaHoaDon, txtTongTien, lblMaHoaDon, lblNgayLap, lblTongTien, txtNgayLap});
-		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnXoa, btnXoaTrang, btnCTHD, btnTimKiem});
-		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNgayLap, lblMaKhachHang});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaHoaDon, lblMaNhanVien});
+		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNgayLap, lblMaKhachHang});
+		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnTimKiem, btnXemPhiu});
 		
 		tblHoaDon = new JTable();
+		tblHoaDon.setRowHeight(25);
+		tblHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblHoaDon.setShowHorizontalLines(false);
 		tblHoaDon.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tblHoaDon.setModel(listHoaDon);
@@ -247,29 +261,27 @@ public class HoaDonUI extends JPanel {
 		
 		btnTimKhachHang = new JButton("Tim KH");
 		btnTimKhachHang.setBackground(Color.decode("#FFA6B6"));
-		btnTimKhachHang.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searchNV.png")));
+		btnTimKhachHang.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searchKH.png")));
 		btnTimKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_pnlKhachHang = new GroupLayout(pnlKhachHang);
 		gl_pnlKhachHang.setHorizontalGroup(
-			gl_pnlKhachHang.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_pnlKhachHang.createSequentialGroup()
+			gl_pnlKhachHang.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_pnlKhachHang.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblsoDTKH)
 						.addComponent(lblgioiTinh)
-						.addGroup(Alignment.TRAILING, gl_pnlKhachHang.createSequentialGroup()
-							.addComponent(lbltenKhachHang, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
+						.addComponent(lbltenKhachHang, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtsoDTKH, GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_pnlKhachHang.createSequentialGroup()
-							.addComponent(cmbgioiTinh, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+					.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.TRAILING)
+						.addComponent(txtsoDTKH, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+						.addGroup(gl_pnlKhachHang.createSequentialGroup()
+							.addComponent(cmbgioiTinh, 0, 212, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnTimKhachHang, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txttenKhachHang, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
+							.addComponent(btnTimKhachHang, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txttenKhachHang, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
 					.addContainerGap())
-				.addComponent(scrollPaneKhachHang, GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+				.addComponent(scrollPaneKhachHang, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
 		);
 		gl_pnlKhachHang.setVerticalGroup(
 			gl_pnlKhachHang.createParallelGroup(Alignment.LEADING)
@@ -282,20 +294,20 @@ public class HoaDonUI extends JPanel {
 					.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtsoDTKH, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblsoDTKH))
+					.addGap(18)
 					.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pnlKhachHang.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cmbgioiTinh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblgioiTinh)))
-						.addGroup(gl_pnlKhachHang.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btnTimKhachHang, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_pnlKhachHang.createParallelGroup(Alignment.BASELINE)
+							.addComponent(cmbgioiTinh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblgioiTinh))
+						.addComponent(btnTimKhachHang, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPaneKhachHang, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
 		);
+		gl_pnlKhachHang.linkSize(SwingConstants.HORIZONTAL, new Component[] {lbltenKhachHang, lblsoDTKH, lblgioiTinh});
 		
 		tableKhachHang = new JTable();
+		tableKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tableKhachHang.setRowHeight(25);
 		tableKhachHang.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
 		listKhachHang = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Tên", "Số điện thoại", "Địa chỉ"});
 		tableKhachHang.setModel(listKhachHang);
@@ -375,7 +387,8 @@ public class HoaDonUI extends JPanel {
 		gl_pnlNhanVien.linkSize(SwingConstants.VERTICAL, new Component[] {txtemail, btnTimNhanVien});
 		
 		tableNhanVien = new JTable();
-		tableNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		tableNhanVien.setRowHeight(25);
+		tableNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tableNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
 		listNhanVien = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Tên", "Số điện thoại", "Email"});
 		tableNhanVien.setModel(listNhanVien);

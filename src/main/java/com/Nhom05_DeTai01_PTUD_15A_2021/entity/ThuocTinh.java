@@ -5,9 +5,9 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class ThuocTinh {	
-	@Column(columnDefinition = "VARCHAR(30)")
+	@Column(columnDefinition = "NVARCHAR(30)")
 	private String tenThuocTinh;
-	@Column(columnDefinition = "VARCHAR(30)")
+	@Column(columnDefinition = "NVARCHAR(30)")
 	private String giaTri;
 
 	public ThuocTinh() {

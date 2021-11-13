@@ -18,7 +18,7 @@ public class ChiTietHoaDon {
 	private HoaDon hoaDon;
 	
 	@Id
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ma_san_pham", columnDefinition = "VARCHAR(10)")
 	private SanPham sanPham;
 	

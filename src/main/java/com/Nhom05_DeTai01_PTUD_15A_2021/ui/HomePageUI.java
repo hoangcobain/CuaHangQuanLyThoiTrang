@@ -231,17 +231,23 @@ public class HomePageUI extends JFrame {
 				xoaTrangHoaDon(pnlhoaDon.btnCTHD);
 			}
 		});
-		pnlhoaDon.btnTimKiem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String maNV, maKH;
+		pnlhoaDon.btnTimKiem.addActionListener(new ActionListener () {
+		    public void actionPerformed(ActionEvent e) {
+		    	String maNV, maKH;
 				maNV = pnlhoaDon.txtMaNhanVien.getText();
 				maKH = pnlhoaDon.txtMaKhachHang.getText();
-				if(maNV.equals(maKH))
+				LocalDate date = null;
+				try {
+					date = ((Date) pnlhoaDon.txtNgayLap.getModel().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Chưa chọn ngày");
+					return;
+				}
+				if(maNV.equals(maKH) && date==null)
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 				else
-					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH);
-			}
+					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonth(),date.getYear());
+		    }
 		});
 		pnlhoaDon.btnXoa.addMouseListener(new MouseAdapter() {
 			@Override
@@ -278,7 +284,7 @@ public class HomePageUI extends JFrame {
 		pnlChiTietHoaDon.btnTimSP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sanPhamController.searchByTenNCC(pnlChiTietHoaDon.listSanPham,pnlChiTietHoaDon.txtTenSanPham.getText(),pnlChiTietHoaDon.txtTenNCC.getText());
+				//				sanPhamController.searchByTenNCC(pnlChiTietHoaDon.listSanPham,pnlChiTietHoaDon.txtTenSanPham.getText(),pnlChiTietHoaDon.txtTenNCC.getText());
 			}
 		});
 		pnlChiTietHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
@@ -382,7 +388,8 @@ public class HomePageUI extends JFrame {
 		pnlLapHoaDon.btnTimSP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText());
+				sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText(),
+						pnlLapHoaDon.txtSize.getText(),pnlLapHoaDon.txtMauSac.getText());
 			}
 		});
 		pnlLapHoaDon.tblSanPham.addMouseListener(new MouseAdapter() {
@@ -390,13 +397,17 @@ public class HomePageUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = pnlLapHoaDon.tblSanPham.getSelectedRow();
 				String id = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
-				String tenNcc = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
 				String tenSP = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
-				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
-				
+				String tenNcc = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
+				String kichCo = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
+				String mauSac = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
+				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
+
 				pnlLapHoaDon.txtMaSanPham.setText(id);
 				pnlLapHoaDon.txtTenNCC.setText(tenNcc);
 				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
+				pnlLapHoaDon.txtSize.setText(kichCo);
+				pnlLapHoaDon.txtMauSac.setText(mauSac);
 				try {
 					int soLuong = Integer.parseInt(pnlLapHoaDon.txtSoLuong.getText());
 					double dg = Double.parseDouble(donGia);
@@ -411,9 +422,18 @@ public class HomePageUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				JTable table = pnlLapHoaDon.tblCTHD;
 				int index = table.getSelectedRow();
-				String soLuong = table.getModel().getValueAt(index, 3).toString();
-				String giaThanh = table.getModel().getValueAt(index, 4).toString();
-				pnlLapHoaDon.txtMaSanPham.setText(table.getModel().getValueAt(index, 0).toString());
+				String maSp = table.getModel().getValueAt(index, 0).toString();
+				String tenSP = table.getModel().getValueAt(index, 1).toString();
+				String tenNCC = table.getModel().getValueAt(index, 2).toString();
+				String size = table.getModel().getValueAt(index, 3).toString();
+				String mauSac = table.getModel().getValueAt(index, 4).toString();
+				String soLuong = table.getModel().getValueAt(index, 5).toString();
+				String giaThanh = table.getModel().getValueAt(index, 6).toString();
+				pnlLapHoaDon.txtMaSanPham.setText(maSp);
+				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
+				pnlLapHoaDon.txtTenNCC.setText(tenNCC);
+				pnlLapHoaDon.txtSize.setText(size);
+				pnlLapHoaDon.txtMauSac.setText(mauSac);
 				pnlLapHoaDon.txtSoLuong.setText(soLuong);
 				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
 			}
@@ -438,7 +458,6 @@ public class HomePageUI extends JFrame {
 			}
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				nhapSoLuong();
 			}			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -460,21 +479,26 @@ public class HomePageUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String maSP = pnlLapHoaDon.txtMaSanPham.getText();
+				if (maSP.equals("")) {
+					return;
+				}
 				String soLuong = pnlLapHoaDon.txtSoLuong.getText();
 				String giaThanh = pnlLapHoaDon.txtGiaThanh.getText();
 				SanPham sanPham = sanPhamController.getSanPham(maSP);
 				String tenSP = sanPham.getTenSanPham();
 				String tenNCC = sanPham.getNhaCungCap().getTenNCC();
+				String size = sanPham.getSize();
+				String mauSac = sanPham.getMauSac();
 				int slSP = sanPham.getSoLuong();
 				try {
 					int sl = Integer.parseInt(soLuong);
 					double gt = Double.parseDouble(giaThanh);
-					if (sl<=0 || sl>=slSP) {
+					if (sl<=0 || sl>slSP) {
 						JOptionPane.showMessageDialog(null, "Nhập số lượng sai: 0 < SỐ LƯỢNG <= "+slSP+"(Sản phẩm trong kho)");
 						pnlLapHoaDon.txtSoLuong.selectAll();
 						pnlLapHoaDon.txtSoLuong.requestFocus();						
 					}else {
-						String[] row = {maSP,tenSP,tenNCC,sl+"",gt+""};
+						String[] row = {maSP,tenSP,tenNCC,size,mauSac,sl+"",gt+""};
 						removeRowCTHD(maSP);						
 						pnlLapHoaDon.listCTHD.addRow(row);
 						loadTongTien();
@@ -482,6 +506,11 @@ public class HomePageUI extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Số lượng không phải số: "+e2.getMessage());
 				}
+			}
+		});
+		pnlLapHoaDon.cmbKhuyenMai.addActionListener (new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				loadTongTien();
 			}
 		});
 		pnlLapHoaDon.btnThanhToan.addMouseListener(new MouseAdapter() {
@@ -492,15 +521,29 @@ public class HomePageUI extends JFrame {
 						JOptionPane.showMessageDialog(null, "Tiền khách trả không được để trống");
 					}
 					else {
+						try {
+							double tt = Double.parseDouble(pnlLapHoaDon.txtTongTien.getText());
+							double tk = Double.parseDouble(pnlLapHoaDon.txtTienKhachDua.getText());
+							double chietKhau = Double.parseDouble(pnlLapHoaDon.txtChietKhau.getText());
+							if (tk+chietKhau<tt) {
+								JOptionPane.showMessageDialog(null, "Tiền khách trả không đủ");
+								return;
+							}
+						} catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, "Tiền khách trả hoặc chiết khấu không phải số");
+							return;
+						}
 						thanhToan();
 						pnlLapHoaDon.txtTongTien.setText("");
+						pnlLapHoaDon.txtTienKhachDua.setText("0");
+						pnlLapHoaDon.cmbKhuyenMai.setSelectedIndex(0);
+						pnlLapHoaDon.txtChietKhau.setText("0");
 					}
 				}
 				else {
-				JOptionPane.showMessageDialog(null, "Hóa đơn chưa có sản phẩm hoặc khách hàng");
-		//		sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText());
-				loadHoaDon();
-				
+					JOptionPane.showMessageDialog(null, "Hóa đơn chưa có sản phẩm hoặc khách hàng");
+					//		sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText());
+					loadHoaDon();
 				}
 			}
 		});
@@ -538,15 +581,15 @@ public class HomePageUI extends JFrame {
 					pnlKhachHang.txtSoDienThoai.selectAll();
 				}
 				else {
-				KhachHang khachHang = new KhachHang(ten, gioiTinh, sodt, diaChi);
-				khachHang = khachHangController.themKhachHang(khachHang);
-				if(khachHang.getMaKhachHang().equals(""))
-					JOptionPane.showMessageDialog(null, "Thêm không thành công :((");
-				else 
-					pnlKhachHang.txtMaKhachHang.setText(khachHang.getMaKhachHang());
-				
+					KhachHang khachHang = new KhachHang(ten, gioiTinh, sodt, diaChi);
+					khachHang = khachHangController.themKhachHang(khachHang);
+					if(khachHang.getMaKhachHang().equals(""))
+						JOptionPane.showMessageDialog(null, "Thêm không thành công :((");
+					else 
+						pnlKhachHang.txtMaKhachHang.setText(khachHang.getMaKhachHang());
+
 					loadKhachHang();
-				
+
 				}
 			}
 		});
@@ -568,7 +611,7 @@ public class HomePageUI extends JFrame {
 			}
 		});
 
-		
+
 		pnlKhachHang.btnTimKH.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -639,9 +682,9 @@ public class HomePageUI extends JFrame {
 					pnlLoaiSanPham.txtTenLoai.selectAll();;	
 				}
 				else {
-				LoaiSanPham lsp = loaiSanPhamController.save(new LoaiSanPham(ten));
-				pnlLoaiSanPham.txtMaLoai.setText(lsp.getMaLoaiSanPham());
-				loadLoaiSanPham();
+					LoaiSanPham lsp = loaiSanPhamController.save(new LoaiSanPham(ten));
+					pnlLoaiSanPham.txtMaLoai.setText(lsp.getMaLoaiSanPham());
+					loadLoaiSanPham();
 				}
 			}
 		});
@@ -742,7 +785,7 @@ public class HomePageUI extends JFrame {
 					value = model.getValueAt(count, 1).toString();
 					listTT.add(new ThuocTinh(name, value));
 				}
-				
+
 				if(!(ten.length() > 0 )) {
 					JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống");
 					pnlSanPham.txtTenSanPham.requestFocus();
@@ -759,16 +802,16 @@ public class HomePageUI extends JFrame {
 					pnlSanPham.txtGiaThanh.selectAll();
 				}		
 				else {
-				SanPham sanPham = sanPhamController.saveSP(new SanPham(ten, gia, tenNCC, soLuong, kichco, mausac, listTT, loai, personalImage));
-				if (sanPham.getMaSanPham().equals("")) {
-					JOptionPane.showMessageDialog(null, "Thêm không thành công");
-					return;
-				}
-				else {
-				JOptionPane.showMessageDialog(null, "Thêm Sản Phẩm thành công [MaSP: "+sanPham.getMaSanPham()+"]");
-				pnlSanPham.txtMaSanPham.setText(sanPham.getMaSanPham());
-				loadSanPham();
-				}
+					SanPham sanPham = sanPhamController.saveSP(new SanPham(ten, gia, tenNCC, soLuong, kichco, mausac, listTT, loai, personalImage));
+					if (sanPham.getMaSanPham().equals("")) {
+						JOptionPane.showMessageDialog(null, "Thêm không thành công");
+						return;
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Thêm Sản Phẩm thành công [MaSP: "+sanPham.getMaSanPham()+"]");
+						pnlSanPham.txtMaSanPham.setText(sanPham.getMaSanPham());
+						loadSanPham();
+					}
 				}
 			}
 		});
@@ -903,26 +946,26 @@ public class HomePageUI extends JFrame {
 				}
 				else if(!(email.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"))) {
 					JOptionPane.showMessageDialog(null, "Email không đúng định dạng");
-					 pnlNhanVien.txtEmail.requestFocus();
-					 pnlNhanVien.txtEmail.selectAll();
+					pnlNhanVien.txtEmail.requestFocus();
+					pnlNhanVien.txtEmail.selectAll();
 				}
 				else {
-				try {
-					Email email2 = new Email(email);
-					NhanVien nhanVien = new NhanVien(ten, gioiTinh, diaChi, sdt, email2, null);
-					nhanVien = nhanVienController.saveNhanVien(nhanVien);
-					
-					TaiKhoan taiKhoan = taiKhoanController.taoTaiKhoan(nhanVien.getMaNhanVien(),"a123456",nhanVien);
-					nhanVien.setTaiKhoan(taiKhoan);
-					
-					nhanVien = nhanVienController.saveNhanVien(nhanVien);
-					pnlNhanVien.txtMaNhanVien.setText(nhanVien.getMaNhanVien());
-				}catch (Exception e2) {
-					JOptionPane.showMessageDialog(null,"Thêm không thành công: "+e2.getMessage());
-					e2.printStackTrace();
+					try {
+						Email email2 = new Email(email);
+						NhanVien nhanVien = new NhanVien(ten, gioiTinh, diaChi, sdt, email2, null);
+						nhanVien = nhanVienController.saveNhanVien(nhanVien);
+
+						TaiKhoan taiKhoan = taiKhoanController.taoTaiKhoan(nhanVien.getMaNhanVien(),"a123456",nhanVien);
+						nhanVien.setTaiKhoan(taiKhoan);
+
+						nhanVien = nhanVienController.saveNhanVien(nhanVien);
+						pnlNhanVien.txtMaNhanVien.setText(nhanVien.getMaNhanVien());
+					}catch (Exception e2) {
+						JOptionPane.showMessageDialog(null,"Thêm không thành công: "+e2.getMessage());
+						e2.printStackTrace();
+					}
+					loadNhanVien();
 				}
-				loadNhanVien();
-			}
 			}
 		});
 		pnlNhanVien.btnSua.addActionListener(new ActionListener() {
@@ -967,25 +1010,25 @@ public class HomePageUI extends JFrame {
 					pnlNhanVien.radNam.isSelected();
 			}
 		});
-		 pnlNhanVien.btnTimNV.addActionListener(new ActionListener() {
+		pnlNhanVien.btnTimNV.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loadNhanVien();
-				}
-			});
-		 pnlNhanVien.btnLamMoi.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					loadNhanVien();
-					}
-				});
-		
+			}
+		});
+		pnlNhanVien.btnLamMoi.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadNhanVien();
+			}
+		});
+
 		pnlNhanVien.btnTimNV.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-					String sdt = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
-					String ten = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
-					nhanVienController.searchNhanVienBySDT(pnlNhanVien.listNhanVien, sdt,ten);
+				String sdt = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
+				String ten = pnlNhanVien.cmbTimKiem.getSelectedItem().toString();
+				nhanVienController.searchNhanVienBySDT(pnlNhanVien.listNhanVien, sdt,ten);
 			}
 		});
 		//Xu ly hinh anh trong san pham
@@ -998,7 +1041,7 @@ public class HomePageUI extends JFrame {
 					public String getDescription() {
 						return "Image File (*.jpg)";
 					}
-					
+
 					@Override
 					public boolean accept(File f) {
 						if(f.isDirectory())
@@ -1038,12 +1081,12 @@ public class HomePageUI extends JFrame {
 					pnlNguonHang.txtTen.selectAll();;	
 				}
 				else {
-				nhaCungCapController.save(new NhaCungCap(ma, ten, diachi, sdt));
-				loadNhaCungCap();
+					nhaCungCapController.save(new NhaCungCap(ma, ten, diachi, sdt));
+					loadNhaCungCap();
 				}
 			}
 		});
-		
+
 		pnlNguonHang.tblNhaCungCap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1054,20 +1097,20 @@ public class HomePageUI extends JFrame {
 				pnlNguonHang.txtSDT.setText(pnlNguonHang.tblNhaCungCap.getModel().getValueAt(index, 3).toString());
 			}
 		});
-		
+
 		pnlNguonHang.btnXoaTrang.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				xoaTrangNhaCungCap();
 			}
 		});
-		
+
 		pnlNguonHang.btnCapNhat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
 					NhaCungCap nhaCungCap = new NhaCungCap();
-					
+
 					nhaCungCap.setTenNCC(pnlNguonHang.txtTen.getText().trim());
 					nhaCungCap.setDiaChi(pnlNguonHang.txtDiaChi.getText().trim());
 					nhaCungCap.setSoDienThoai(pnlNguonHang.txtSDT.getText().trim());
@@ -1078,22 +1121,22 @@ public class HomePageUI extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
 				}
-				
-				
-				
+
+
+
 			}
 		});
-		
+
 		pnlNguonHang.btnTim.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {		
-					String sdt = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
-					String ten = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
-					nhaCungCapController.searchNCC(pnlNguonHang.listNhaCC, sdt, ten);
-					pnlNguonHang.cmbTimKiem.setSelectedIndex(0);
+				String sdt = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
+				String ten = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
+				nhaCungCapController.searchNCC(pnlNguonHang.listNhaCC, sdt, ten);
+				pnlNguonHang.cmbTimKiem.setSelectedIndex(0);
 			}
 		});
-	
+
 		pnlNguonHang.btnLamMoi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1101,7 +1144,7 @@ public class HomePageUI extends JFrame {
 			}
 		});
 	}
-	
+
 	protected void xoaTrangNhanVien() {
 		pnlNhanVien.txtMaNhanVien.setText("");
 		pnlNhanVien.txtTenNhanVien.setText("");
@@ -1123,7 +1166,7 @@ public class HomePageUI extends JFrame {
 		pnlSanPham.txtTenSanPham.setText("");
 		pnlSanPham.txtKichCo.setText("");
 		pnlSanPham.txtMauSac.setText("");
-//		pnlSanPham.txtTenNCC.setText("");
+		//		pnlSanPham.txtTenNCC.setText("");
 		personalImage = null;
 		ImageIcon icon = new ImageIcon(getClass().getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_product_127px.png"));
 		pnlSanPham.lblImage.setIcon(icon);
@@ -1148,10 +1191,10 @@ public class HomePageUI extends JFrame {
 	protected void loadLoaiSanPham() {
 		loaiSanPhamController.load(pnlLoaiSanPham.listLoaiSP);
 	}
-	
+
 	protected void thanhToan() {
 		String maKH, maNV, maSP;
-		double giaThanh, tongTien,tienKhachTra = 0;
+		double giaThanh, tongTien,tienKhachTra = 0, chietKhau=0;
 		int soLuong;
 		SanPham sanPham;
 		Set<ChiTietHoaDon> listCTHD = new HashSet<ChiTietHoaDon>();
@@ -1162,7 +1205,9 @@ public class HomePageUI extends JFrame {
 		try {
 			tongTien = Double.parseDouble(pnlLapHoaDon.txtTongTien.getText());
 			tienKhachTra = Double.parseDouble(pnlLapHoaDon.txtTienKhachDua.getText());
+			chietKhau = Double.parseDouble(pnlLapHoaDon.txtChietKhau.getText());
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Tiền khách trả hoặc chiết khấu không phải số");
 			return;
 		}
 		HoaDon hoaDon = hoaDonController.lapHoaDon(new HoaDon(new Date(), tongTien, nhanVienController.getNhanVienById(maNV), khachHangController.getKhachHang(maKH)));
@@ -1173,8 +1218,8 @@ public class HomePageUI extends JFrame {
 		for (int i = 0; i < model.getRowCount(); ++i) {
 			try {
 				maSP = model.getValueAt(i, 0).toString();
-				soLuong = Integer.parseInt(model.getValueAt(i, 3).toString());
-				giaThanh = Double.parseDouble(model.getValueAt(i, 4).toString());
+				soLuong = Integer.parseInt(model.getValueAt(i, 5).toString());
+				giaThanh = Double.parseDouble(model.getValueAt(i, 6).toString());
 				sanPham = sanPhamController.getSanPham(maSP);
 				sanPham.setSoLuong(sanPham.getSoLuong()-soLuong);
 				chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, giaThanh, soLuong);
@@ -1202,7 +1247,7 @@ public class HomePageUI extends JFrame {
 			bw.write("-----------------------------------------------------------\r\n");
 			// Ghi sản phẩm
 			int quantotal = 0;
-			
+
 			for (int i = 0; i < model.getRowCount(); i++) {
 				String id = (String) model.getValueAt(i, 0);
 				String tenSP = (String) model.getValueAt(i, 1);
@@ -1219,9 +1264,9 @@ public class HomePageUI extends JFrame {
 			bw.write("\t\t--------------------------------------------\r\n");
 			bw.write("\t\tThành tiền:\t\t\t" + hoaDon.getTongTien() + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
-	        bw.write("\t\tTiền khách đưa:\t\t\t" + tienKhachTra + " VNĐ\r\n");
-	        bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(tienKhachTra-tongTien) + " VNĐ\r\n");
-	        bw.write("------------------------------------------------------------\r\n");
+			bw.write("\t\tTiền khách đưa:\t\t\t" + tienKhachTra + " VNĐ\r\n");
+			bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(tienKhachTra-tongTien) + " VNĐ\r\n");
+			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Chương trình khuyến mãi: ");
 			bw.write("Không có.\r\n");
 			bw.write("------------------------------------------------------------\r\n");
@@ -1250,7 +1295,7 @@ public class HomePageUI extends JFrame {
 		double tongTien = 0;
 		for (int i = 0; i < model.getRowCount(); ++i) {
 			try {
-				tongTien += Double.parseDouble(model.getValueAt(i, 4).toString());
+				tongTien += Double.parseDouble(model.getValueAt(i, 6).toString()) *(1-(pnlLapHoaDon.cmbKhuyenMai.getSelectedIndex()*0.05));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1269,9 +1314,13 @@ public class HomePageUI extends JFrame {
 
 	protected void xoaTrangLapHoaDon() {
 		pnlLapHoaDon.txtMaSanPham.setText("");
-		pnlLapHoaDon.txtSoLuong.setText("");
+		pnlLapHoaDon.txtSoLuong.setText("0");
 		pnlLapHoaDon.txtGiaThanh.setText("");
 		pnlLapHoaDon.txtTienKhachDua.setText("");
+		pnlLapHoaDon.txtTenSanPham.setText("");
+		pnlLapHoaDon.txtTenNCC.setText("");
+		pnlLapHoaDon.txtSize.setText("");
+		pnlLapHoaDon.txtMauSac.setText("");
 	}
 
 	private void loadHoaDon() {
@@ -1304,7 +1353,7 @@ public class HomePageUI extends JFrame {
 		pnlhoaDon.txtTongTien.setText("");
 		btnCTHD.setEnabled(false);
 	}
-	
+
 	protected void loadNhaCungCap() {
 		pnlNguonHang.cmbTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		nhaCungCapController.load(pnlNguonHang.listNhaCC,pnlNguonHang.cmbTimKiem);
@@ -1335,5 +1384,5 @@ public class HomePageUI extends JFrame {
 		}			
 		this.dispose();
 	}
-	
+
 }
