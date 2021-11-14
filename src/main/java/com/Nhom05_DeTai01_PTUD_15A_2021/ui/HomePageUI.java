@@ -22,6 +22,8 @@ import javax.swing.table.TableModel;
 
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -100,6 +102,8 @@ public class HomePageUI extends JFrame {
 	private LoaiSanPhamController loaiSanPhamController;
 	@Autowired
 	private NhaCungCapController nhaCungCapController;
+	
+	private Logger logger = LoggerFactory.getLogger(HomePageUI.class);
 
 	/**
 	 * Create the frame.
@@ -302,22 +306,18 @@ public class HomePageUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = pnlChiTietHoaDon.tblCTHD.getSelectedRow();
-				int i = pnlChiTietHoaDon.tblSanPham.getSelectedRow();
 				String id = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 0).toString();
 				String ten = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 1).toString();
 				String tenNCC = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 2).toString();
 				String soLuong = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 3).toString();
 				String kichCo = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 4).toString();
 				String mauSac = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 5).toString();
-				
-				
-				String giaThanh = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(i, 6).toString();
-				
+				String giaThanh = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 6).toString();
 				pnlChiTietHoaDon.txtMaSanPham.setText(id);
 				pnlChiTietHoaDon.txtSoLuong.setText(soLuong);
 				pnlChiTietHoaDon.txtTenSanPham.setText(ten);
 				pnlChiTietHoaDon.txtTenNCC.setText(tenNCC);
-//				pnlChiTietHoaDon.txtGiaThanh.setText(giaThanh);
+				pnlChiTietHoaDon.txtGiaThanh.setText(giaThanh);
 				pnlChiTietHoaDon.txtKichCo.setText(kichCo);
 				pnlChiTietHoaDon.txtMauSac.setText(mauSac);
 				try {
@@ -334,11 +334,17 @@ public class HomePageUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = pnlChiTietHoaDon.tblSanPham.getSelectedRow();
 				String id = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
-				String donGia = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
+				String ten = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
+				String tenNCC = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
 				String kichCo = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
 				String mauSac = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
-				pnlChiTietHoaDon.txtDonGia.setText(donGia);
+				String donGia = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
 				pnlChiTietHoaDon.txtMaSanPham.setText(id);
+				pnlChiTietHoaDon.txtTenSanPham.setText(ten);
+				pnlChiTietHoaDon.txtTenNCC.setText(tenNCC);
+				pnlChiTietHoaDon.txtKichCo.setText(kichCo);
+				pnlChiTietHoaDon.txtMauSac.setText(mauSac);
+				pnlChiTietHoaDon.txtDonGia.setText(donGia);
 				try {
 					int soLuong = Integer.parseInt(pnlChiTietHoaDon.txtSoLuong.getText());
 					double dg = Double.parseDouble(donGia);
@@ -362,7 +368,6 @@ public class HomePageUI extends JFrame {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				nhapSoLuong();
 			}			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -399,8 +404,18 @@ public class HomePageUI extends JFrame {
 				try {
 					int sl = Integer.parseInt(soLuong);
 					double gt = Double.parseDouble(giaThanh);
-					ChiTietHoaDon cthd = chiTietHoaDonController.getCTHDByHDSP(maHD,maSP);
-					chiTietHoaDonController.capNhatCTHD(cthd,sl,gt);
+					try {
+						ChiTietHoaDon cthd = chiTietHoaDonController.getCTHDByHDSP(maHD,maSP);
+						chiTietHoaDonController.capNhatCTHD(cthd,sl,gt);
+					} catch (Exception e2) {
+						int kq = JOptionPane.showConfirmDialog(null, "Bạn muốn thêm San Phẩm Mới","Cảnh báo",JOptionPane.YES_NO_OPTION);
+						if (kq == JOptionPane.YES_OPTION) {
+							SanPham sp = sanPhamController.getSanPham(maSP);
+							HoaDon hd = hoaDonController.getHoaDonById(maHD);
+							hd.getListChiTietHoaDon().add(new ChiTietHoaDon(hd, sp, gt, sl));
+							hoaDonController.lapHoaDon(hd);
+						}
+					}					
 					xoaTrangCTHD();
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Cập Nhật không thành công: "+e2.getMessage());
@@ -1351,10 +1366,14 @@ public class HomePageUI extends JFrame {
 	}
 
 	protected void xoaTrangCTHD() {
-		pnlChiTietHoaDon.txtDonGia.setText("");
-		pnlChiTietHoaDon.txtSoLuong.setText("");
-		pnlChiTietHoaDon.txtMaSanPham.setText("");
+		pnlChiTietHoaDon.txtDonGia.setText("0.0");
+		pnlChiTietHoaDon.txtSoLuong.setText("0");
+		pnlChiTietHoaDon.txtMaSanPham.setText("0.0");
 		pnlChiTietHoaDon.txtGiaThanh.setText("");
+		pnlChiTietHoaDon.txtTenSanPham.setText("");
+		pnlChiTietHoaDon.txtTenNCC.setText("");
+		pnlChiTietHoaDon.txtKichCo.setText("");
+		pnlChiTietHoaDon.txtMauSac.setText("");
 	}
 
 	private void loadCTHD() {
@@ -1365,6 +1384,8 @@ public class HomePageUI extends JFrame {
 		pnlChiTietHoaDon.txtMaKhachHang.setText(hoaDon.getKhachHang().getMaKhachHang());
 		pnlChiTietHoaDon.txtMaNhanVien.setText(hoaDon.getNhanVien().getMaNhanVien());
 		pnlChiTietHoaDon.txtNgayLap.setText(hoaDon.getNgayLapHoaDon().toString());
+		pnlChiTietHoaDon.txtTenKhachHang.setText(hoaDon.getKhachHang().getTenKhachHang());
+		pnlChiTietHoaDon.txtTenNhanVien.setText(hoaDon.getNhanVien().getTenNhanVien());
 	}
 
 	protected void xoaTrangHoaDon(JButton btnCTHD) {

@@ -3,6 +3,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ChiTietHoaDonController {
 			ChiTietHoaDon chiTietHoaDon = iterator.next();
 			sanPham = chiTietHoaDon.getSanPham();
 			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
-					chiTietHoaDon.getSoLuong()+"",chiTietHoaDon.getDonGia()+""};
+					chiTietHoaDon.getSoLuong()+"",sanPham.getSize(),sanPham.getMauSac(),chiTietHoaDon.getDonGia()+""};
 			listCTHD.addRow(row);
 		}
 	}
@@ -34,7 +35,7 @@ public class ChiTietHoaDonController {
 	public void xoaCTHD(String maHD, String maSP) {
 		chiTietHoaDonDAO.deleteById(new ChiTietHoaDon_PK(maHD,maSP));
 	}
-	
+
 	public ChiTietHoaDon getCTHDByHDSP(String maHD, String maSP) {
 		return chiTietHoaDonDAO.getById(new ChiTietHoaDon_PK(maHD, maSP));
 	}
