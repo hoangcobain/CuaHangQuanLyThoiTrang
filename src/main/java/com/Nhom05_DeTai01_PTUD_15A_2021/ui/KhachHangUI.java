@@ -20,6 +20,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -46,15 +47,15 @@ public class KhachHangUI extends JPanel {
 		lblBangQuanLyKhachHang.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
 		JPanel pnlChucNang = new JPanel();
-		pnlChucNang.setBackground(Color.decode("#FFB6F8"));
+		pnlChucNang.setBackground(new Color(119, 136, 153));
 		
 		JPanel pnlTimKiem = new JPanel();
-		pnlTimKiem.setBackground(Color.decode("#FFB6F8"));
+		pnlTimKiem.setBackground(new Color(119, 136, 153));
 		
 		scrDSNhanVien = new JScrollPane();
 		
 		JPanel pnlDienThongTin = new JPanel();
-		pnlDienThongTin.setBackground(Color.decode("#FFB6F8"));
+		pnlDienThongTin.setBackground(new Color(119, 136, 153));
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -126,11 +127,13 @@ public class KhachHangUI extends JPanel {
 		txtDiaChi.setColumns(10);
 		
 		radNam = new JRadioButton("Nam");
+		radNam.setBackground(new Color(119, 136, 153));
 		radNam.setSelected(true);
 		buttonGroup.add(radNam);
 		
 		radNam.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		radNu = new JRadioButton("N\u1EEF");
+		radNu.setBackground(new Color(119, 136, 153));
 		buttonGroup.add(radNu);
 		radNu.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		radNu.setHorizontalAlignment(SwingConstants.LEFT);
@@ -194,6 +197,7 @@ public class KhachHangUI extends JPanel {
 		tblDSNhanVien = new JTable();
 		tblDSNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblDSNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tblDSNhanVien.setRowHeight(35);
 		listKhachHang = new DefaultTableModel(null,new String[] {"Mã khách hàng", "Họ tên", 
 				"Số điện thoại", "Địa chỉ", "Giới tính"});
 		tblDSNhanVien.setModel(listKhachHang);
@@ -208,16 +212,17 @@ public class KhachHangUI extends JPanel {
 		cmbTimKiem.setEditable(true);
 		
 		btnTimKH = new JButton("");
-		btnTimKH.setBackground(new Color(64, 224, 208));
+		btnTimKH.setBackground(new Color(119, 136, 153));
 		btnTimKH.setToolTipText("Tìm khách hàng");
 		btnTimKH.setIcon(new ImageIcon(KhachHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_search_20px.png")));
 		btnTimKH.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnTimKH.setFocusPainted(false);
 		btnTimKH.setFocusable(false);
-		btnTimKH.setBorder(BorderFactory.createEmptyBorder());
+		btnTimKH.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnLamMoi = new JButton("Làm Mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnLamMoi.setFocusable(false);
+		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlTimKiem = new GroupLayout(pnlTimKiem);
 		gl_pnlTimKiem.setHorizontalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
@@ -253,22 +258,14 @@ public class KhachHangUI extends JPanel {
 		btnThem.setIcon(new ImageIcon(KhachHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_add_user_group_man_woman_40px.png")));
 		btnThem.setBackground(Color.decode("#A6FFEA"));
 		btnThem.setFocusable(false);
-		btnThem.setBorder(BorderFactory.createEmptyBorder());
-		btnThem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnThem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		btnSua = new JButton("S\u1EEDa");
 		btnSua.setIcon(new ImageIcon(KhachHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_edit_property_40px.png")));
 		btnSua.setBackground(Color.decode("#E2A6FF"));
 		btnSua.setFocusable(false);
-		btnSua.setBorder(BorderFactory.createEmptyBorder());
-		btnSua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnSua.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		btnLapHoaDon = new JButton("Lập Hóa Đơn");
@@ -277,14 +274,14 @@ public class KhachHangUI extends JPanel {
 		btnLapHoaDon.setBackground(Color.decode("#FFA6B6"));
 		btnLapHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLapHoaDon.setFocusable(false);
-		btnLapHoaDon.setBorder(BorderFactory.createEmptyBorder());
+		btnLapHoaDon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoaTrang = new JButton("Xóa Trắng");
 		btnXoaTrang.setIcon(new ImageIcon(KhachHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_ccleaner_40px.png")));
 		btnXoaTrang.setBackground(Color.decode("#E2A6FF"));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXoaTrang.setFocusable(false);
-		btnXoaTrang.setBorder(BorderFactory.createEmptyBorder());
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlChucNang = new GroupLayout(pnlChucNang);
 		gl_pnlChucNang.setHorizontalGroup(
 			gl_pnlChucNang.createParallelGroup(Alignment.LEADING)

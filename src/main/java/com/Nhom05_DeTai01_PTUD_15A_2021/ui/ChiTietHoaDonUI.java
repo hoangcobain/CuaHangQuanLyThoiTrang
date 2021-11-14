@@ -38,6 +38,9 @@ public class ChiTietHoaDonUI extends JPanel {
 	protected JButton btnTimSP, btnCapNhat, btnXoa, btnXoaTrang;
 	private JLabel lblGiaThanh;
 	public JTextField txtGiaThanh;
+	protected JTextField txtKichCo;
+	private JLabel lblMauSac;
+	protected JTextField txtMauSac;
 
 	protected ChiTietHoaDonUI() {
 		txtMaHoaDon = new JTextField();
@@ -73,7 +76,7 @@ public class ChiTietHoaDonUI extends JPanel {
 		lblTongTien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JPanel pnlCenter = new JPanel();
-		pnlCenter.setBackground(Color.decode("#FFB6F8"));
+		pnlCenter.setBackground(new Color(119, 136, 153));
 		pnlCenter.setBorder(new LineBorder(Color.BLACK));
 		
 		JScrollPane scrSanPham = new JScrollPane();
@@ -87,54 +90,53 @@ public class ChiTietHoaDonUI extends JPanel {
 						.addComponent(lblMaHoaDon))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtMaHoaDon, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-						.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
+						.addComponent(txtMaHoaDon, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+						.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNgayLap)
 						.addComponent(lblTongTien))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtNgayLap, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-						.addComponent(txtMaNhanVien, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+						.addComponent(txtNgayLap, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+						.addComponent(txtMaNhanVien, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
 					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(pnlCenter, GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
-					.addContainerGap())
-				.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
+					.addComponent(pnlCenter, GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE)
+					.addGap(13))
+				.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE)
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(63)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblMaKhachHang)
-						.addComponent(txtMaKhachHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(486))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(63)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTongTien)
-						.addComponent(txtMaNhanVien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(486))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblMaHoaDon)
-						.addComponent(lblNgayLap)
-						.addComponent(txtMaHoaDon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtNgayLap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(62)
-					.addComponent(pnlCenter, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-					.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(63)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblMaKhachHang)
+								.addComponent(txtMaKhachHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(63)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTongTien)
+								.addComponent(txtMaNhanVien, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblMaHoaDon)
+								.addComponent(lblNgayLap)
+								.addComponent(txtMaHoaDon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtNgayLap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(pnlCenter, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
 		);
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNgayLap, lblTongTien});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaHoaDon, lblMaKhachHang});
 		
-		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Giá thành"});
+		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Kích cỡ", "Màu sắc", "Giá thành"});
 		tblCTHD = new JTable();
 		tblCTHD.setRowHeight(25);
 		tblCTHD.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -207,105 +209,149 @@ public class ChiTietHoaDonUI extends JPanel {
 		txtGiaThanh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtGiaThanh.setEditable(false);
 		txtGiaThanh.setColumns(10);
+		
+		JLabel lblKichCo = new JLabel("Kích cỡ");
+		lblKichCo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		txtKichCo = new JTextField();
+		txtKichCo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtKichCo.setColumns(10);
+		
+		lblMauSac = new JLabel("Màu sắc");
+		lblMauSac.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		txtMauSac = new JTextField();
+		txtMauSac.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtMauSac.setColumns(10);
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlCenter.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblGiaThanh, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDonGia)
-						.addComponent(lblSoLuong)
-						.addComponent(lblMaSanPham, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtGiaThanh, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtSoLuong, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtMaSanPham, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_pnlCenter.createSequentialGroup()
-							.addGap(16)
-							.addComponent(lblTSanPham)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtTenSanPham, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblTenNCC)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtTenNCC, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnTimSP, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_pnlCenter.createSequentialGroup()
-							.addGap(6)
-							.addComponent(scrCTHD, GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)))
-					.addContainerGap())
-				.addGroup(gl_pnlCenter.createSequentialGroup()
-					.addGap(10)
-					.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(btnXoa)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXoaTrang)
-					.addContainerGap(634, Short.MAX_VALUE))
-		);
-		gl_pnlCenter.setVerticalGroup(
-			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlCenter.createSequentialGroup()
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pnlCenter.createSequentialGroup()
-							.addContainerGap(19, Short.MAX_VALUE)
-							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnTimSP, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_pnlCenter.createSequentialGroup()
-									.addComponent(lblTSanPham)
-									.addGap(19)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrCTHD, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_pnlCenter.createSequentialGroup()
-							.addGap(27)
-							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_pnlCenter.createSequentialGroup()
-									.addComponent(lblTenNCC)
-									.addGap(99))
-								.addGroup(gl_pnlCenter.createSequentialGroup()
-									.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtMaSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtTenSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtTenNCC, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_pnlCenter.createSequentialGroup()
-											.addGap(3)
-											.addComponent(lblMaSanPham)))
-									.addGap(31)
-									.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_pnlCenter.createSequentialGroup()
-											.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtSoLuong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblSoLuong))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_pnlCenter.createSequentialGroup()
-											.addComponent(lblDonGia)
-											.addGap(3)))))
-							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+									.addGap(10)
+									.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnXoa)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnXoaTrang)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnTimSP, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_pnlCenter.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtGiaThanh, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblKichCo))
 								.addGroup(gl_pnlCenter.createSequentialGroup()
-									.addGap(9)
-									.addComponent(lblGiaThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_pnlCenter.createSequentialGroup()
+											.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblMauSac)
+												.addComponent(lblTenNCC)
+												.addComponent(lblTSanPham))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING, false)
+												.addGroup(Alignment.LEADING, gl_pnlCenter.createSequentialGroup()
+													.addGap(18)
+													.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+														.addComponent(txtKichCo, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)
+														.addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)))
+												.addGroup(Alignment.LEADING, gl_pnlCenter.createSequentialGroup()
+													.addGap(18)
+													.addComponent(txtTenSanPham, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE))
+												.addComponent(txtTenNCC, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)))
+										.addGroup(gl_pnlCenter.createSequentialGroup()
+											.addComponent(lblMaSanPham, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+											.addGap(3)
+											.addComponent(txtMaSanPham, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblSoLuong)
+									.addGap(3)
+									.addComponent(txtSoLuong, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addComponent(lblDonGia)
+									.addGap(3)
+									.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+									.addGap(1)))
+							.addGap(18))
+						.addGroup(gl_pnlCenter.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblGiaThanh, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnXoaTrang)
-								.addComponent(btnXoa))))
+							.addComponent(txtGiaThanh, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+							.addGap(19)))
+					.addComponent(scrCTHD, GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		gl_pnlCenter.setVerticalGroup(
+			gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_pnlCenter.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrCTHD, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_pnlCenter.createSequentialGroup()
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblMaSanPham, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtMaSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtTenSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTSanPham))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblTenNCC)
+								.addComponent(txtTenNCC, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(8)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblKichCo)
+								.addComponent(txtKichCo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE, false)
+								.addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMauSac))
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblSoLuong)
+									.addPreferredGap(ComponentPlacement.RELATED))
+								.addGroup(Alignment.TRAILING, gl_pnlCenter.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(txtSoLuong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(6)))
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addGap(6)
+									.addComponent(lblDonGia, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addGap(12)
+									.addComponent(lblGiaThanh, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addGap(6)
+									.addComponent(txtGiaThanh, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnXoaTrang)
+									.addComponent(btnXoa)
+									.addComponent(btnTimSP, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_pnlCenter.createSequentialGroup()
+									.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)))))
+					.addGap(7))
+		);
+		gl_pnlCenter.linkSize(SwingConstants.VERTICAL, new Component[] {lblMaSanPham, lblSoLuong, lblDonGia, lblTSanPham, lblTenNCC, lblGiaThanh, lblKichCo, lblMauSac});
 		gl_pnlCenter.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang});
-		gl_pnlCenter.linkSize(SwingConstants.HORIZONTAL, new Component[] {txtMaSanPham, txtSoLuong, txtDonGia});
+		gl_pnlCenter.linkSize(SwingConstants.HORIZONTAL, new Component[] {txtTenSanPham, txtTenNCC, txtMaSanPham, txtSoLuong, txtDonGia, txtGiaThanh, txtKichCo, txtMauSac});
 		gl_pnlCenter.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaSanPham, lblSoLuong, lblDonGia});
 		gl_pnlCenter.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang});
-		listSanPham = new DefaultTableModel(null, new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Đơn giá"});
+		listSanPham = new DefaultTableModel(null, new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Kích thước", "Màu sắc", "Đơn giá"});
 		tblSanPham = new JTable();
 		tblSanPham.setRowHeight(25);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -315,5 +361,4 @@ public class ChiTietHoaDonUI extends JPanel {
 		pnlCenter.setLayout(gl_pnlCenter);
 		setLayout(gl_contentPane);
 	}
-
 }

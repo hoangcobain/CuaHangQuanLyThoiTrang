@@ -21,6 +21,8 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.SwingConstants;
 import java.awt.Component;
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 
@@ -40,7 +42,7 @@ public class HoaDonUI extends JPanel {
 	protected JComboBox<Object> cmbgioiTinh;
 	protected JTable tableKhachHang;
 	protected JTable tblHoaDon;
-	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang;
+	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang, btnXemPhiu;
 	protected DefaultTableModel listHoaDon = new DefaultTableModel(null,
 			new String[] {
 					"M\u00E3 h\u00F3a \u0111\u01A1n", "Ng\u00E0y l\u1EADp h\u00F3a \u0111\u01A1n", "T\u00EAn kh\u00E1ch h\u00E0ng", "T\u00EAn nh\u00E2n vi\u00EAn", "T\u1ED5ng ti\u1EC1n"
@@ -90,11 +92,11 @@ public class HoaDonUI extends JPanel {
 		lblMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JPanel pnlNhanVien = new JPanel();
-		pnlNhanVien.setBackground(Color.decode("#FFB6F8"));
+		pnlNhanVien.setBackground(new Color(119, 136, 153));
 		pnlNhanVien.setBorder(new LineBorder(Color.BLACK));
 		
 		JPanel pnlKhachHang = new JPanel();
-		pnlKhachHang.setBackground(Color.decode("#FFB6F8"));
+		pnlKhachHang.setBackground(new Color(119, 136, 153));
 		pnlKhachHang.setBorder(new LineBorder(Color.BLACK));
 		
 		JScrollPane scrHoaDon = new JScrollPane();
@@ -103,33 +105,44 @@ public class HoaDonUI extends JPanel {
 		btnCapNhat.setBackground(Color.decode("#A6FFEA"));
 		btnCapNhat.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/updated.png")));
 		btnCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCapNhat.setFocusable(false);
+		btnCapNhat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoa = new JButton("Xóa");
 		btnXoa.setBackground(Color.decode("#E2A6FF"));
 		btnXoa.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/remove.png")));
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoa.setFocusable(false);
+		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoaTrang = new JButton("Xóa trắng");
 		btnXoaTrang.setBackground(Color.decode("#E2A6FF"));
 		btnXoaTrang.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/clean.png")));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnXoaTrang.setFocusable(false);
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnCTHD = new JButton("Chi tiết hóa đơn");
 		btnCTHD.setEnabled(false);
 		btnCTHD.setBackground(Color.decode("#FFEAB6"));
 		btnCTHD.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/details.png")));
 		btnCTHD.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCTHD.setFocusable(false);
+		btnCTHD.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnTimKiem = new JButton("Tìm kiếm");
 		btnTimKiem.setBackground(Color.decode("#E2A6FF"));
 		btnTimKiem.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searching.png")));
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnTimKiem.setFocusable(false);
+		btnTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
-		JButton btnXemPhiu = new JButton("Xem Phiếu");
+		btnXemPhiu = new JButton("Xem Phiếu");
 		btnXemPhiu.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/report.png")));
 		btnXemPhiu.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnXemPhiu.setEnabled(false);
 		btnXemPhiu.setBackground(new Color(255, 234, 182));
+		btnXemPhiu.setFocusable(false);
+		btnXemPhiu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
@@ -230,7 +243,6 @@ public class HoaDonUI extends JPanel {
 		tblHoaDon = new JTable();
 		tblHoaDon.setRowHeight(25);
 		tblHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tblHoaDon.setShowHorizontalLines(false);
 		tblHoaDon.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tblHoaDon.setModel(listHoaDon);
 		
@@ -263,6 +275,8 @@ public class HoaDonUI extends JPanel {
 		btnTimKhachHang.setBackground(Color.decode("#FFA6B6"));
 		btnTimKhachHang.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searchKH.png")));
 		btnTimKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTimKhachHang.setFocusable(false);
+		btnTimKhachHang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlKhachHang = new GroupLayout(pnlKhachHang);
 		gl_pnlKhachHang.setHorizontalGroup(
 			gl_pnlKhachHang.createParallelGroup(Alignment.TRAILING)
@@ -341,6 +355,8 @@ public class HoaDonUI extends JPanel {
 		btnTimNhanVien.setBackground(Color.decode("#FFA6B6"));
 		btnTimNhanVien.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searchNV.png")));
 		btnTimNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTimNhanVien.setFocusable(false);
+		btnTimNhanVien.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlNhanVien = new GroupLayout(pnlNhanVien);
 		gl_pnlNhanVien.setHorizontalGroup(
 			gl_pnlNhanVien.createParallelGroup(Alignment.LEADING)

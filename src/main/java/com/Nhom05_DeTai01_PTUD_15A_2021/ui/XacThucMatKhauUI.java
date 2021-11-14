@@ -69,8 +69,8 @@ public class XacThucMatKhauUI extends JFrame {
 			}
 		});
 		gradientPanel.kGradientFocus = -1;
-		gradientPanel.kEndColor = Color.WHITE;
-		gradientPanel.kStartColor = new Color(255, 51, 153);
+		gradientPanel.kEndColor = new Color(192, 192, 192);
+		gradientPanel.kStartColor = new Color(192, 192, 192);
 		gradientPanel.setBounds(0, 0, 669, 420);
 		contentPane.add(gradientPanel);
 		gradientPanel.setLayout(null);

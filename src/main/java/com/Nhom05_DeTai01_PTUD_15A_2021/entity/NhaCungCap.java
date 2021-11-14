@@ -66,9 +66,9 @@ public class NhaCungCap {
 		this.maNhaCungCap = maNhaCungCap;
 	}
 	
-	public NhaCungCap(String maNhaCungCap, String tenNCC, String diaChi, String soDienThoai) {
+	
+	public NhaCungCap(String tenNCC, String diaChi, String soDienThoai) {
 		super();
-		this.maNhaCungCap = maNhaCungCap;
 		this.tenNCC = tenNCC;
 		this.diaChi = diaChi;
 		this.soDienThoai = soDienThoai;

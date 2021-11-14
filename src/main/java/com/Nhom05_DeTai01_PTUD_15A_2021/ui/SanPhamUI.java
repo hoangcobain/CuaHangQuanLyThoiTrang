@@ -47,34 +47,38 @@ public class SanPhamUI extends JPanel {
 	public SanPhamUI() {
 		setBackground(Color.WHITE);
 		JPanel pnlLeftSanPham = new JPanel();
-		pnlLeftSanPham.setBackground(Color.decode("#FFB6F8"));
+		pnlLeftSanPham.setBackground(new Color(119, 136, 153));
 		
 		JPanel pnlRightSanPham = new JPanel();
-		pnlRightSanPham.setBackground(Color.decode("#FFB6F8"));
+		pnlRightSanPham.setBackground(new Color(119, 136, 153));
 		
 		btnThemSanPham = new JButton("Thêm mới");
-		btnThemSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnThemSanPham.setFocusPainted(false);
+		btnThemSanPham.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_clothes_23px.png")));
+		btnThemSanPham.setBackground(new Color(192, 192, 192));
+		btnThemSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnThemSanPham.setFocusable(false);
-		btnThemSanPham.setBorder(BorderFactory.createEmptyBorder());
+		btnThemSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnCapNhatSanPham = new JButton("Cập nhật");
-		btnCapNhatSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCapNhatSanPham.setFocusPainted(false);
+		btnCapNhatSanPham.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_refresh_23px.png")));
+		btnCapNhatSanPham.setBackground(new Color(192, 192, 192));
+		btnCapNhatSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCapNhatSanPham.setFocusable(false);
-		btnCapNhatSanPham.setBorder(BorderFactory.createEmptyBorder());
+		btnCapNhatSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoaSanPham = new JButton("Xóa");
-		btnXoaSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnXoaSanPham.setFocusPainted(false);
+		btnXoaSanPham.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/remove.png")));
+		btnXoaSanPham.setBackground(new Color(192, 192, 192));
+		btnXoaSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXoaSanPham.setFocusable(false);
-		btnXoaSanPham.setBorder(BorderFactory.createEmptyBorder());
+		btnXoaSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoaTrangSanPham = new JButton("Xóa trắng");
-		btnXoaTrangSanPham.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnXoaTrangSanPham.setFocusPainted(false);
+		btnXoaTrangSanPham.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_erase_23px.png")));
+		btnXoaTrangSanPham.setBackground(new Color(192, 192, 192));
+		btnXoaTrangSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXoaTrangSanPham.setFocusable(false);
-		btnXoaTrangSanPham.setBorder(BorderFactory.createEmptyBorder());
+		btnXoaTrangSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		cmbTimSanPham = new JComboBox<String>();
 		cmbTimSanPham.setEditable(true);
@@ -90,7 +94,7 @@ public class SanPhamUI extends JPanel {
 			gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlSanPham.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
 						.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
 						.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 969, Short.MAX_VALUE)
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
@@ -101,7 +105,7 @@ public class SanPhamUI extends JPanel {
 							.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_pnlSanPham.createSequentialGroup()
+						.addGroup(gl_pnlSanPham.createSequentialGroup()
 							.addComponent(lblDanhSachSanPham, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(cmbTimSanPham, 0, 754, Short.MAX_VALUE)))
@@ -113,31 +117,30 @@ public class SanPhamUI extends JPanel {
 			gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlSanPham.createSequentialGroup()
 					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
-						.addComponent(pnlRightSanPham, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+						.addComponent(pnlRightSanPham, GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
 							.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-								.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-								.addComponent(btnCapNhatSanPham, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-								.addComponent(btnThemSanPham, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnXoaTrangSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
+								.addComponent(btnXoaSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
+								.addComponent(btnCapNhatSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
+								.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblDanhSachSanPham)
 								.addComponent(cmbTimSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)))
+							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)))
 					.addGap(0))
 		);
 		
 		tblSanPham = new JTable();
-		tblSanPham.setRowHeight(25);
+		tblSanPham.setRowHeight(35);
 		listSanPham = new DefaultTableModel(null,new String[] {
 				"M\u00E3 s\u1EA3n ph\u1EA9m", "T\u00EAn s\u1EA3n ph\u1EA9m", "T\u00EAn NCC", "S\u1ED1 l\u01B0\u1EE3ng","Kích cỡ","Màu sắc", "T\u00EAn lo\u1EA1i", "Gi\u00E1 th\u00E0nh"
 			});
 		tblSanPham.setModel(listSanPham);
-		tblSanPham.setShowHorizontalLines(false);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		scrSanPham.setViewportView(tblSanPham);
 		

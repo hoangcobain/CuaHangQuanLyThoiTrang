@@ -72,8 +72,8 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		gradientPanel.kBorderRadius = 0;
 		gradientPanel.kGradientFocus = -1;
-		gradientPanel.kStartColor = new Color(255, 51, 153);
-		gradientPanel.kEndColor = Color.WHITE;
+		gradientPanel.kStartColor = new Color(119, 136, 153);
+		gradientPanel.kEndColor = new Color(119, 136, 153);
 		
 		txtTaiKhoan = new JTextField();
 		txtTaiKhoan.setBounds(289, 228, 468, 20);
@@ -108,6 +108,7 @@ public class DangNhapUI extends JFrame {
 		lblMatKhau.setForeground(Color.WHITE);
 		
 		KButton btnDangNhap = new KButton();
+		btnDangNhap.kHoverColor = new Color(119, 136, 153);
 		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDangNhap.addMouseListener(new MouseAdapter() {
 			@Override
@@ -122,12 +123,12 @@ public class DangNhapUI extends JFrame {
 		btnDangNhap.kForeGround = Color.WHITE;
 		btnDangNhap.kSelectedColor = new Color(255, 51, 153);
 		btnDangNhap.kHoverForeGround = Color.BLACK;
-		btnDangNhap.kHoverEndColor = new Color(255, 51, 153);
+		btnDangNhap.kHoverEndColor = new Color(119, 136, 153);
 		btnDangNhap.kHoverStartColor = Color.WHITE;
 		btnDangNhap.kBackGroundColor = new Color(255, 51, 153);
 		btnDangNhap.kBorderRadius = 40;
 		btnDangNhap.kEndColor = Color.WHITE;
-		btnDangNhap.kStartColor = new Color(255, 51, 153);
+		btnDangNhap.kStartColor = new Color(105, 105, 105);
 		btnDangNhap.setText("Đăng nhập");
 		
 		JLabel btnDangXuat = new JLabel("X");
@@ -152,24 +153,6 @@ public class DangNhapUI extends JFrame {
 		
 		lblUserimage.setForeground(Color.WHITE);
 		lblUserimage.setFont(new Font("Segoe UI", Font.BOLD, 30));
-		
-		JLabel lblFacebook = new JLabel("");
-		lblFacebook.setIcon(new ImageIcon(DangNhapUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_facebook_50px.png")));
-		lblFacebook.setBounds(408, 555, 50, 50);
-		
-		lblFacebook.setForeground(Color.WHITE);
-		
-		JLabel lblInstagram = new JLabel("");
-		lblInstagram.setIcon(new ImageIcon(DangNhapUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_instagram_logo_50px.png")));
-		lblInstagram.setBounds(502, 555, 50, 50);
-
-		lblInstagram.setForeground(Color.WHITE);
-		
-		JLabel lblYoutube = new JLabel("");
-		lblYoutube.setIcon(new ImageIcon(DangNhapUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_youtube_play_button_50px.png")));
-		lblYoutube.setBounds(590, 555, 50, 50);
-		
-		lblYoutube.setForeground(Color.WHITE);
 		contentPane.setLayout(null);
 		gradientPanel.setLayout(null);
 		gradientPanel.add(txtTaiKhoan);
@@ -180,9 +163,6 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.add(btnDangXuat);
 		gradientPanel.add(lblImageHL);
 		gradientPanel.add(lblUserimage);
-		gradientPanel.add(lblFacebook);
-		gradientPanel.add(lblInstagram);
-		gradientPanel.add(lblYoutube);
 		contentPane.add(gradientPanel);
 		
 		lblQuenMatKHau = new JLabel("Quên mật khẩu...?");

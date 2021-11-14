@@ -2,6 +2,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.GroupLayout;
@@ -68,7 +69,7 @@ public class LapHoaDonUI extends JPanel {
 		lblTongTien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		JPanel pnlCenTer = new JPanel();
-		pnlCenTer.setBackground(Color.decode("#FFB6F8"));
+		pnlCenTer.setBackground(new Color(119, 136, 153));
 		pnlCenTer.setBorder(new LineBorder(Color.BLACK));
 
 		JScrollPane scrSanPham = new JScrollPane();
@@ -77,15 +78,15 @@ public class LapHoaDonUI extends JPanel {
 		btnTim.setBackground(Color.decode("#FFA6B6"));
 		btnTim.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searchNV.png")));
 		btnTim.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTim.setFocusable(false);
+		btnTim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnThanhToan = new JButton("Thanh toán");
 		btnThanhToan.setBackground(Color.decode("#A6FFEA"));
-		btnThanhToan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnThanhToan.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/checkout.png")));
 		btnThanhToan.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnThanhToan.setFocusable(false);
+		btnThanhToan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		lblTienKhach = new JLabel("Tiền khách");
 		lblTienKhach.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -225,16 +226,22 @@ public class LapHoaDonUI extends JPanel {
 		btnThem.setBackground(Color.decode("#ffe19c"));
 		btnThem.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/floppy-disk.png")));
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnThem.setFocusable(false);
+		btnThem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnXoa = new JButton("Xóa SP trong HĐơn");
 		btnXoa.setBackground(Color.decode("#FFA6B6"));
 		btnXoa.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/remove.png")));
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoa.setFocusable(false);
+		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		btnXoaTrang = new JButton("Xóa trắng");
 		btnXoaTrang.setBackground(Color.decode("#E2A6FF"));
 		btnXoaTrang.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/clean.png")));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoaTrang.setFocusable(false);
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		txtMaSanPham = new JTextField();
 		txtMaSanPham.setEditable(false);
@@ -260,6 +267,8 @@ public class LapHoaDonUI extends JPanel {
 		btnTimSP.setBackground(Color.decode("#E2A6FF"));
 		btnTimSP.setIcon(new ImageIcon(LapHoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/searching.png")));
 		btnTimSP.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnTimSP.setFocusable(false);
+		btnTimSP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		lblGiaThanh = new JLabel("Giá thành");
 		lblGiaThanh.setFont(new Font("Tahoma", Font.PLAIN, 20));

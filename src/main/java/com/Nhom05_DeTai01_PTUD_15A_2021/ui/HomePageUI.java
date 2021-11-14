@@ -175,9 +175,9 @@ public class HomePageUI extends JFrame {
 			}
 		});		
 		//	XỬ LÝ HOÁ ĐƠN
-		pnlhoaDon.btnTimNhanVien.addMouseListener(new MouseAdapter() {
+		pnlhoaDon.btnTimNhanVien.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten, sdt, email;
 				ten = pnlhoaDon.txttenNhanVien.getText();
 				sdt = pnlhoaDon.txtsoDT.getText();
@@ -185,9 +185,9 @@ public class HomePageUI extends JFrame {
 				nhanVienController.searchNhanVien(pnlhoaDon.listNhanVien,ten,sdt,email);
 			}
 		});
-		pnlhoaDon.btnTimKhachHang.addMouseListener(new MouseAdapter() {
+		pnlhoaDon.btnTimKhachHang.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten, sdt;
 				int gioiTinh;
 				ten = pnlhoaDon.txttenKhachHang.getText();
@@ -225,9 +225,8 @@ public class HomePageUI extends JFrame {
 				pnlhoaDon.btnCTHD.setEnabled(true);
 			}
 		});
-		pnlhoaDon.btnXoaTrang.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		pnlhoaDon.btnXoaTrang.addActionListener (new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
 				xoaTrangHoaDon(pnlhoaDon.btnCTHD);
 			}
 		});
@@ -249,9 +248,9 @@ public class HomePageUI extends JFrame {
 					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonth(),date.getYear());
 		    }
 		});
-		pnlhoaDon.btnXoa.addMouseListener(new MouseAdapter() {
+		pnlhoaDon.btnXoa.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String id = pnlhoaDon.txtMaHoaDon.getText();
 				if (!id.equals("")){
 					hoaDonController.xoaHoaDon(id);
@@ -280,23 +279,47 @@ public class HomePageUI extends JFrame {
 				loadCTHD();
 			}
 		});
+		pnlhoaDon.btnXemPhiu.addActionListener (new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				String id = pnlhoaDon.tblHoaDon.getModel().getValueAt(pnlhoaDon.tblHoaDon.getSelectedRow(), 0).toString();
+				Runtime run = Runtime.getRuntime();
+				try {
+					run.exec("notepad History//" + id + ".txt");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		//		XỬ LÝ CHI TIET HÓA ĐƠN
 		pnlChiTietHoaDon.btnTimSP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//				sanPhamController.searchByTenNCC(pnlChiTietHoaDon.listSanPham,pnlChiTietHoaDon.txtTenSanPham.getText(),pnlChiTietHoaDon.txtTenNCC.getText());
+				sanPhamController.searchByTenNCC(pnlChiTietHoaDon.listSanPham,pnlChiTietHoaDon.txtTenSanPham.getText(),pnlChiTietHoaDon.txtTenNCC.getText(),pnlChiTietHoaDon.txtKichCo
+						.getText(),pnlChiTietHoaDon.txtMauSac.getText());
 			}
 		});
 		pnlChiTietHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = pnlChiTietHoaDon.tblCTHD.getSelectedRow();
+				int i = pnlChiTietHoaDon.tblSanPham.getSelectedRow();
 				String id = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 0).toString();
+				String ten = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 1).toString();
+				String tenNCC = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 2).toString();
 				String soLuong = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 3).toString();
-				String giaThanh = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 4).toString();
+				String kichCo = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 4).toString();
+				String mauSac = pnlChiTietHoaDon.tblCTHD.getModel().getValueAt(index, 5).toString();
+				
+				
+				String giaThanh = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(i, 6).toString();
+				
 				pnlChiTietHoaDon.txtMaSanPham.setText(id);
 				pnlChiTietHoaDon.txtSoLuong.setText(soLuong);
-				pnlChiTietHoaDon.txtGiaThanh.setText(giaThanh);
+				pnlChiTietHoaDon.txtTenSanPham.setText(ten);
+				pnlChiTietHoaDon.txtTenNCC.setText(tenNCC);
+//				pnlChiTietHoaDon.txtGiaThanh.setText(giaThanh);
+				pnlChiTietHoaDon.txtKichCo.setText(kichCo);
+				pnlChiTietHoaDon.txtMauSac.setText(mauSac);
 				try {
 					int soLuong1 = Integer.parseInt(pnlChiTietHoaDon.txtSoLuong.getText());
 					double gt = Double.parseDouble(giaThanh);
@@ -311,7 +334,9 @@ public class HomePageUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = pnlChiTietHoaDon.tblSanPham.getSelectedRow();
 				String id = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
-				String donGia = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
+				String donGia = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
+				String kichCo = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
+				String mauSac = pnlChiTietHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
 				pnlChiTietHoaDon.txtDonGia.setText(donGia);
 				pnlChiTietHoaDon.txtMaSanPham.setText(id);
 				try {
@@ -348,15 +373,15 @@ public class HomePageUI extends JFrame {
 				nhapSoLuong();				
 			}
 		});
-		pnlChiTietHoaDon.btnXoaTrang.addMouseListener(new MouseAdapter() {
+		pnlChiTietHoaDon.btnXoaTrang.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				xoaTrangCTHD();
 			}
 		});
-		pnlChiTietHoaDon.btnXoa.addMouseListener(new MouseAdapter() {
+		pnlChiTietHoaDon.btnXoa.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String maSP = pnlChiTietHoaDon.txtMaSanPham.getText();
 				String maHD = pnlChiTietHoaDon.txtMaHoaDon.getText();
 				chiTietHoaDonController.xoaCTHD(maHD,maSP);
@@ -364,9 +389,9 @@ public class HomePageUI extends JFrame {
 				loadCTHD();
 			}
 		});
-		pnlChiTietHoaDon.btnCapNhat.addMouseListener(new MouseAdapter() {
+		pnlChiTietHoaDon.btnCapNhat.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String maSP = pnlChiTietHoaDon.txtMaSanPham.getText();
 				String maHD = pnlChiTietHoaDon.txtMaHoaDon.getText();
 				String soLuong = pnlChiTietHoaDon.txtSoLuong.getText();
@@ -385,9 +410,9 @@ public class HomePageUI extends JFrame {
 			}
 		});
 		//		XỬ LÝ LẬP HÓA ĐƠN
-		pnlLapHoaDon.btnTimSP.addMouseListener(new MouseAdapter() {
+		pnlLapHoaDon.btnTimSP.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText(),
 						pnlLapHoaDon.txtSize.getText(),pnlLapHoaDon.txtMauSac.getText());
 			}
@@ -438,9 +463,9 @@ public class HomePageUI extends JFrame {
 				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
 			}
 		});
-		pnlLapHoaDon.btnXoaTrang.addMouseListener(new MouseAdapter() {
+		pnlLapHoaDon.btnXoaTrang.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				xoaTrangLapHoaDon();
 			}
 		});
@@ -467,17 +492,17 @@ public class HomePageUI extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				nhapSoLuong();
 			}
-		});
-		pnlLapHoaDon.btnXoa.addMouseListener(new MouseAdapter() {
+		});		
+		pnlLapHoaDon.btnXoa.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				removeRowCTHD(pnlLapHoaDon.txtMaSanPham.getText());
 				loadTongTien();
 			}
-		});
-		pnlLapHoaDon.btnThem.addMouseListener(new MouseAdapter() {
+		});	
+		pnlLapHoaDon.btnThem.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String maSP = pnlLapHoaDon.txtMaSanPham.getText();
 				if (maSP.equals("")) {
 					return;
@@ -507,15 +532,16 @@ public class HomePageUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Số lượng không phải số: "+e2.getMessage());
 				}
 			}
-		});
+		});	
+		
 		pnlLapHoaDon.cmbKhuyenMai.addActionListener (new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				loadTongTien();
 			}
 		});
-		pnlLapHoaDon.btnThanhToan.addMouseListener(new MouseAdapter() {
+		pnlLapHoaDon.btnThanhToan.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {		
+			public void actionPerformed(ActionEvent e) {
 				if(pnlLapHoaDon.tblCTHD.getRowCount()>0 && !pnlLapHoaDon.txtMaKhachHang.getText().equals("")) {
 					if(pnlLapHoaDon.txtTienKhachDua.getText().equals("")) {
 						JOptionPane.showMessageDialog(null, "Tiền khách trả không được để trống");
@@ -547,17 +573,17 @@ public class HomePageUI extends JFrame {
 				}
 			}
 		});
-		pnlLapHoaDon.btnTim.addMouseListener(new MouseAdapter() {
+		pnlLapHoaDon.btnTim.addActionListener (new ActionListener () {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				paneContent.setViewportView(pnlKhachHang);
 				loadKhachHang();
 			}
-		});
+		});	
 		//		XỬ LÝ KHÁCH HÀNG
-		pnlKhachHang.btnThem.addMouseListener(new MouseAdapter() {
+		pnlKhachHang.btnThem.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten = pnlKhachHang.txtTenNhanVien.getText().trim();
 				String sodt = pnlKhachHang.txtSoDienThoai.getText().trim();
 				String diaChi = pnlKhachHang.txtDiaChi.getText().trim();
@@ -589,13 +615,13 @@ public class HomePageUI extends JFrame {
 						pnlKhachHang.txtMaKhachHang.setText(khachHang.getMaKhachHang());
 
 					loadKhachHang();
-
 				}
+				
 			}
-		});
-		pnlKhachHang.btnSua.addMouseListener(new MouseAdapter() {
+		} );
+		pnlKhachHang.btnSua.addActionListener(new ActionListener() {	
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten = pnlKhachHang.txtTenNhanVien.getText().trim();
 				String sodt = pnlKhachHang.txtSoDienThoai.getText().trim();
 				String diaChi = pnlKhachHang.txtDiaChi.getText().trim();
@@ -610,11 +636,9 @@ public class HomePageUI extends JFrame {
 				loadKhachHang();
 			}
 		});
-
-
-		pnlKhachHang.btnTimKH.addMouseListener(new MouseAdapter() {
+		pnlKhachHang.btnTimKH.addActionListener(new ActionListener() {	
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				if(e.getSource().equals(pnlKhachHang.btnTimKH)) {		
 					String id = pnlKhachHang.cmbTimKiem.getSelectedItem().toString();
 					String ten = pnlKhachHang.cmbTimKiem.getSelectedItem().toString();
@@ -623,15 +647,15 @@ public class HomePageUI extends JFrame {
 				}
 			}
 		});
-		pnlKhachHang.btnLamMoi.addMouseListener(new MouseAdapter() {
+		pnlKhachHang.btnLamMoi.addActionListener(new ActionListener() {	
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				loadKhachHang();
 			}
 		});
-		pnlKhachHang.btnXoaTrang.addMouseListener(new MouseAdapter() {
+		pnlKhachHang.btnXoaTrang.addActionListener(new ActionListener() {	
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				pnlKhachHang.txtMaKhachHang.setText("");
 				pnlKhachHang.txtTenNhanVien.setText("");
 				pnlKhachHang.txtSoDienThoai.setText("");
@@ -667,9 +691,10 @@ public class HomePageUI extends JFrame {
 		});
 
 		//		XỬ LÝ LOẠI SẢN PHẨM
-		pnlLoaiSanPham.btnThemMoi.addMouseListener(new MouseAdapter() {
+		
+		pnlLoaiSanPham.btnThemMoi.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten = pnlLoaiSanPham.txtTenLoai.getText().trim();
 				if(!(ten.length() >0)) {
 					JOptionPane.showMessageDialog(null, "Tên loại sản phẩm không được để trống"); 
@@ -686,11 +711,12 @@ public class HomePageUI extends JFrame {
 					pnlLoaiSanPham.txtMaLoai.setText(lsp.getMaLoaiSanPham());
 					loadLoaiSanPham();
 				}
+				
 			}
 		});
-		pnlLoaiSanPham.btnCapNhat.addMouseListener(new MouseAdapter() {
+		pnlLoaiSanPham.btnCapNhat.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String ten = pnlLoaiSanPham.txtTenLoai.getText().trim();
 				LoaiSanPham loaiSanPham = new LoaiSanPham(ten);
 				loaiSanPham.setMaLoaiSanPham(pnlLoaiSanPham.txtMaLoai.getText());
@@ -698,9 +724,9 @@ public class HomePageUI extends JFrame {
 				loadLoaiSanPham();
 			}
 		});
-		pnlLoaiSanPham.btnXoa.addMouseListener(new MouseAdapter() {
+		pnlLoaiSanPham.btnXoa.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				loaiSanPhamController.xoaLSP(pnlLoaiSanPham.txtMaLoai.getText());
 				loadLoaiSanPham();
 				xoaTrangLoaiSanPham();
@@ -714,10 +740,11 @@ public class HomePageUI extends JFrame {
 				pnlLoaiSanPham.txtTenLoai.setText(pnlLoaiSanPham.tblLoaiSanPham.getModel().getValueAt(index, 1).toString());
 			}
 		});
-		pnlLoaiSanPham.btnXoaTrang.addMouseListener(new MouseAdapter() {
+		pnlLoaiSanPham.btnXoaTrang.addActionListener(new ActionListener() {	
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				xoaTrangLoaiSanPham();
+				
 			}
 		});
 
@@ -1068,10 +1095,9 @@ public class HomePageUI extends JFrame {
 			}
 		});
 		//XU LY NHA CUNG CAP
-		pnlNguonHang.btnThemMoi.addMouseListener(new MouseAdapter() {
+		pnlNguonHang.btnThemMoi.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				String ma = pnlNguonHang.txtMaNCC.getText().trim();
+			public void actionPerformed(ActionEvent e) {
 				String ten = pnlNguonHang.txtTen.getText().trim();
 				String diachi = pnlNguonHang.txtDiaChi.getText().trim();
 				String sdt = pnlNguonHang.txtSDT.getText().trim();
@@ -1081,12 +1107,13 @@ public class HomePageUI extends JFrame {
 					pnlNguonHang.txtTen.selectAll();;	
 				}
 				else {
-					nhaCungCapController.save(new NhaCungCap(ma, ten, diachi, sdt));
+					NhaCungCap nhaCungCap = new NhaCungCap(ten, diachi, sdt);
+					nhaCungCapController.save(nhaCungCap);
+					pnlNguonHang.txtMaNCC.setText(nhaCungCap.getMaNhaCungCap());
 					loadNhaCungCap();
 				}
 			}
 		});
-
 		pnlNguonHang.tblNhaCungCap.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1097,17 +1124,15 @@ public class HomePageUI extends JFrame {
 				pnlNguonHang.txtSDT.setText(pnlNguonHang.tblNhaCungCap.getModel().getValueAt(index, 3).toString());
 			}
 		});
-
-		pnlNguonHang.btnXoaTrang.addMouseListener(new MouseAdapter() {
+		pnlNguonHang.btnXoaTrang.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				xoaTrangNhaCungCap();
 			}
 		});
-
-		pnlNguonHang.btnCapNhat.addMouseListener(new MouseAdapter() {
+		pnlNguonHang.btnCapNhat.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				try {
 					NhaCungCap nhaCungCap = new NhaCungCap();
 
@@ -1121,25 +1146,20 @@ public class HomePageUI extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
 				}
-
-
-
 			}
 		});
-
-		pnlNguonHang.btnTim.addMouseListener(new MouseAdapter() {
+		pnlNguonHang.btnTim.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {		
+			public void actionPerformed(ActionEvent e) {
 				String sdt = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
 				String ten = pnlNguonHang.cmbTimKiem.getSelectedItem().toString();
 				nhaCungCapController.searchNCC(pnlNguonHang.listNhaCC, sdt, ten);
 				pnlNguonHang.cmbTimKiem.setSelectedIndex(0);
 			}
 		});
-
-		pnlNguonHang.btnLamMoi.addMouseListener(new MouseAdapter() {
+		pnlNguonHang.btnLamMoi.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				loadNhaCungCap();
 			}
 		});
@@ -1215,7 +1235,7 @@ public class HomePageUI extends JFrame {
 			JOptionPane.showMessageDialog(null, "Lập hóa đơn không thành công");
 			return;
 		}
-		for (int i = 0; i < model.getRowCount(); ++i) {
+		for (int i = 0; i < model.getRowCount(); i++) {
 			try {
 				maSP = model.getValueAt(i, 0).toString();
 				soLuong = Integer.parseInt(model.getValueAt(i, 5).toString());
@@ -1252,28 +1272,30 @@ public class HomePageUI extends JFrame {
 				String id = (String) model.getValueAt(i, 0);
 				String tenSP = (String) model.getValueAt(i, 1);
 				String tenNCC = (String) model.getValueAt(i, 2);
-				String quantity = String.valueOf(model.getValueAt(i, 3));
-				String intomoney = String.valueOf(model.getValueAt(i, 4));
+				String quantity = String.valueOf(model.getValueAt(i, 5));
+				String intomoney = String.valueOf(model.getValueAt(i, 6));
 				bw.write((i + 1) + ". " + tenSP + "\r\n");
-				bw.write(id + "\t\t" + tenNCC + "\t\t\t   " + quantity + "\t\t   " + intomoney + "\r\n\r\n");
+				bw.write(id + "\t\t" + tenNCC + "\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
 				quantotal += Integer.parseInt(quantity);
 			}
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + hoaDon.getTongTien() + " VNĐ\r\n");
-			bw.write("\t\tChiết khấu:\t" + "0" + "%\t\t-" + "0" + " VNĐ\r\n");
+			bw.write("\t\tKhuyến mãi:\t" + pnlLapHoaDon.cmbKhuyenMai.getSelectedItem() + "\t\t-" + "0" + " VNĐ\r\n");
+			bw.write("\t\tChiết khấu:\t" + chietKhau + "%\t\t-" + "0" + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
-			bw.write("\t\tThành tiền:\t\t\t" + hoaDon.getTongTien() + " VNĐ\r\n");
+			bw.write("\t\tThành tiền:\t\t\t" + tongTien + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
 			bw.write("\t\tTiền khách đưa:\t\t\t" + tienKhachTra + " VNĐ\r\n");
 			bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(tienKhachTra-tongTien) + " VNĐ\r\n");
 			bw.write("------------------------------------------------------------\r\n");
-			bw.write("Chương trình khuyến mãi: ");
+			bw.write("Chương trình ưu đãi: ");
 			bw.write("Không có.\r\n");
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Mật khẩu Wifi: HandL\r\n");
 			bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
 			bw.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		// Mở file txt
 		Runtime run = Runtime.getRuntime();
@@ -1360,6 +1382,7 @@ public class HomePageUI extends JFrame {
 		AutoCompleteDecorator.decorate(pnlNguonHang.cmbTimKiem);
 	}
 	protected void xoaTrangNhaCungCap() {
+		pnlNguonHang.txtMaNCC.setText("");
 		pnlNguonHang.txtTen.setText("");
 		pnlNguonHang.txtDiaChi.setText("");
 		pnlNguonHang.txtSDT.setText("");

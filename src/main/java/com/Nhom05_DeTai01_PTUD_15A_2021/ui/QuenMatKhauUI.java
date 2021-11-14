@@ -1,7 +1,6 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,8 +80,8 @@ public class QuenMatKhauUI extends JFrame {
 			}
 		});
 		gradientPanel.kGradientFocus = -1;
-		gradientPanel.kEndColor = Color.WHITE;
-		gradientPanel.kStartColor = new Color(255, 51, 153);
+		gradientPanel.kEndColor = new Color(192, 192, 192);
+		gradientPanel.kStartColor = new Color(192, 192, 192);
 		gradientPanel.setBounds(0, 0, 669, 420);
 		contentPane.add(gradientPanel);
 		gradientPanel.setLayout(null);
@@ -100,7 +99,7 @@ public class QuenMatKhauUI extends JFrame {
 		gradientPanel.add(lblDoiMatKHau);
 
 		JLabel lblEmail = new JLabel("Nhập Email");
-		lblEmail.setForeground(Color.WHITE);
+		lblEmail.setForeground(new Color(255, 255, 255));
 		lblEmail.setBounds(325, 128, 115, 14);
 		gradientPanel.add(lblEmail);
 
@@ -159,15 +158,15 @@ public class QuenMatKhauUI extends JFrame {
 		btnGui.setFocusPainted(false);
 		btnGui.setFocusable(false);
 		btnGui.setBorder(BorderFactory.createEmptyBorder());
-		btnGui.kStartColor = new Color(255, 51, 153);
+		btnGui.kStartColor = new Color(128, 128, 128);
 		btnGui.setkStartColor(new Color(255, 51, 153));
-		btnGui.kSelectedColor = new Color(255, 51, 153);
+		btnGui.kSelectedColor = new Color(192, 192, 192);
 		btnGui.setkSelectedColor(new Color(255, 51, 153));
 		btnGui.kHoverStartColor = Color.WHITE;
 		btnGui.setkHoverStartColor(Color.WHITE);
 		btnGui.kHoverForeGround = Color.BLACK;
 		btnGui.setkHoverForeGround(Color.BLACK);
-		btnGui.kHoverEndColor = new Color(255, 51, 153);
+		btnGui.kHoverEndColor = new Color(255, 255, 255);
 		btnGui.setkHoverEndColor(new Color(255, 51, 153));
 		btnGui.kForeGround = Color.WHITE;
 		btnGui.setkForeGround(Color.WHITE);
@@ -175,7 +174,7 @@ public class QuenMatKhauUI extends JFrame {
 		btnGui.setkEndColor(Color.WHITE);
 		btnGui.kBorderRadius = 40;
 		btnGui.setkBorderRadius(40);
-		btnGui.kBackGroundColor = new Color(255, 51, 153);
+		btnGui.kBackGroundColor = new Color(192, 192, 192);
 		btnGui.setkBackGroundColor(new Color(255, 51, 153));
 		btnGui.setBounds(573, 148, 86, 45);
 		gradientPanel.add(btnGui);
@@ -204,15 +203,15 @@ public class QuenMatKhauUI extends JFrame {
 		btnXacNhan.setFocusPainted(false);
 		btnXacNhan.setFocusable(false);
 		btnXacNhan.setBorder(BorderFactory.createEmptyBorder());
-		btnXacNhan.kStartColor = new Color(255, 51, 153);
+		btnXacNhan.kStartColor = new Color(192, 192, 192);
 		btnXacNhan.setkStartColor(new Color(255, 51, 153));
-		btnXacNhan.kSelectedColor = new Color(255, 51, 153);
+		btnXacNhan.kSelectedColor = new Color(192, 192, 192);
 		btnXacNhan.setkSelectedColor(new Color(255, 51, 153));
 		btnXacNhan.kHoverStartColor = Color.WHITE;
 		btnXacNhan.setkHoverStartColor(Color.WHITE);
 		btnXacNhan.kHoverForeGround = Color.BLACK;
 		btnXacNhan.setkHoverForeGround(Color.BLACK);
-		btnXacNhan.kHoverEndColor = new Color(255, 51, 153);
+		btnXacNhan.kHoverEndColor = new Color(255, 255, 255);
 		btnXacNhan.setkHoverEndColor(new Color(255, 51, 153));
 		btnXacNhan.kForeGround = Color.WHITE;
 		btnXacNhan.setkForeGround(Color.WHITE);

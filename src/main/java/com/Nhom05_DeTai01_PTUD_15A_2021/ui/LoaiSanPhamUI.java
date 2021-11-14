@@ -1,6 +1,7 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.GroupLayout;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
 
 public class LoaiSanPhamUI extends JPanel {
 	protected static final long serialVersionUID = 1L;
@@ -29,10 +31,10 @@ public class LoaiSanPhamUI extends JPanel {
 	public LoaiSanPhamUI() {
 		setBackground(Color.WHITE);
 		JPanel pnlLeftLoaiSanPham = new JPanel();
-		pnlLeftLoaiSanPham.setBackground(new Color(255, 105, 180));
+		pnlLeftLoaiSanPham.setBackground(new Color(119, 136, 153));
 		
 		JPanel pnlRightLoaiSanPham = new JPanel();
-		pnlRightLoaiSanPham.setBackground(new Color(255, 105, 180));
+		pnlRightLoaiSanPham.setBackground(new Color(119, 136, 153));
 		
 		scrLoaiSanPham = new JScrollPane();
 		GroupLayout gl_pnlLoaiSanPham = new GroupLayout(this);
@@ -62,23 +64,39 @@ public class LoaiSanPhamUI extends JPanel {
 		);
 		
 		tblLoaiSanPham = new JTable();
-		tblLoaiSanPham.setShowHorizontalLines(false);
 		tblLoaiSanPham.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tblLoaiSanPham.setRowHeight(35);
 		listLoaiSP = new DefaultTableModel(null, new String[] {"M\u00E3 lo\u1EA1i", "T\u00EAn lo\u1EA1i"});
 		tblLoaiSanPham.setModel(listLoaiSP);
 		scrLoaiSanPham.setViewportView(tblLoaiSanPham);
 		
 		btnThemMoi = new JButton("Thêm mới");
+		btnThemMoi.setBackground(new Color(192, 192, 192));
+		btnThemMoi.setIcon(new ImageIcon(LoaiSanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_clothes_23px.png")));
 		btnThemMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnThemMoi.setFocusable(false);
+		btnThemMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnCapNhat = new JButton("Cập nhật");
+		btnCapNhat.setBackground(new Color(192, 192, 192));
+		btnCapNhat.setIcon(new ImageIcon(LoaiSanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_refresh_23px.png")));
 		btnCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCapNhat.setFocusable(false);
+		btnCapNhat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoa = new JButton("Xóa bỏ");
+		btnXoa.setBackground(new Color(192, 192, 192));
+		btnXoa.setIcon(new ImageIcon(LoaiSanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_clear_symbol_23px.png")));
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoa.setFocusable(false);
+		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXoaTrang = new JButton("Xóa trắng");
+		btnXoaTrang.setBackground(new Color(192, 192, 192));
+		btnXoaTrang.setIcon(new ImageIcon(LoaiSanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_erase_23px.png")));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoaTrang.setFocusable(false);
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlRightLoaiSanPham = new GroupLayout(pnlRightLoaiSanPham);
 		gl_pnlRightLoaiSanPham.setHorizontalGroup(
 			gl_pnlRightLoaiSanPham.createParallelGroup(Alignment.LEADING)

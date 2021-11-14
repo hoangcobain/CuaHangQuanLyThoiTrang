@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Component;
+import java.awt.Cursor;
 
 public class NguonHangUI extends JPanel {
 	protected static final long serialVersionUID = 1L;
@@ -37,7 +40,7 @@ public class NguonHangUI extends JPanel {
 	public NguonHangUI() {
 		setBackground(Color.WHITE);
 		JPanel pnlRightNguonHang = new JPanel();
-		pnlRightNguonHang.setBackground(new Color(255, 105, 180));
+		pnlRightNguonHang.setBackground(new Color(119, 136, 153));
 		
 		scrNhaCungCap = new JScrollPane();
 		GroupLayout gl_pnlLoaiSanPham = new GroupLayout(this);
@@ -58,8 +61,8 @@ public class NguonHangUI extends JPanel {
 		);
 		
 		tblNhaCungCap = new JTable();
-		tblNhaCungCap.setShowHorizontalLines(false);
 		tblNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tblNhaCungCap.setRowHeight(35);
 		listNhaCC = new DefaultTableModel(null, new String[] {"Mã nhà cung cấp","Tên NCC", "Địa chỉ","Số điện thoại"});
 		tblNhaCungCap.setModel(listNhaCC);
 		scrNhaCungCap.setViewportView(tblNhaCungCap);
@@ -79,20 +82,32 @@ public class NguonHangUI extends JPanel {
 		txtDiaChi.setColumns(10);
 		
 		btnThemMoi = new JButton("Thêm mới");
+		btnThemMoi.setBackground(new Color(192, 192, 192));
+		btnThemMoi.setIcon(new ImageIcon(NguonHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_delivered_23px.png")));
 		btnThemMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnThemMoi.setFocusable(false);
+		btnThemMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnCapNhat = new JButton("Cập nhật");
+		btnCapNhat.setBackground(new Color(192, 192, 192));
+		btnCapNhat.setIcon(new ImageIcon(NguonHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_refresh_23px.png")));
 		btnCapNhat.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCapNhat.setFocusable(false);
+		btnCapNhat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnLamMoi = new JButton("Làm mới");
-		btnLamMoi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnLamMoi.setBackground(new Color(192, 192, 192));
+		btnLamMoi.setIcon(new ImageIcon(NguonHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_list_23px.png")));
+		btnLamMoi.setFocusable(false);
+		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		btnXoaTrang = new JButton("Xóa trắng");
+		btnXoaTrang.setBackground(new Color(192, 192, 192));
+		btnXoaTrang.setIcon(new ImageIcon(NguonHangUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_erase_23px.png")));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoaTrang.setFocusable(false);
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		JLabel lblSDT = new JLabel("SĐT");
 		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -189,13 +204,14 @@ public class NguonHangUI extends JPanel {
 						.addComponent(btnLamMoi)
 						.addComponent(btnXoaTrang))
 					.addGap(39)
-					.addGroup(gl_pnlRightNguonHang.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_pnlRightNguonHang.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_pnlRightNguonHang.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_pnlRightNguonHang.createParallelGroup(Alignment.BASELINE)
 							.addComponent(cmbTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblTim))
-						.addComponent(btnTim, Alignment.TRAILING))
-					.addContainerGap(380, Short.MAX_VALUE))
+						.addComponent(btnTim))
+					.addContainerGap(70, Short.MAX_VALUE))
 		);
+		gl_pnlRightNguonHang.linkSize(SwingConstants.VERTICAL, new Component[] {cmbTimKiem, btnTim});
 		pnlRightNguonHang.setLayout(gl_pnlRightNguonHang);
 		setLayout(gl_pnlLoaiSanPham);
 	}

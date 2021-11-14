@@ -2,6 +2,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
 
 public class NhanVienUI extends JPanel {
 	protected static final long serialVersionUID = 1L;
@@ -46,15 +49,15 @@ public class NhanVienUI extends JPanel {
 		lblQuanLyKhachHang.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
 		JPanel pnlChucNang = new JPanel();
-		pnlChucNang.setBackground(Color.decode("#FFB6F8"));
+		pnlChucNang.setBackground(new Color(119, 136, 153));
 		
 		JPanel pnlTimKiem = new JPanel();
-		pnlTimKiem.setBackground(Color.decode("#FFB6F8"));
+		pnlTimKiem.setBackground(new Color(119, 136, 153));
 		
 		JScrollPane scrDSNhanVien = new JScrollPane();
 		
 		JPanel pnlDienThongTin = new JPanel();
-		pnlDienThongTin.setBackground(Color.decode("#FFB6F8"));
+		pnlDienThongTin.setBackground(new Color(119, 136, 153));
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -126,11 +129,13 @@ public class NhanVienUI extends JPanel {
 		txtDiaChi.setColumns(10);
 		
 		radNam = new JRadioButton("Nam");
+		radNam.setBackground(new Color(119, 136, 153));
 		radNam.setSelected(true);
 		buttonGroup.add(radNam);
 		
 		radNam.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		radNu = new JRadioButton("N\u1EEF");
+		radNu.setBackground(new Color(119, 136, 153));
 		buttonGroup.add(radNu);
 		radNu.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		radNu.setHorizontalAlignment(SwingConstants.LEFT);
@@ -208,6 +213,7 @@ public class NhanVienUI extends JPanel {
 		tblDSNhanVien = new JTable();
 		tblDSNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblDSNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tblDSNhanVien.setRowHeight(35);
 		listNhanVien = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Họ tên", 
 				"Số điện thoại", "Địa chỉ", "Email", "Giới tính"});
 		tblDSNhanVien.setModel(listNhanVien);
@@ -226,9 +232,9 @@ public class NhanVienUI extends JPanel {
 		btnTimNV.setToolTipText("Tìm khách hàng");
 		btnTimNV.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnTimNV.setFocusable(false);
-		btnTimNV.setFocusPainted(false);
-		btnTimNV.setBorder(BorderFactory.createEmptyBorder());
-		btnTimNV.setBackground(new Color(64, 224, 208));
+		btnTimNV.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnTimNV.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnTimNV.setBackground(new Color(119, 136, 153));
 		
 		btnLamMoi = new JButton("Làm Mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -251,16 +257,15 @@ public class NhanVienUI extends JPanel {
 		gl_pnlTimKiem.setVerticalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlTimKiem.createSequentialGroup()
-					.addContainerGap()
+					.addGap(12)
 					.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_pnlTimKiem.createSequentialGroup()
-							.addGap(1)
 							.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.BASELINE)
 								.addComponent(cmbTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTimKiem)))
-						.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnLamMoi)
+								.addComponent(lblTimKiem))
+							.addGap(12)
+							.addComponent(btnLamMoi)))
 					.addContainerGap(155, Short.MAX_VALUE))
 		);
 		pnlTimKiem.setLayout(gl_pnlTimKiem);
@@ -268,9 +273,8 @@ public class NhanVienUI extends JPanel {
 		btnThem = new JButton("Th\u00EAm");
 		btnThem.setIcon(new ImageIcon(NhanVienUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_add_user_group_man_woman_40px.png")));
 		btnThem.setBackground(Color.decode("#A6FFEA"));
-		btnThem.setFocusPainted(false);
 		btnThem.setFocusable(false);
-		btnThem.setBorder(BorderFactory.createEmptyBorder());
+		btnThem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -280,22 +284,16 @@ public class NhanVienUI extends JPanel {
 		btnSua = new JButton("S\u1EEDa");
 		btnSua.setIcon(new ImageIcon(NhanVienUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_edit_property_40px.png")));
 		btnSua.setBackground(Color.decode("#E2A6FF"));
-		btnSua.setFocusPainted(false);
 		btnSua.setFocusable(false);
-		btnSua.setBorder(BorderFactory.createEmptyBorder());
-		btnSua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnSua.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		btnXoaTrang = new JButton("Xóa Trắng");
 		btnXoaTrang.setIcon(new ImageIcon(NhanVienUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_ccleaner_40px.png")));
 		btnXoaTrang.setBackground(Color.decode("#E2A6FF"));
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnXoaTrang.setFocusPainted(false);
 		btnXoaTrang.setFocusable(false);
-		btnXoaTrang.setBorder(BorderFactory.createEmptyBorder());
+		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GroupLayout gl_pnlChucNang = new GroupLayout(pnlChucNang);
 		gl_pnlChucNang.setHorizontalGroup(
 			gl_pnlChucNang.createParallelGroup(Alignment.LEADING)
