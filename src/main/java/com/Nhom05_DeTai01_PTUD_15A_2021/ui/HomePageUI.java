@@ -1280,7 +1280,8 @@ public class HomePageUI extends JFrame {
 			bw.write("-----------------------------------------------------------\r\n");
 			// Ghi sản phẩm
 			int quantotal = 0;
-			double khuyenmai = 0;
+			double khuyenmai = 0,tonggia=0;
+			
 			for (int i = 0; i < model.getRowCount(); i++) {
 				String id = (String) model.getValueAt(i, 0);
 				String tenSP = (String) model.getValueAt(i, 1);
@@ -1291,9 +1292,10 @@ public class HomePageUI extends JFrame {
 				bw.write((i + 1) + ". " + tenSP + "\r\n");
 				bw.write(id + "\t\t" + tenNCC + "\t\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
 				quantotal += Integer.parseInt(quantity);
+				tonggia += Double.parseDouble(intomoney);
 			}
 			bw.write("------------------------------------------------------------\r\n");
-			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + giaThanh + " VNĐ\r\n");
+			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + tonggia + " VNĐ\r\n");
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("\t\tKhuyến mãi:\t" + pnlLapHoaDon.cmbKhuyenMai.getSelectedItem() + "\t-" + khuyenmai + " VNĐ\r\n");
 			bw.write("\t\tChiết khấu:\t" + chietKhau + "\t\t-" + chietKhau + " VNĐ\r\n");
