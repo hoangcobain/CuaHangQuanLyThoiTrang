@@ -102,8 +102,6 @@ public class HomePageUI extends JFrame {
 	private LoaiSanPhamController loaiSanPhamController;
 	@Autowired
 	private NhaCungCapController nhaCungCapController;
-	
-	private Logger logger = LoggerFactory.getLogger(HomePageUI.class);
 
 	/**
 	 * Create the frame.
@@ -249,7 +247,7 @@ public class HomePageUI extends JFrame {
 				if(maNV.equals(maKH) && date==null)
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 				else
-					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonth(),date.getYear());
+					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonthValue(),date.getYear());
 		    }
 		});
 		pnlhoaDon.btnXoa.addActionListener (new ActionListener () {

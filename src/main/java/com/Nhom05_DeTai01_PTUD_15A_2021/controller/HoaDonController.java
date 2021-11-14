@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,15 @@ import com.Nhom05_DeTai01_PTUD_15A_2021.dao.HoaDonDAO;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.HoaDon;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.KhachHang;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhanVien;
+import com.Nhom05_DeTai01_PTUD_15A_2021.ui.HomePageUI;
 
 @Service
 public class HoaDonController {
 
 	@Autowired
 	private HoaDonDAO hoaDonDAO;
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public void loadHoaDon(DefaultTableModel listHoaDon){
 		List<HoaDon> list = hoaDonDAO.findAll();
@@ -37,9 +42,10 @@ public class HoaDonController {
 		return hoaDonDAO.findById(id).get();
 	}
 
-	public void search(DefaultTableModel listHoaDon, String maNV, String maKH, int day, Month month, int year) {
+	public void search(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month, int year) {
 		listHoaDon.setRowCount(0);
 		List<HoaDon> list;
+		logger.warn(day+" "+month+" "+year);
 		list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH, day, month, year);
 		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			HoaDon hoaDon = iterator.next();
