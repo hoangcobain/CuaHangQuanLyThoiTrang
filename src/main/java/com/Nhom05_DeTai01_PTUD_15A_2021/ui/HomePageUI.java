@@ -1227,7 +1227,7 @@ public class HomePageUI extends JFrame {
 
 	protected void thanhToan() {
 		String maKH, maNV, maSP;
-		double giaThanh, tongTien,tienKhachTra = 0, chietKhau=0;
+		double giaThanh = 0, tongTien,tienKhachTra = 0, chietKhau=0;
 		int soLuong;
 		SanPham sanPham;
 		Set<ChiTietHoaDon> listCTHD = new HashSet<ChiTietHoaDon>();
@@ -1280,26 +1280,28 @@ public class HomePageUI extends JFrame {
 			bw.write("-----------------------------------------------------------\r\n");
 			// Ghi sản phẩm
 			int quantotal = 0;
-
+			double khuyenmai = 0;
 			for (int i = 0; i < model.getRowCount(); i++) {
 				String id = (String) model.getValueAt(i, 0);
 				String tenSP = (String) model.getValueAt(i, 1);
 				String tenNCC = (String) model.getValueAt(i, 2);
 				String quantity = String.valueOf(model.getValueAt(i, 5));
 				String intomoney = String.valueOf(model.getValueAt(i, 6));
+				khuyenmai += Double.parseDouble(model.getValueAt(i, 6).toString()) - (Double.parseDouble(model.getValueAt(i, 6).toString()) *(1-(pnlLapHoaDon.cmbKhuyenMai.getSelectedIndex()*0.05)));
 				bw.write((i + 1) + ". " + tenSP + "\r\n");
-				bw.write(id + "\t\t" + tenNCC + "\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
+				bw.write(id + "\t\t" + tenNCC + "\t\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
 				quantotal += Integer.parseInt(quantity);
 			}
 			bw.write("------------------------------------------------------------\r\n");
-			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + hoaDon.getTongTien() + " VNĐ\r\n");
-			bw.write("\t\tKhuyến mãi:\t" + pnlLapHoaDon.cmbKhuyenMai.getSelectedItem() + "\t\t-" + "0" + " VNĐ\r\n");
-			bw.write("\t\tChiết khấu:\t" + chietKhau + "%\t\t-" + "0" + " VNĐ\r\n");
+			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + giaThanh + " VNĐ\r\n");
+			bw.write("------------------------------------------------------------\r\n");
+			bw.write("\t\tKhuyến mãi:\t" + pnlLapHoaDon.cmbKhuyenMai.getSelectedItem() + "\t-" + khuyenmai + " VNĐ\r\n");
+			bw.write("\t\tChiết khấu:\t" + chietKhau + "\t\t-" + chietKhau + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
-			bw.write("\t\tThành tiền:\t\t\t" + tongTien + " VNĐ\r\n");
+			bw.write("\t\tThành tiền:\t\t\t" + (tongTien-chietKhau) + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
 			bw.write("\t\tTiền khách đưa:\t\t\t" + tienKhachTra + " VNĐ\r\n");
-			bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(tienKhachTra-tongTien) + " VNĐ\r\n");
+			bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(tienKhachTra-(tongTien-chietKhau)) + " VNĐ\r\n");
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Chương trình ưu đãi: ");
 			bw.write("Không có.\r\n");
@@ -1346,7 +1348,7 @@ public class HomePageUI extends JFrame {
 			}
 		}
 	}
-
+	
 	protected void xoaTrangLapHoaDon() {
 		pnlLapHoaDon.txtMaSanPham.setText("");
 		pnlLapHoaDon.txtSoLuong.setText("0");
