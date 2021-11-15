@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Image;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -17,10 +16,14 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,8 +58,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -67,6 +72,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -287,8 +293,9 @@ public class HomePageUI extends JFrame {
 				Runtime run = Runtime.getRuntime();
 				try {
 					run.exec("notepad History//" + id + ".txt");
+				
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Hóa đơn đã bị xóa trong lịch sử lưu hóa đơn");
 				}
 			}
 		});
@@ -581,7 +588,8 @@ public class HomePageUI extends JFrame {
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Hóa đơn chưa có sản phẩm hoặc khách hàng");
-					//		sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText());
+					sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText(),
+							pnlLapHoaDon.txtSize.getText(),pnlLapHoaDon.txtMauSac.getText());
 					loadHoaDon();
 				}
 			}
@@ -740,9 +748,14 @@ public class HomePageUI extends JFrame {
 		pnlLoaiSanPham.btnXoa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loaiSanPhamController.xoaLSP(pnlLoaiSanPham.txtMaLoai.getText());
-				loadLoaiSanPham();
-				xoaTrangLoaiSanPham();
+				if(!pnlLoaiSanPham.txtMaLoai.getText().equals("")) {
+					loaiSanPhamController.xoaLSP(pnlLoaiSanPham.txtMaLoai.getText());
+					loadLoaiSanPham();
+					xoaTrangLoaiSanPham();
+				}
+				else 
+					JOptionPane.showMessageDialog(null, "Bạn cần chọn sản phẩm bên dưới để xóa");		
+				
 			}
 		});
 		pnlLoaiSanPham.tblLoaiSanPham.addMouseListener(new MouseAdapter() {
@@ -816,8 +829,8 @@ public class HomePageUI extends JFrame {
 				try {
 					soLuong = Integer.parseInt(pnlSanPham.txtSoLuong.getText().trim());
 					gia = Double.parseDouble(pnlSanPham.txtGiaThanh.getText().trim());
-				}catch (Exception e2) {
-					return;
+				} catch (Exception e2) {
+					
 				}
 				TableModel model = pnlSanPham.tblThuocTinh.getModel();
 				for (int count = 0; count < model.getRowCount(); count++){
@@ -831,16 +844,36 @@ public class HomePageUI extends JFrame {
 					pnlSanPham.txtTenSanPham.requestFocus();
 					pnlSanPham.txtTenSanPham.selectAll();
 				}
-				else if(!(soLuong > 0)){
-					JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0");
+				else if((pnlSanPham.txtSoLuong.getText().toString().equals("")) || soLuong < 0){
+					JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 và không được để trống");
+					pnlSanPham.txtSoLuong.requestFocus();
+					pnlSanPham.txtSoLuong.selectAll();			
+				}
+				else if(!(pnlSanPham.txtSoLuong.getText().toString().matches("[0-9.]*"))) {
+					JOptionPane.showMessageDialog(null, "Số lượng phải là số");
 					pnlSanPham.txtSoLuong.requestFocus();
 					pnlSanPham.txtSoLuong.selectAll();
 				}
-				else if(!(gia > 0)){
-					JOptionPane.showMessageDialog(null, "Giá phải lớn hơn 0");
+				else if((pnlSanPham.txtGiaThanh.getText().toString().equals("")) || soLuong < 0){
+					JOptionPane.showMessageDialog(null, "Giá thành phải lớn hơn 0 và không được để trống");
 					pnlSanPham.txtGiaThanh.requestFocus();
-					pnlSanPham.txtGiaThanh.selectAll();
-				}		
+					pnlSanPham.txtGiaThanh.selectAll();			
+				}
+				else if(!(pnlSanPham.txtGiaThanh.getText().toString().matches("[0-9.]*"))) {
+					JOptionPane.showMessageDialog(null, "Giá thành phải là số");
+					pnlSanPham.txtGiaThanh.requestFocus();
+					pnlSanPham.txtGiaThanh.selectAll();			
+				}
+				else if(!(kichco.length()>0)) {
+					JOptionPane.showMessageDialog(null, "Kích cỡ không được để trống");
+					pnlSanPham.txtKichCo.requestFocus();
+					pnlSanPham.txtKichCo.selectAll();
+				}
+				else if(!(mausac.length()>0)) {
+					JOptionPane.showMessageDialog(null, "Màu sắc không được để trống");
+					pnlSanPham.txtKichCo.requestFocus();
+					pnlSanPham.txtKichCo.selectAll();
+				}
 				else {
 					SanPham sanPham = sanPhamController.saveSP(new SanPham(ten, gia, tenNCC, soLuong, kichco, mausac, listTT, loai, personalImage));
 					if (sanPham.getMaSanPham().equals("")) {
@@ -851,6 +884,7 @@ public class HomePageUI extends JFrame {
 						JOptionPane.showMessageDialog(null, "Thêm Sản Phẩm thành công [MaSP: "+sanPham.getMaSanPham()+"]");
 						pnlSanPham.txtMaSanPham.setText(sanPham.getMaSanPham());
 						loadSanPham();
+						xoaTrangSanPham();
 					}
 				}
 			}
@@ -897,11 +931,13 @@ public class HomePageUI extends JFrame {
 		pnlSanPham.btnXoaSanPham.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(pnlSanPham.txtMaSanPham.getText().equals(""))
-					return;
+				if(!pnlSanPham.txtMaSanPham.getText().equals("")) {
 				sanPhamController.xoaSanPham(pnlSanPham.txtMaSanPham.getText());
-				xoaTrangSanPham();
 				loadSanPham();
+				xoaTrangSanPham();
+				}
+				else 
+					JOptionPane.showMessageDialog(null, "Bạn cần chọn sản phẩm bên dưới để xóa");		
 			}
 		});
 		pnlSanPham.btnXoaTrangSanPham.addActionListener(new ActionListener() {
@@ -985,7 +1021,7 @@ public class HomePageUI extends JFrame {
 					pnlNhanVien.txtSoDienThoai.selectAll();
 				}
 				else if(!(email.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"))) {
-					JOptionPane.showMessageDialog(null, "Email không đúng định dạng");
+					JOptionPane.showMessageDialog(null, "Email không đúng định dạng\nVD: abc@gmail.com");
 					pnlNhanVien.txtEmail.requestFocus();
 					pnlNhanVien.txtEmail.selectAll();
 				}
@@ -1114,8 +1150,13 @@ public class HomePageUI extends JFrame {
 				String ten = pnlNguonHang.txtTen.getText().trim();
 				String diachi = pnlNguonHang.txtDiaChi.getText().trim();
 				String sdt = pnlNguonHang.txtSDT.getText().trim();
-				if(!(ten.length() >0 )) {
+				if(!(ten.length() > 0 && ten.matches("[a-zA-Z0-9]*"))) {
 					JOptionPane.showMessageDialog(null, "Tên nhà cung cấp phải là kí tự và không được để trống"); 
+					pnlNguonHang.txtTen.requestFocus();	
+					pnlNguonHang.txtTen.selectAll();;	
+				}
+				else if(!(sdt.length() > 0 && sdt.matches("[0-9]{10}"))){
+					JOptionPane.showMessageDialog(null, "Số điện thoại phải đủ 10 số và không được để trống"); 
 					pnlNguonHang.txtTen.requestFocus();	
 					pnlNguonHang.txtTen.selectAll();;	
 				}
@@ -1176,6 +1217,67 @@ public class HomePageUI extends JFrame {
 				loadNhaCungCap();
 			}
 		});
+		
+		//Xu ly in Excel
+		pnlhoaDon.btnBaoCao.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FileOutputStream exOutputStream = null;
+				BufferedOutputStream exBufferedOutputStream = null;
+				XSSFWorkbook excelJTableExporter = null;
+				
+				//chon location luu
+				JFileChooser excelFileChooser = new JFileChooser("D:\\Desktop");
+				excelFileChooser.setDialogTitle("Save As");
+				//chi filter file co duoi xls,xlsx,xlsm
+				FileNameExtensionFilter fnef = new FileNameExtensionFilter("Excel Files", "xls","xlsx","xlsm");
+				excelFileChooser.setFileFilter(fnef);
+				int excelChooser = excelFileChooser.showSaveDialog(null);
+				
+					
+				if(excelChooser == JFileChooser.APPROVE_OPTION) {
+					try {
+					excelJTableExporter = new XSSFWorkbook();
+					XSSFSheet excelSheet = excelJTableExporter.createSheet("Báo cáo");
+					
+					DefaultTableModel model = (DefaultTableModel) pnlhoaDon.tblHoaDon.getModel();
+					for (int i = 0; i < model.getRowCount(); i++) {
+						XSSFRow excelRow = excelSheet.createRow(i);
+						for (int j = 0; j < model.getColumnCount(); j++) {
+							XSSFCell excelCell = excelRow.createCell(j);
+							
+							excelCell.setCellValue(model.getValueAt(i, j).toString());
+						}
+						
+					}
+					exOutputStream = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
+					exBufferedOutputStream = new BufferedOutputStream(exOutputStream);
+					excelJTableExporter.write(exBufferedOutputStream);
+					JOptionPane.showMessageDialog(null, "Xuất báo cáo thành công");
+				}
+				
+				catch (FileNotFoundException ex) {
+					ex.printStackTrace();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}finally {
+					try {
+						if(exOutputStream != null) {
+							exOutputStream.close();
+						}
+						if(exBufferedOutputStream != null) {
+							exBufferedOutputStream.close();
+						}
+						if(excelJTableExporter != null) {
+							excelJTableExporter.close();
+						}
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				}
+				}
+			}
+		});
 	}
 
 	protected void xoaTrangNhanVien() {
@@ -1199,7 +1301,8 @@ public class HomePageUI extends JFrame {
 		pnlSanPham.txtTenSanPham.setText("");
 		pnlSanPham.txtKichCo.setText("");
 		pnlSanPham.txtMauSac.setText("");
-		//		pnlSanPham.txtTenNCC.setText("");
+		pnlSanPham.cmbTenNCC.setSelectedIndex(0);
+		pnlSanPham.cmbTenLoai.setSelectedIndex(0);
 		personalImage = null;
 		ImageIcon icon = new ImageIcon(getClass().getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_product_127px.png"));
 		pnlSanPham.lblImage.setIcon(icon);

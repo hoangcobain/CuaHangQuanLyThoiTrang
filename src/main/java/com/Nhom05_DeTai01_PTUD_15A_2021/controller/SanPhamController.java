@@ -67,7 +67,9 @@ public class SanPhamController {
 					sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""
 			};
 			listSanPham.addRow(row);
-		}		
+		}
+		cmbTenLoai.setSelectedIndex(0);
+		cmbTenNCC.setSelectedIndex(0);
 	}
 
 	public SanPham saveSP(SanPham sanPham) {

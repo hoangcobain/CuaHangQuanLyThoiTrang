@@ -42,7 +42,7 @@ public class HoaDonUI extends JPanel {
 	protected JComboBox<Object> cmbgioiTinh;
 	protected JTable tableKhachHang;
 	protected JTable tblHoaDon;
-	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang, btnXemPhiu;
+	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang, btnXemPhiu, btnBaoCao;
 	protected DefaultTableModel listHoaDon = new DefaultTableModel(null,
 			new String[] {
 					"M\u00E3 h\u00F3a \u0111\u01A1n", "Ng\u00E0y l\u1EADp h\u00F3a \u0111\u01A1n", "T\u00EAn kh\u00E1ch h\u00E0ng", "T\u00EAn nh\u00E2n vi\u00EAn", "T\u1ED5ng ti\u1EC1n"
@@ -143,6 +143,11 @@ public class HoaDonUI extends JPanel {
 		btnXemPhiu.setBackground(new Color(255, 234, 182));
 		btnXemPhiu.setFocusable(false);
 		btnXemPhiu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		btnBaoCao = new JButton("Báo Cáo");
+		btnBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBaoCao.setFocusable(false);
+		btnBaoCao.setBackground(new Color(255, 234, 182));
 
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
@@ -165,7 +170,7 @@ public class HoaDonUI extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(pnlKhachHang, GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+							.addComponent(pnlKhachHang, GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
 							.addGap(9))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -174,11 +179,11 @@ public class HoaDonUI extends JPanel {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblTongTien, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtTongTien, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+									.addComponent(txtTongTien, GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblMaKhachHang)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)))
+									.addComponent(txtMaKhachHang, GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(0))
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -191,11 +196,13 @@ public class HoaDonUI extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+					.addComponent(btnBaoCao, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addComponent(scrHoaDon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+				.addComponent(scrHoaDon, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1515, Short.MAX_VALUE)
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -229,12 +236,13 @@ public class HoaDonUI extends JPanel {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnTimKiem)
-							.addComponent(btnCTHD)))
+							.addComponent(btnCTHD))
+						.addComponent(btnBaoCao, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrHoaDon, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+					.addComponent(scrHoaDon, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem});
+		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnXemPhiu, btnBaoCao});
 		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {txtMaHoaDon, txtTongTien, lblMaHoaDon, lblNgayLap, lblTongTien, txtNgayLap});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaHoaDon, lblMaNhanVien});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNgayLap, lblMaKhachHang});

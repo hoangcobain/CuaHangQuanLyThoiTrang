@@ -114,7 +114,7 @@ public class QuenMatKhauUI extends JFrame {
 				to = txtEmail.getText();
 				NhanVien nhanVien = nhanVienController.getNhanVienByEmail(to);
 				if (nhanVien == null) {
-					JOptionPane.showMessageDialog(null, "Email khong dung");
+					JOptionPane.showMessageDialog(null, "Email không đúng");
 					return;
 				}
 				
