@@ -20,7 +20,7 @@ public class GioiThieuUI extends JPanel {
 	 */
 	public GioiThieuUI() {
 		
-		JLabel lblNewLabel = new JLabel("NHÓM 5 PHÁT TRIỂN ỨNG DỤNG - QUẢN LÝ CỬA HÀNG H&L");
+		JLabel lblNewLabel = new JLabel("NHÓM 5 PHÁT TRIỂN ỨNG DỤNG --- QUẢN LÝ CỬA HÀNG H&L");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout groupLayout = new GroupLayout(this);
