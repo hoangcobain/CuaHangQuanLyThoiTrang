@@ -63,7 +63,10 @@ public class KhachHangController {
 		listKhachHang.setRowCount(0);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();
-			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai(),khachHang.getDiaChi()};
+			String gioiTinh = "Nam";
+			if(khachHang.isGioiTinh())
+				gioiTinh = "Nữ";
+			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai(),khachHang.getDiaChi(),gioiTinh};
 			listKhachHang.addRow(row);
 		}
 	}

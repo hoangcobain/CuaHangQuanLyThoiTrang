@@ -986,7 +986,28 @@ public class HomePageUI extends JFrame {
 				}
 			}
 		});
-
+		pnlSanPham.cmbChonTimKiem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cmbChonTimKiemActionPerformed(e);
+				
+			}
+		});
+		pnlSanPham.btnTim.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnChonTimKiemActionPerformed(e);
+				
+			}
+		});
+		pnlSanPham.btnLamMoi.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadSanPham();
+				pnlSanPham.cmbChonTimKiem.setSelectedIndex(0);
+				xoaTrangSanPham();
+			}
+		});
 		//		NHÂN VIÊN
 		pnlNhanVien.btnXoaTrang.addActionListener(new ActionListener() {
 			@Override
@@ -1084,12 +1105,6 @@ public class HomePageUI extends JFrame {
 					pnlNhanVien.radNu.isSelected();
 				else
 					pnlNhanVien.radNam.isSelected();
-			}
-		});
-		pnlNhanVien.btnTimNV.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				loadNhanVien();
 			}
 		});
 		pnlNhanVien.btnLamMoi.addActionListener(new ActionListener() {
@@ -1215,67 +1230,6 @@ public class HomePageUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loadNhaCungCap();
-			}
-		});
-		
-		//Xu ly in Excel
-		pnlhoaDon.btnBaoCao.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FileOutputStream exOutputStream = null;
-				BufferedOutputStream exBufferedOutputStream = null;
-				XSSFWorkbook excelJTableExporter = null;
-				
-				//chon location luu
-				JFileChooser excelFileChooser = new JFileChooser("D:\\Desktop");
-				excelFileChooser.setDialogTitle("Save As");
-				//chi filter file co duoi xls,xlsx,xlsm
-				FileNameExtensionFilter fnef = new FileNameExtensionFilter("Excel Files", "xls","xlsx","xlsm");
-				excelFileChooser.setFileFilter(fnef);
-				int excelChooser = excelFileChooser.showSaveDialog(null);
-				
-					
-				if(excelChooser == JFileChooser.APPROVE_OPTION) {
-					try {
-					excelJTableExporter = new XSSFWorkbook();
-					XSSFSheet excelSheet = excelJTableExporter.createSheet("Báo cáo");
-					
-					DefaultTableModel model = (DefaultTableModel) pnlhoaDon.tblHoaDon.getModel();
-					for (int i = 0; i < model.getRowCount(); i++) {
-						XSSFRow excelRow = excelSheet.createRow(i);
-						for (int j = 0; j < model.getColumnCount(); j++) {
-							XSSFCell excelCell = excelRow.createCell(j);
-							
-							excelCell.setCellValue(model.getValueAt(i, j).toString());
-						}
-						
-					}
-					exOutputStream = new FileOutputStream(excelFileChooser.getSelectedFile() + ".xlsx");
-					exBufferedOutputStream = new BufferedOutputStream(exOutputStream);
-					excelJTableExporter.write(exBufferedOutputStream);
-					JOptionPane.showMessageDialog(null, "Xuất báo cáo thành công");
-				}
-				
-				catch (FileNotFoundException ex) {
-					ex.printStackTrace();
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}finally {
-					try {
-						if(exOutputStream != null) {
-							exOutputStream.close();
-						}
-						if(exBufferedOutputStream != null) {
-							exBufferedOutputStream.close();
-						}
-						if(excelJTableExporter != null) {
-							excelJTableExporter.close();
-						}
-					} catch (IOException ex) {
-						ex.printStackTrace();
-					}
-				}
-				}
 			}
 		});
 	}
@@ -1513,7 +1467,88 @@ public class HomePageUI extends JFrame {
 		pnlNguonHang.txtDiaChi.setText("");
 		pnlNguonHang.txtSDT.setText("");
 	}
+	private void cmbChonTimKiemActionPerformed(ActionEvent evt) {
+		if (pnlSanPham.cmbChonTimKiem.getSelectedIndex() == 0) {
+			pnlSanPham.lblGiaTu.setVisible(false);
+			pnlSanPham.txtGiaTu.setVisible(false);
+			pnlSanPham.lblDen.setVisible(false);
+			pnlSanPham.txtDen.setVisible(false);
+			pnlSanPham.cmbTimTheoTen.setVisible(false);
+			pnlSanPham.btnTim.setVisible(false);
 
+		} else if (pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Tên")) {
+			pnlSanPham.cmbTimTheoTen.setVisible(true);
+			pnlSanPham.btnTim.setVisible(true);
+			pnlSanPham.lblGiaTu.setVisible(false);
+			pnlSanPham.txtGiaTu.setVisible(false);
+			pnlSanPham.lblDen.setVisible(false);
+			pnlSanPham.txtDen.setVisible(false);
+			sanPhamController.TimKiemTheoTen(pnlSanPham.cmbTimTheoTen, pnlSanPham.listSanPham);
+			AutoCompleteDecorator.decorate(pnlSanPham.cmbTimTheoTen);
+		} else if (pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Kích thước")) {
+			pnlSanPham.cmbTimTheoTen.setVisible(true);
+			pnlSanPham.btnTim.setVisible(true);
+			pnlSanPham.lblGiaTu.setVisible(false);
+			pnlSanPham.txtGiaTu.setVisible(false);
+			pnlSanPham.lblDen.setVisible(false);
+			pnlSanPham.txtDen.setVisible(false);
+			sanPhamController.TimKiemTheoSize(pnlSanPham.cmbTimTheoTen, pnlSanPham.listSanPham);
+			AutoCompleteDecorator.decorate(pnlSanPham.cmbTimTheoTen);
+		} else if (pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Giá")) {
+			pnlSanPham.lblGiaTu.setVisible(true);
+			pnlSanPham.txtGiaTu.setVisible(true);
+			pnlSanPham.lblDen.setVisible(true);
+			pnlSanPham.txtDen.setVisible(true);
+			pnlSanPham.btnTim.setVisible(true);
+			pnlSanPham.cmbTimTheoTen.setVisible(false);
+		}
+}		
+	 private void btnChonTimKiemActionPerformed(ActionEvent evt) {
+		 if (pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Tên")) {
+			 sanPhamController.searchByTenSP(pnlSanPham.listSanPham, pnlSanPham.cmbTimTheoTen.getSelectedItem().toString());
+		 }
+		if (pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Giá")) {
+			while (true) {
+				if (pnlSanPham.txtGiaTu.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(this, "Giá không được để trống");
+					pnlSanPham.txtGiaTu.grabFocus();
+					return;
+				}  else if ((!pnlSanPham.txtGiaTu.getText().trim().matches("[0-9]+")) || (Double.parseDouble(pnlSanPham.txtGiaTu.getText()) <=0 )) {
+					JOptionPane.showMessageDialog(this, "Giá phải là số và lớn hơn 0");
+					pnlSanPham.txtGiaTu.grabFocus();
+					return;
+				}
+				else {
+					break;
+				}
+			}
+			while (true) {
+				if (pnlSanPham.txtDen.getText().trim().equals("")) {
+					JOptionPane.showMessageDialog(this, "Giá không được để trống");
+					pnlSanPham.txtDen.grabFocus();
+					return;
+				} else if ((!pnlSanPham.txtDen.getText().trim().matches("[0-9]+")) || (Double.parseDouble(pnlSanPham.txtDen.getText()) <=0 )) {
+					JOptionPane.showMessageDialog(this, "Giá phải là số và lớn hơn 0");
+					pnlSanPham.txtDen.grabFocus();
+					return;
+				} 
+				else {
+					break;
+				}
+			}
+			if ((Double.parseDouble(pnlSanPham.txtGiaTu.getText().trim())) >= Double
+						.parseDouble(pnlSanPham.txtDen.getText().trim())) {
+					JOptionPane.showMessageDialog(this, "Giá phải từ nhỏ đến lớn");
+					pnlSanPham.txtGiaTu.grabFocus();
+			}
+			else {
+        	sanPhamController.searchByGiaThanh(pnlSanPham.listSanPham,Double.parseDouble(pnlSanPham.txtGiaTu.getText()),Double.parseDouble(pnlSanPham.txtDen.getText()));
+			}	
+		 }
+		if(pnlSanPham.cmbChonTimKiem.getSelectedItem().equals("Kích thước")) {
+			 sanPhamController.searchBySize(pnlSanPham.listSanPham, pnlSanPham.cmbTimTheoTen.getSelectedItem().toString());
+		}
+	 }
 	protected void doiMatKhau() {
 		try {
 			DoiMatKhauUI frame = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(DoiMatKhauUI.class);

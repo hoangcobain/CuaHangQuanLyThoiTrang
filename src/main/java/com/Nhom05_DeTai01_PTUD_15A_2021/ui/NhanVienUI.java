@@ -235,9 +235,6 @@ public class NhanVienUI extends JPanel {
 		btnTimNV.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTimNV.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnTimNV.setBackground(new Color(119, 136, 153));
-		
-		btnLamMoi = new JButton("Làm Mới");
-		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_pnlTimKiem = new GroupLayout(pnlTimKiem);
 		gl_pnlTimKiem.setHorizontalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
@@ -245,14 +242,10 @@ public class NhanVienUI extends JPanel {
 					.addContainerGap()
 					.addComponent(lblTimKiem, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cmbTimKiem, 0, 93, Short.MAX_VALUE)
+					.addComponent(cmbTimKiem, 0, 273, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addGap(35))
-				.addGroup(gl_pnlTimKiem.createSequentialGroup()
-					.addGap(153)
-					.addComponent(btnLamMoi)
-					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		gl_pnlTimKiem.setVerticalGroup(
 			gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
@@ -260,13 +253,10 @@ public class NhanVienUI extends JPanel {
 					.addGap(12)
 					.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnTimNV, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_pnlTimKiem.createSequentialGroup()
-							.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cmbTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTimKiem))
-							.addGap(12)
-							.addComponent(btnLamMoi)))
-					.addContainerGap(155, Short.MAX_VALUE))
+						.addGroup(gl_pnlTimKiem.createParallelGroup(Alignment.BASELINE)
+							.addComponent(cmbTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblTimKiem)))
+					.addContainerGap(198, Short.MAX_VALUE))
 		);
 		pnlTimKiem.setLayout(gl_pnlTimKiem);
 		
@@ -294,15 +284,19 @@ public class NhanVienUI extends JPanel {
 		btnXoaTrang.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXoaTrang.setFocusable(false);
 		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		btnLamMoi = new JButton("Làm Mới");
+		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_pnlChucNang = new GroupLayout(pnlChucNang);
 		gl_pnlChucNang.setHorizontalGroup(
 			gl_pnlChucNang.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlChucNang.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlChucNang.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnThem, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-						.addComponent(btnSua, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-						.addComponent(btnXoaTrang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+						.addComponent(btnThem, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+						.addComponent(btnSua, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+						.addComponent(btnXoaTrang, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+						.addComponent(btnLamMoi, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_pnlChucNang.setVerticalGroup(
@@ -314,8 +308,11 @@ public class NhanVienUI extends JPanel {
 					.addComponent(btnSua, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnXoaTrang, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(89, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnLamMoi)
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
+		gl_pnlChucNang.linkSize(SwingConstants.VERTICAL, new Component[] {btnLamMoi, btnXoaTrang});
 		pnlChucNang.setLayout(gl_pnlChucNang);
 		setLayout(gl_contentPane);
 	}

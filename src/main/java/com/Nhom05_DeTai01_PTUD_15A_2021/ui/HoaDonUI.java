@@ -42,7 +42,7 @@ public class HoaDonUI extends JPanel {
 	protected JComboBox<Object> cmbgioiTinh;
 	protected JTable tableKhachHang;
 	protected JTable tblHoaDon;
-	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang, btnXemPhiu, btnBaoCao;
+	protected JButton btnTimNhanVien, btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnTimKhachHang, btnXemPhiu;
 	protected DefaultTableModel listHoaDon = new DefaultTableModel(null,
 			new String[] {
 					"M\u00E3 h\u00F3a \u0111\u01A1n", "Ng\u00E0y l\u1EADp h\u00F3a \u0111\u01A1n", "T\u00EAn kh\u00E1ch h\u00E0ng", "T\u00EAn nh\u00E2n vi\u00EAn", "T\u1ED5ng ti\u1EC1n"
@@ -143,11 +143,6 @@ public class HoaDonUI extends JPanel {
 		btnXemPhiu.setBackground(new Color(255, 234, 182));
 		btnXemPhiu.setFocusable(false);
 		btnXemPhiu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
-		btnBaoCao = new JButton("Báo Cáo");
-		btnBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnBaoCao.setFocusable(false);
-		btnBaoCao.setBackground(new Color(255, 234, 182));
 
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
@@ -194,11 +189,9 @@ public class HoaDonUI extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnXoaTrang, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnBaoCao, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+					.addComponent(btnCTHD, GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -236,22 +229,21 @@ public class HoaDonUI extends JPanel {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnXemPhiu, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnTimKiem)
-							.addComponent(btnCTHD))
-						.addComponent(btnBaoCao, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnCTHD)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrHoaDon, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnXemPhiu, btnBaoCao});
+		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnCTHD, btnTimKiem, btnXemPhiu});
 		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {txtMaHoaDon, txtTongTien, lblMaHoaDon, lblNgayLap, lblTongTien, txtNgayLap});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaHoaDon, lblMaNhanVien});
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNgayLap, lblMaKhachHang});
-		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnTimKiem, btnXemPhiu});
+		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnTimKiem});
 		
 		tblHoaDon = new JTable();
 		tblHoaDon.setRowHeight(25);
 		tblHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tblHoaDon.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tblHoaDon.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblHoaDon.setModel(listHoaDon);
 		
 		scrHoaDon.setViewportView(tblHoaDon);
@@ -330,8 +322,8 @@ public class HoaDonUI extends JPanel {
 		tableKhachHang = new JTable();
 		tableKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tableKhachHang.setRowHeight(25);
-		tableKhachHang.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
-		listKhachHang = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Tên", "Số điện thoại", "Địa chỉ"});
+		tableKhachHang.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
+		listKhachHang = new DefaultTableModel(null,new String[] {"Mã khách hàng", "Tên", "Số điện thoại", "Địa chỉ"});
 		tableKhachHang.setModel(listKhachHang);
 		scrollPaneKhachHang.setViewportView(tableKhachHang);
 		pnlKhachHang.setLayout(gl_pnlKhachHang);
@@ -413,7 +405,7 @@ public class HoaDonUI extends JPanel {
 		tableNhanVien = new JTable();
 		tableNhanVien.setRowHeight(25);
 		tableNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tableNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tableNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listNhanVien = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Tên", "Số điện thoại", "Email"});
 		tableNhanVien.setModel(listNhanVien);
 		scrollPaneNhanVien.setViewportView(tableNhanVien);

@@ -14,4 +14,16 @@ public interface SanPhamDAO extends JpaRepository<SanPham, String>{
 			+ "OR CHARINDEX(?3,[size])>0 OR CHARINDEX(?4,[mau_sac])>0 ",
 			nativeQuery = true)
 	List<SanPham> searchByTenNCC(String ten, String ncc, String size, String mauSac);
+	
+	@Query(value = "SELECT * FROM [dbo].[san_pham] WHERE ?1=[ten_san_pham]",
+			nativeQuery = true)
+	List<SanPham> searchSPByTen(String ten);
+	
+	@Query(value = "SELECT * FROM [dbo].[san_pham] WHERE ?1<=[gia_thanh]  AND ?2>=[gia_thanh]",
+			nativeQuery = true)
+	List<SanPham> searchSPByPrice(double giatu,double dentu);
+	
+	@Query(value = "SELECT * FROM [dbo].[san_pham] WHERE ?1=[size]",
+			nativeQuery = true)
+	List<SanPham> searchSPBySize(String size);
 }

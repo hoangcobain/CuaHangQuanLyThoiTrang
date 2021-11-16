@@ -3,6 +3,7 @@ package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,7 +41,39 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	
+	public void searchByTenSP(DefaultTableModel listSanPham, String ten) {
+		listSanPham.setRowCount(0);
+		List<SanPham> list = sanPhamDAO.searchSPByTen(ten);
+		for (Iterator<SanPham> iterator = list.iterator(); iterator.hasNext();) {
+			SanPham sanPham = iterator.next();
+			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
+					sanPham.getSoLuong()+"",sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""};
+			listSanPham.addRow(row);
+		}
+	}
+	
+	public void searchByGiaThanh(DefaultTableModel listSanPham, double giatu,double dentu) {
+		listSanPham.setRowCount(0);
+		List<SanPham> list = sanPhamDAO.searchSPByPrice(giatu, dentu);
+		for (Iterator<SanPham> iterator = list.iterator(); iterator.hasNext();) {
+			SanPham sanPham = iterator.next();
+			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
+					sanPham.getSoLuong()+"",sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""};
+			listSanPham.addRow(row);
+		}
+	}
+	public void searchBySize(DefaultTableModel listSanPham, String size) {
+		listSanPham.setRowCount(0);
+		List<SanPham> list = sanPhamDAO.searchSPBySize(size);
+		for (Iterator<SanPham> iterator = list.iterator(); iterator.hasNext();) {
+			SanPham sanPham = iterator.next();
+			String[] row = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),
+					sanPham.getSoLuong()+"",sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""};
+			listSanPham.addRow(row);
+		}
+	}
+	
 	public SanPham getSanPham(String maSP) {
 		return sanPhamDAO.getById(maSP);
 	}
@@ -71,6 +104,36 @@ public class SanPhamController {
 		cmbTenLoai.setSelectedIndex(0);
 		cmbTenNCC.setSelectedIndex(0);
 	}
+	public void TimKiemTheoTen(JComboBox<String> cmbTen, DefaultTableModel listSanPham) {	
+		List<SanPham> listSP = sanPhamDAO.findAll();
+		cmbTen.removeAllItems();
+		listSanPham.setRowCount(0);
+		cmbTen.setModel(new DefaultComboBoxModel<String>(new String[] {"---Tìm theo tên---"}));
+		for (Iterator<SanPham> iterator = listSP.iterator(); iterator.hasNext();) {
+			SanPham sanPham = iterator.next();
+			String row[] = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),sanPham.getSoLuong()+"",
+					sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""
+			};
+			cmbTen.addItem(sanPham.getTenSanPham());
+			listSanPham.addRow(row);
+		}
+	}
+	
+	public void TimKiemTheoSize(JComboBox<String> cmbTen, DefaultTableModel listSanPham) {	
+		List<SanPham> listSP = sanPhamDAO.findAll();
+		cmbTen.removeAllItems();
+		listSanPham.setRowCount(0);
+		cmbTen.setModel(new DefaultComboBoxModel<String>(new String[] {"---Tìm theo size---"}));
+		for (Iterator<SanPham> iterator = listSP.iterator(); iterator.hasNext();) {
+			SanPham sanPham = iterator.next();
+			String row[] = {sanPham.getMaSanPham(),sanPham.getTenSanPham(),sanPham.getNhaCungCap().getTenNCC(),sanPham.getSoLuong()+"",
+					sanPham.getSize(),sanPham.getMauSac(),sanPham.getLoaiSanPham().getTenLoaiSanPham(),sanPham.getGiaThanh()+""
+			};
+			cmbTen.addItem(sanPham.getSize());
+			listSanPham.addRow(row);
+		}
+	}
+	
 
 	public SanPham saveSP(SanPham sanPham) {
 		return sanPhamDAO.save(sanPham);		

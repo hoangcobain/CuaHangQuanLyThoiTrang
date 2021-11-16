@@ -64,6 +64,7 @@ public class LoaiSanPhamUI extends JPanel {
 		);
 		
 		tblLoaiSanPham = new JTable();
+		tblLoaiSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblLoaiSanPham.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tblLoaiSanPham.setRowHeight(35);
 		listLoaiSP = new DefaultTableModel(null, new String[] {"M\u00E3 lo\u1EA1i", "T\u00EAn lo\u1EA1i"});

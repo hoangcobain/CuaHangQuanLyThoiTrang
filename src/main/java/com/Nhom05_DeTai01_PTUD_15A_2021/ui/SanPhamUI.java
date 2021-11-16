@@ -29,17 +29,19 @@ public class SanPhamUI extends JPanel {
 	protected JTextField txtGiaThanh;
 	protected JTextField txtTenSanPham;
 //	protected JTextField cmbTenNCC;
-	protected JComboBox<String> cmbTenLoai, cmbTimSanPham,cmbTenNCC;
+	protected JComboBox<String> cmbTenLoai, cmbChonTimKiem,cmbTenNCC,cmbTimTheoTen;
 	protected JTextField txtTenThuocTinh;
 	protected JTextField txtGiaTri;
 	protected JTable tblSanPham;
 	protected JTable tblThuocTinh;
 	protected DefaultTableModel listSanPham, listThuocTinh;
 	protected JButton btnThemSanPham, btnCapNhatSanPham, btnXoaSanPham, btnXoaTrangSanPham, 
-	btnThemThuocTinh, btnXoaRong, btnXoaThuocTinh, btnXoaTrangThuocTinh,btnImage;
-	protected JLabel lblImage;
+	btnThemThuocTinh, btnXoaRong, btnXoaThuocTinh, btnXoaTrangThuocTinh,btnImage,btnTim,btnLamMoi;
+	protected JLabel lblImage,lblGiaTu,lblDen;
 	protected JTextField txtKichCo;
 	protected JTextField txtMauSac;
+	protected JTextField txtGiaTu;
+	protected JTextField txtDen;
 
 	/**
 	 * Create the panel.
@@ -80,38 +82,79 @@ public class SanPhamUI extends JPanel {
 		btnXoaTrangSanPham.setFocusable(false);
 		btnXoaTrangSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
-		cmbTimSanPham = new JComboBox<String>();
-		cmbTimSanPham.setEditable(true);
-		cmbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cmbTimSanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
-		JLabel lblDanhSachSanPham = new JLabel("Danh sách sản phẩm");
-		lblDanhSachSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cmbChonTimKiem = new JComboBox<String>();
+		cmbChonTimKiem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---Tìm kiếm theo---", "Tên", "Giá", "Kích thước"}));
+		cmbChonTimKiem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		cmbChonTimKiem.setEditable(true);
+		cmbChonTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cmbChonTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		JScrollPane scrSanPham = new JScrollPane();
+		
+		cmbTimTheoTen = new JComboBox();
+		cmbTimTheoTen.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cmbTimTheoTen.setVisible(false);
+		cmbTimTheoTen.setEditable(true);
+		
+		txtGiaTu = new JTextField();
+		txtGiaTu.setVisible(false);
+		txtGiaTu.setColumns(10);
+		
+		txtDen = new JTextField();
+		txtDen.setVisible(false);
+		txtDen.setColumns(10);
+		
+		lblGiaTu = new JLabel("Giá từ");
+		lblGiaTu.setVisible(false);
+		
+		lblDen = new JLabel("Đến");
+		lblDen.setVisible(false);
+		
+		btnTim = new JButton("Tìm");
+		btnTim.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_search_in_list_23px.png")));
+		btnTim.setVisible(false);
+		
+		btnLamMoi = new JButton("");
+		btnLamMoi.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_checklist_23px.png")));
 		GroupLayout gl_pnlSanPham = new GroupLayout(this);
 		gl_pnlSanPham.setHorizontalGroup(
 			gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlSanPham.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
-						.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 969, Short.MAX_VALUE)
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
-							.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCapNhatSanPham, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+							.addContainerGap()
+							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
+								.addComponent(pnlLeftSanPham, GroupLayout.PREFERRED_SIZE, 969, Short.MAX_VALUE)
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnCapNhatSanPham, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnXoaSanPham, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnXoaTrangSanPham, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))))
 						.addGroup(gl_pnlSanPham.createSequentialGroup()
-							.addComponent(lblDanhSachSanPham, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+							.addGap(23)
+							.addComponent(cmbChonTimKiem, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cmbTimSanPham, 0, 754, Short.MAX_VALUE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnLamMoi, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblGiaTu)
+							.addGap(10)
+							.addComponent(txtGiaTu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(lblDen)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtDen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(cmbTimTheoTen, 0, 213, Short.MAX_VALUE)
+							.addGap(10)
+							.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+							.addGap(33)))
+					.addGap(0)
 					.addComponent(pnlRightSanPham, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addGap(0))
 		);
 		gl_pnlSanPham.setVerticalGroup(
 			gl_pnlSanPham.createParallelGroup(Alignment.TRAILING)
@@ -126,17 +169,36 @@ public class SanPhamUI extends JPanel {
 								.addComponent(btnXoaSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
 								.addComponent(btnCapNhatSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
 								.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblDanhSachSanPham)
-								.addComponent(cmbTimSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)))
+							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addGap(20)
+									.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtGiaTu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblGiaTu)
+										.addComponent(btnLamMoi)))
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addGap(20)
+									.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtDen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblDen)))
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addGap(20)
+									.addComponent(cmbTimTheoTen, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addGap(20)
+									.addComponent(btnTim))
+								.addGroup(gl_pnlSanPham.createSequentialGroup()
+									.addGap(20)
+									.addComponent(cmbChonTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(23)
+							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))
 					.addGap(0))
 		);
+		gl_pnlSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {cmbChonTimKiem, cmbTimTheoTen, txtGiaTu, txtDen, btnTim});
 		
 		tblSanPham = new JTable();
 		tblSanPham.setRowHeight(35);
+		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listSanPham = new DefaultTableModel(null,new String[] {
 				"M\u00E3 s\u1EA3n ph\u1EA9m", "T\u00EAn s\u1EA3n ph\u1EA9m", "T\u00EAn NCC", "S\u1ED1 l\u01B0\u1EE3ng","Kích cỡ","Màu sắc", "T\u00EAn lo\u1EA1i", "Gi\u00E1 th\u00E0nh"
 			});

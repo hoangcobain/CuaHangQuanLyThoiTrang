@@ -198,7 +198,7 @@ public class LapHoaDonUI extends JPanel {
 		tblCTHD = new JTable();
 		tblCTHD.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblCTHD.setRowHeight(25);
-		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp","Kích cỡ","Màu sắc", "Số lượng", "Giá thành"});
 		tblCTHD.setModel(listCTHD);
 		scrSanPham.setViewportView(tblCTHD);
@@ -376,7 +376,7 @@ public class LapHoaDonUI extends JPanel {
 		tblSanPham = new JTable();
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblSanPham.setRowHeight(25);
-		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listSanPham = new DefaultTableModel(null,new String[] {"Mã", "Tên SP", "Nhà CCấp", "Số lượng","Kích cỡ","Màu sắc","Đơn giá"});
 		tblSanPham.setModel(listSanPham);
 		scrCTHD.setViewportView(tblSanPham);

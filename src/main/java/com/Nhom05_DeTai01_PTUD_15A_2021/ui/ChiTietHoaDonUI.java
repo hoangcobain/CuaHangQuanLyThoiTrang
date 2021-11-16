@@ -189,7 +189,7 @@ public class ChiTietHoaDonUI extends JPanel {
 		tblCTHD = new JTable();
 		tblCTHD.setRowHeight(25);
 		tblCTHD.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblCTHD.setModel(listCTHD);
 		scrSanPham.setViewportView(tblCTHD);
 		
@@ -365,7 +365,7 @@ public class ChiTietHoaDonUI extends JPanel {
 		tblSanPham = new JTable();
 		tblSanPham.setRowHeight(25);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblSanPham.setModel(listSanPham);
 		scrCTHD.setViewportView(tblSanPham);
 		pnlCenter.setLayout(gl_pnlCenter);
