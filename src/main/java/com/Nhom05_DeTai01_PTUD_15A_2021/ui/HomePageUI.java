@@ -266,16 +266,17 @@ public class HomePageUI extends JFrame {
 				maNV = pnlhoaDon.txtMaNhanVien.getText();
 				maKH = pnlhoaDon.txtMaKhachHang.getText();
 				LocalDate date = null;
-				try {
-					date = ((Date) pnlhoaDon.txtNgayLap.getModel().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Chưa chọn ngày");
-					return;
-				}
-				if(maNV.equals(maKH) && date==null)
+				if(maNV.equals("") && maKH.equals(""))
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
-				else
+				else {
+					try {
+						date = ((Date) pnlhoaDon.txtNgayLap.getModel().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Chưa chọn ngày");
+						return;
+					}
 					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonthValue(),date.getYear());
+				}
 		    }
 		});
 		pnlhoaDon.btnXoa.addActionListener (new ActionListener () {

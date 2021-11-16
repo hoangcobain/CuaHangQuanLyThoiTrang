@@ -17,10 +17,15 @@ import com.Nhom05_DeTai01_PTUD_15A_2021.entity.KhachHang;
 public class KhachHangController {
 	@Autowired
 	private KhachHangDAO khachHangDAO;
-	
+
 
 	public void searchKhachHang(DefaultTableModel listKhachHang, String ten, String sdt, int gioiTinh) {
-		List<KhachHang> list = khachHangDAO.search(ten, sdt, gioiTinh);
+
+		List<KhachHang> list; 
+		if (ten.equals("") && sdt.equals("")) 
+			list = khachHangDAO.findAll();
+		else
+			list = khachHangDAO.search(ten, sdt, gioiTinh);
 		listKhachHang.setRowCount(0);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();
@@ -28,7 +33,7 @@ public class KhachHangController {
 			listKhachHang.addRow(row);
 		}
 	}
-	
+
 	public KhachHang getKhachHang(String id) {
 		return khachHangDAO.findById(id).get();
 	}
@@ -36,7 +41,7 @@ public class KhachHangController {
 	public List<KhachHang> getKhachHangs() {
 		return khachHangDAO.findAll();
 	}
-	
+
 
 	public void loadKhachHang(DefaultTableModel listKhachHang,JComboBox<String> cmbTimKiemKH) {
 		List<KhachHang> list = khachHangDAO.findAll();
@@ -51,13 +56,13 @@ public class KhachHangController {
 				gioiTinh = "Nữ";
 			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai()
 					,khachHang.getDiaChi(),gioiTinh};
-				cmbTimKiemKH.addItem(khachHang.getSoDienThoai());
-				cmbTimKiemKH.addItem(khachHang.getTenKhachHang());
-				listKhachHang.addRow(row);			
+			cmbTimKiemKH.addItem(khachHang.getSoDienThoai());
+			cmbTimKiemKH.addItem(khachHang.getTenKhachHang());
+			listKhachHang.addRow(row);			
 		}
 	}
-	
-	
+
+
 	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt,String ten) {
 		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt,ten);
 		listKhachHang.setRowCount(0);
@@ -70,9 +75,9 @@ public class KhachHangController {
 			listKhachHang.addRow(row);
 		}
 	}
-	
-	
-	
+
+
+
 	public KhachHang themKhachHang(KhachHang khachHang) {
 		return khachHangDAO.save(khachHang);
 	}
