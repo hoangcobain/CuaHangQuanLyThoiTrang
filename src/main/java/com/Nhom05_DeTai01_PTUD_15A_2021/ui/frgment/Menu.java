@@ -131,7 +131,7 @@ public class Menu extends JPanel {
 	protected void paintChildren(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D) g;
 		graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		GradientPaint gradientPaint = new GradientPaint(0, 0, new Color(119,136,153), 0, getHeight(), new Color(119,136,153));
+		GradientPaint gradientPaint = new GradientPaint(0, 0, new Color(90, 101, 112), 0, getHeight(), new Color(119,136,153));
 		graphics2d.setPaint(gradientPaint);
 		graphics2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
 		graphics2d.fillRect(0, 0, getWidth(), getHeight());

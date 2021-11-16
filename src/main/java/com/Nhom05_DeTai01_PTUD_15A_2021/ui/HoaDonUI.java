@@ -138,6 +138,7 @@ public class HoaDonUI extends JPanel {
 		btnTimKiem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		btnXemPhiu = new JButton("Xem Phiếu");
+		btnXemPhiu.setEnabled(false);
 		btnXemPhiu.setIcon(new ImageIcon(HoaDonUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/report.png")));
 		btnXemPhiu.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnXemPhiu.setBackground(new Color(255, 234, 182));
