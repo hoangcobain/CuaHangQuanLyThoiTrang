@@ -10,7 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -136,7 +136,10 @@ public class HomePageUI extends JFrame {
 				doiMatKhau();
 			}
 		});
-		contentPane.add(panelMenu, BorderLayout.WEST);
+		JScrollPane paneWest = new JScrollPane(panelMenu);
+		paneWest.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		paneWest.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		contentPane.add(paneWest, BorderLayout.WEST);
 
 		JScrollPane paneContent = new JScrollPane();
 		paneContent.setBorder(null);

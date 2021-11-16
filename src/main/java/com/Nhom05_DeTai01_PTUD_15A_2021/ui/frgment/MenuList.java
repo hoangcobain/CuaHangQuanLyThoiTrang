@@ -25,6 +25,7 @@ public class MenuList<E extends Object> extends JList<E>{
 
 	public MenuList() {
 		setOpaque(false);
+		setAutoscrolls(true);
 		listModel = new DefaultListModel();
 		setModel(listModel);
 		addMouseListener(new MouseAdapter() {
