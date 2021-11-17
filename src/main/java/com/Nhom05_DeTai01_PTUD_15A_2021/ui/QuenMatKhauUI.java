@@ -25,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.Nhom05_DeTai01_PTUD_15A_2021.Nhom05DeTai01Ptud15A2021Application;
@@ -51,6 +52,10 @@ public class QuenMatKhauUI extends JFrame {
 	private TaiKhoanController controller;
 	@Autowired
 	private NhanVienController nhanVienController;
+	@Value("${app.email.username}")
+	String user = "cuahangHandL@gmail.com";
+	@Value("${app.email.password}")
+	String password = "HL1234567";
 
 	/**
 	 * Create the frame.
@@ -122,8 +127,6 @@ public class QuenMatKhauUI extends JFrame {
 				Random rand = new Random();
 				randomCode	= rand.nextInt(999999);
 				String host = "smtp.gmail.com";
-				String user = "cuahangHandL@gmail.com";
-				String password = "HL123456789";
 				String subject = "Resting Code";
 				String message = "Your code is " +randomCode;
 				boolean sessionDebug = false;

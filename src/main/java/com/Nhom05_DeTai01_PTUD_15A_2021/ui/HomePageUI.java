@@ -81,6 +81,7 @@ public class HomePageUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	protected Menu panelMenu;
+	private JScrollPane paneContent = new JScrollPane();
 	private ThongKeUI pnlThongKe = new ThongKeUI();
 	private HoaDonUI pnlhoaDon = new HoaDonUI();
 	private LapHoaDonUI pnlLapHoaDon = new LapHoaDonUI();
@@ -141,7 +142,7 @@ public class HomePageUI extends JFrame {
 		paneWest.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		contentPane.add(paneWest, BorderLayout.WEST);
 
-		JScrollPane paneContent = new JScrollPane();
+		
 		paneContent.setBorder(null);
 		contentPane.add(paneContent, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
@@ -1596,6 +1597,7 @@ public class HomePageUI extends JFrame {
 
 	protected void dangXuat() {
 		try {
+			paneContent.setViewportView(pnlGioiThieuUI);
 			taiKhoanController.logout();
 			DangNhapUI frame = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(DangNhapUI.class);
 			frame.setVisible(true);
