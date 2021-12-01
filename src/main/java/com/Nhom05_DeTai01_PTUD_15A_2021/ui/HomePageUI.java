@@ -851,8 +851,19 @@ public class HomePageUI extends JFrame {
 				String ten, name, value,kichco,mausac;
 				int soLuong = 0;
 				double gia = 0;
-				LoaiSanPham loai = loaiSanPhamController.getLoaiSPByName(pnlSanPham.cmbTenLoai.getSelectedItem().toString());
-				NhaCungCap tenNCC = nhaCungCapController.getNCCByName(pnlSanPham.cmbTenNCC.getSelectedItem().toString());
+				LoaiSanPham loai = null;
+				NhaCungCap tenNCC = null;
+				if(pnlSanPham.cmbTenLoai.getSelectedIndex() == -1)
+					JOptionPane.showMessageDialog(null, "Phải chọn tên loại");
+				else if (pnlSanPham.cmbTenNCC.getSelectedIndex() == -1)
+					JOptionPane.showMessageDialog(null, "Phải chọn tên nhà cung cấp");
+				try {
+					loai = loaiSanPhamController.getLoaiSPByName(pnlSanPham.cmbTenLoai.getSelectedItem().toString());
+					tenNCC = nhaCungCapController.getNCCByName(pnlSanPham.cmbTenNCC.getSelectedItem().toString());
+				} catch (Exception e2) {
+					return ;
+				}
+				
 				Set<ThuocTinh> listTT = new HashSet<ThuocTinh>();
 				ten = pnlSanPham.txtTenSanPham.getText().trim();
 				kichco = pnlSanPham.txtKichCo.getText().trim();
@@ -915,7 +926,6 @@ public class HomePageUI extends JFrame {
 						JOptionPane.showMessageDialog(null, "Thêm Sản Phẩm thành công [MaSP: "+sanPham.getMaSanPham()+"]");
 						pnlSanPham.txtMaSanPham.setText(sanPham.getMaSanPham());
 						loadSanPham();
-						xoaTrangSanPham();
 					}
 				}
 			}
@@ -1080,13 +1090,14 @@ public class HomePageUI extends JFrame {
 				else {
 					try {
 						Email email2 = new Email(email);
+						
 						NhanVien nhanVien = new NhanVien(ten, gioiTinh, diaChi, sdt, email2, null);
-						nhanVien = nhanVienController.saveNhanVien(nhanVien);
+						TaiKhoan taiKhoan = taiKhoanController.taoTaiKhoan("abc","a123456",nhanVien);
 
-						TaiKhoan taiKhoan = taiKhoanController.taoTaiKhoan(nhanVien.getMaNhanVien(),"a123456",nhanVien);
 						nhanVien.setTaiKhoan(taiKhoan);
-
 						nhanVien = nhanVienController.saveNhanVien(nhanVien);
+						taiKhoan.setTaiKhoan(nhanVien.getMaNhanVien());
+						taiKhoan = taiKhoanController.save(taiKhoan);
 						pnlNhanVien.txtMaNhanVien.setText(nhanVien.getMaNhanVien());
 					}catch (Exception e2) {
 						JOptionPane.showMessageDialog(null,"Thêm không thành công: "+e2.getMessage());
@@ -1286,8 +1297,8 @@ public class HomePageUI extends JFrame {
 		pnlSanPham.txtTenSanPham.setText("");
 		pnlSanPham.txtKichCo.setText("");
 		pnlSanPham.txtMauSac.setText("");
-		pnlSanPham.cmbTenNCC.setSelectedIndex(0);
-		pnlSanPham.cmbTenLoai.setSelectedIndex(0);
+		pnlSanPham.cmbTenNCC.setSelectedIndex(-1);
+		pnlSanPham.cmbTenLoai.setSelectedIndex(-1);
 		personalImage = null;
 		ImageIcon icon = new ImageIcon(getClass().getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_product_127px.png"));
 		pnlSanPham.lblImage.setIcon(icon);

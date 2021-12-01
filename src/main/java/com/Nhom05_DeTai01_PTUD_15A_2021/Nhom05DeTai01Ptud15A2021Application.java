@@ -55,14 +55,19 @@ public class Nhom05DeTai01Ptud15A2021Application {
 ////			Nhan Vien
 //					
 //			Email email = new Email("abc@gmail.com");
-//			NhanVien nhanVien = new NhanVien("Nguyen Van A", false, "Dia Chi A", "0123456", email, null);
-//			nhanVien = nhanVienDAO.save(nhanVien);
 //			TaiKhoan taiKhoan = new TaiKhoan("quanlycuahang", encoder.encode("123"), Quyen.ROLE_QUANLY);	
+//			NhanVien nhanVien = new NhanVien("Nguyen Van A", false, "Dia Chi A", "0123456", email, null);
 //			taiKhoan.setNhanVien(nhanVien);
 //			taiKhoan = taiKhoanDAO.save(taiKhoan);
 //			
 //			nhanVien.setTaiKhoan(taiKhoan);
+//			
 //			nhanVien = nhanVienDAO.save(nhanVien);
+//			
+//			
+//			
+//			
+//			
 //		});
 //	}
 }

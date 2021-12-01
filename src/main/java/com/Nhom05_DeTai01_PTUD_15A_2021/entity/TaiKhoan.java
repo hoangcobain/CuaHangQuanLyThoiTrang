@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,11 +15,14 @@ public class TaiKhoan {
 	
 	@Id
 	@Column(columnDefinition = "VARCHAR(10)")
-    @GeneratedValue(generator = "TKGenerator")
-	@GenericGenerator(name = "TKGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.TaiKhoanGenerator")
-    private String maTaiKhoan;
+//    @GeneratedValue(generator = "TKGenerator")
+//	@GenericGenerator(name = "TKGenerator", strategy = "com.Nhom05_DeTai01_PTUD_15A_2021.generator.TaiKhoanGenerator")
+    private String maNhanVien;
 	
-	@OneToOne(mappedBy = "taiKhoan")
+	
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "maNhanVien", columnDefinition = "VARCHAR(10)")
 	private NhanVien nhanVien;
 	
 	@Column(nullable = false, columnDefinition = "VARCHAR(30)", unique = true)
@@ -41,16 +46,16 @@ public class TaiKhoan {
 	/**
 	 * @return the maTaiKhoan
 	 */
-	public String getMaTaiKhoan() {
-		return maTaiKhoan;
-	}
-
-	/**
-	 * @param maTaiKhoan the maTaiKhoan to set
-	 */
-	public void setMaTaiKhoan(String maTaiKhoan) {
-		this.maTaiKhoan = maTaiKhoan;
-	}
+//	public String getMaTaiKhoan() {
+//		return maTaiKhoan;
+//	}
+//
+//	/**
+//	 * @param maTaiKhoan the maTaiKhoan to set
+//	 */
+//	public void setMaTaiKhoan(String maTaiKhoan) {
+//		this.maTaiKhoan = maTaiKhoan;
+//	}
 
 	/**
 	 * @return the nhanVien
@@ -110,7 +115,10 @@ public class TaiKhoan {
 
 	@Override
 	public String toString() {
-		return "TaiKhoan [maTaiKhoan=" + maTaiKhoan + ", nhanVien=" + nhanVien + ", taiKhoan=" + taiKhoan + ", matKhau="
+		return "TaiKhoan [maNhanVien=" + maNhanVien + ", nhanVien=" + nhanVien + ", taiKhoan=" + taiKhoan + ", matKhau="
 				+ matKhau + ", quyen=" + quyen + "]";
 	}
+
+	
+	
 }

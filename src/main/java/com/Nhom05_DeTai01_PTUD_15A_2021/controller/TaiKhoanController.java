@@ -75,4 +75,8 @@ public class TaiKhoanController {
 		taiKhoan.setNhanVien(nhanVien);
 		return taiKhoanDAO.save(taiKhoan);
 	}
+
+	public TaiKhoan save(TaiKhoan taiKhoan2) {
+		return taiKhoanDAO.save(taiKhoan2);
+	}
 }

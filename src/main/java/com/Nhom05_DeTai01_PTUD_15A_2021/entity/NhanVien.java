@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -33,8 +34,12 @@ public class NhanVien {
 	@Column(unique = true)
 	private Email email;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "maTaiKhoan")
+//	@OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "ma_tai_khoan", referencedColumnName = "maTaiKhoan")
+//	private TaiKhoan taiKhoan;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
 	private TaiKhoan taiKhoan;
 	
 	@OneToMany(mappedBy = "nhanVien")

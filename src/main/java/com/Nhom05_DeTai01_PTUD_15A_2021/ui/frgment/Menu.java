@@ -54,7 +54,7 @@ public class Menu extends JPanel {
 		lstMenu.addItem(new ModelMenu(""," Cửa Hàng",MenuType.TITLE));
 		lstMenu.addItem(new ModelMenu("bill","Quản Lý Hóa Đơn",MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("page","Lập Hóa Đơn",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("trend","Thống Kế",MenuType.MENU));
+		lstMenu.addItem(new ModelMenu("trend","Thống Kê",MenuType.MENU));
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
