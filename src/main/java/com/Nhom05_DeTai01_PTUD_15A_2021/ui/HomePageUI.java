@@ -457,64 +457,64 @@ public class HomePageUI extends JFrame {
 		pnlLapHoaDon.btnTimSP.addActionListener (new ActionListener () {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sanPhamController.searchByTenNCC(pnlLapHoaDon.listSanPham,pnlLapHoaDon.txtTenSanPham.getText(),pnlLapHoaDon.txtTenNCC.getText(),
-						pnlLapHoaDon.txtSize.getText(),pnlLapHoaDon.txtMauSac.getText());
+				paneContent.setViewportView(pnlSanPham);
+				loadSanPham();
 			}
 		});
-		pnlLapHoaDon.tblSanPham.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int index = pnlLapHoaDon.tblSanPham.getSelectedRow();
-				String id = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
-				String tenSP = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
-				String tenNcc = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
-				String kichCo = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
-				String mauSac = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
-				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
-
-				pnlLapHoaDon.txtMaSanPham.setText(id);
-				pnlLapHoaDon.txtTenNCC.setText(tenNcc);
-				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
-				pnlLapHoaDon.txtSize.setText(kichCo);
-				pnlLapHoaDon.txtMauSac.setText(mauSac);
-				pnlLapHoaDon.txtDonGia.setText(donGia);
-				try {
-					int soLuong = Integer.parseInt(pnlLapHoaDon.txtSoLuong.getText());
-					double dg = Double.parseDouble(donGia);
-					pnlLapHoaDon.txtGiaThanh.setText(soLuong*dg+"");
-				} catch (Exception e2) {
-					pnlLapHoaDon.txtGiaThanh.setText("Lỗi số lượng hoặc đơn giá");
-				}
-			}
-		});
-		pnlLapHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JTable table = pnlLapHoaDon.tblCTHD;
-				int index = table.getSelectedRow();
-				String maSp = table.getModel().getValueAt(index, 0).toString();
-				String tenSP = table.getModel().getValueAt(index, 1).toString();
-				String tenNCC = table.getModel().getValueAt(index, 2).toString();
-				String size = table.getModel().getValueAt(index, 3).toString();
-				String mauSac = table.getModel().getValueAt(index, 4).toString();
-				String soLuong = table.getModel().getValueAt(index, 5).toString();
-				String giaThanh = table.getModel().getValueAt(index, 6).toString();
-				pnlLapHoaDon.txtMaSanPham.setText(maSp);
-				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
-				pnlLapHoaDon.txtTenNCC.setText(tenNCC);
-				pnlLapHoaDon.txtSize.setText(size);
-				pnlLapHoaDon.txtMauSac.setText(mauSac);
-				pnlLapHoaDon.txtSoLuong.setText(soLuong);
-				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
-				try {
-					int sl = Integer.parseInt(soLuong);
-					double gt = Double.parseDouble(giaThanh);
-					pnlLapHoaDon.txtDonGia.setText(gt/sl+"");
-				} catch (Exception e2) {
-					pnlLapHoaDon.txtDonGia.setText("Lỗi số lượng hoặc giá thành");
-				}
-			}
-		});
+//		pnlLapHoaDon.tblSanPham.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int index = pnlLapHoaDon.tblSanPham.getSelectedRow();
+//				String id = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
+//				String tenSP = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
+//				String tenNcc = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
+//				String kichCo = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
+//				String mauSac = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
+//				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
+//
+//				pnlLapHoaDon.txtMaSanPham.setText(id);
+//				pnlLapHoaDon.txtTenNCC.setText(tenNcc);
+//				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
+//				pnlLapHoaDon.txtSize.setText(kichCo);
+//				pnlLapHoaDon.txtMauSac.setText(mauSac);
+//				pnlLapHoaDon.txtDonGia.setText(donGia);
+//				try {
+//					int soLuong = Integer.parseInt(pnlLapHoaDon.txtSoLuong.getText());
+//					double dg = Double.parseDouble(donGia);
+//					pnlLapHoaDon.txtGiaThanh.setText(soLuong*dg+"");
+//				} catch (Exception e2) {
+//					pnlLapHoaDon.txtGiaThanh.setText("Lỗi số lượng hoặc đơn giá");
+//				}
+//			}
+//		});
+//		pnlLapHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				JTable table = pnlLapHoaDon.tblCTHD;
+//				int index = table.getSelectedRow();
+//				String maSp = table.getModel().getValueAt(index, 0).toString();
+//				String tenSP = table.getModel().getValueAt(index, 1).toString();
+//				String tenNCC = table.getModel().getValueAt(index, 2).toString();
+//				String size = table.getModel().getValueAt(index, 3).toString();
+//				String mauSac = table.getModel().getValueAt(index, 4).toString();
+//				String soLuong = table.getModel().getValueAt(index, 5).toString();
+//				String giaThanh = table.getModel().getValueAt(index, 6).toString();
+//				pnlLapHoaDon.txtMaSanPham.setText(maSp);
+//				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
+//				pnlLapHoaDon.txtTenNCC.setText(tenNCC);
+//				pnlLapHoaDon.txtSize.setText(size);
+//				pnlLapHoaDon.txtMauSac.setText(mauSac);
+//				pnlLapHoaDon.txtSoLuong.setText(soLuong);
+//				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
+//				try {
+//					int sl = Integer.parseInt(soLuong);
+//					double gt = Double.parseDouble(giaThanh);
+//					pnlLapHoaDon.txtDonGia.setText(gt/sl+"");
+//				} catch (Exception e2) {
+//					pnlLapHoaDon.txtDonGia.setText("Lỗi số lượng hoặc giá thành");
+//				}
+//			}
+//		});
 		pnlLapHoaDon.btnXoaTrang.addActionListener (new ActionListener () {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -580,7 +580,7 @@ public class HomePageUI extends JFrame {
 						loadTongTien();
 					}
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Số lượng không phải số: "+e2.getMessage());
+					JOptionPane.showMessageDialog(null, "Yêu cầu nhập số lượng");
 				}
 			}
 		});	
@@ -1025,6 +1025,14 @@ public class HomePageUI extends JFrame {
 					String[] row = {thuocTinh.getTenThuocTinh(),thuocTinh.getGiaTri()};
 					pnlSanPham.listThuocTinh.addRow(row);
 				}
+				pnlSanPham.btnLHD.setEnabled(true);
+			}
+		});
+		pnlSanPham.btnLHD.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				paneContent.setViewportView(pnlLapHoaDon);
+				loadSanPhamVaoHoaDon();		
 			}
 		});
 		pnlSanPham.cmbChonTimKiem.addActionListener(new ActionListener() {
@@ -1302,6 +1310,7 @@ public class HomePageUI extends JFrame {
 		personalImage = null;
 		ImageIcon icon = new ImageIcon(getClass().getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_product_127px.png"));
 		pnlSanPham.lblImage.setIcon(icon);
+		pnlSanPham.btnLHD.setEnabled(false);
 	}
 
 	protected void xoaTrangThuocTinh() {
@@ -1460,14 +1469,27 @@ public class HomePageUI extends JFrame {
 		pnlLapHoaDon.txtSize.setText("");
 		pnlLapHoaDon.txtMauSac.setText("");
 		pnlLapHoaDon.tblCTHD.clearSelection();
-		pnlLapHoaDon.tblSanPham.clearSelection();
+		
 	}
 
 	private void loadHoaDon() {
 		pnlLapHoaDon.txtMaKhachHang.setText(pnlKhachHang.txtMaKhachHang.getText());
 		pnlLapHoaDon.txtTenKhachHang.setText(pnlKhachHang.txtTenNhanVien.getText());
+		pnlLapHoaDon.txtSDTKH.setText(pnlKhachHang.txtSoDienThoai.getText());
+		
+		pnlLapHoaDon.txtMaNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien());
+		pnlLapHoaDon.txtTenNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getTenNhanVien());
+		pnlLapHoaDon.txtSoDTNV.setText(taiKhoanController.getTaiKhoan().getNhanVien().getSoDienThoai());
 	}
-
+	private void loadSanPhamVaoHoaDon() {
+		pnlLapHoaDon.txtMaSanPham.setText(pnlSanPham.txtMaSanPham.getText());
+		pnlLapHoaDon.txtTenSanPham.setText(pnlSanPham.txtTenSanPham.getText());
+		pnlLapHoaDon.txtMauSac.setText(pnlSanPham.txtMauSac.getText());
+		pnlLapHoaDon.txtSize.setText(pnlSanPham.txtKichCo.getText());
+		pnlLapHoaDon.txtTenNCC.setText(pnlSanPham.cmbTenNCC.getSelectedItem().toString());
+		pnlLapHoaDon.txtDonGia.setText(pnlSanPham.txtGiaThanh.getText());
+		pnlSanPham.btnLHD.setEnabled(false);
+	}
 	protected void xoaTrangCTHD() {
 		pnlChiTietHoaDon.txtDonGia.setText("0.0");
 		pnlChiTietHoaDon.txtSoLuong.setText("0");

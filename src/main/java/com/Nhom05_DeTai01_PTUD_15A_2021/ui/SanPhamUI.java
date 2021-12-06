@@ -36,7 +36,7 @@ public class SanPhamUI extends JPanel {
 	protected JTable tblThuocTinh;
 	protected DefaultTableModel listSanPham, listThuocTinh;
 	protected JButton btnThemSanPham, btnCapNhatSanPham, btnXoaSanPham, btnXoaTrangSanPham, 
-	btnThemThuocTinh, btnXoaRong, btnXoaThuocTinh, btnXoaTrangThuocTinh,btnImage,btnTim,btnLamMoi;
+	btnThemThuocTinh, btnXoaRong, btnXoaThuocTinh, btnXoaTrangThuocTinh,btnImage,btnTim,btnLamMoi,btnLHD;
 	protected JLabel lblImage,lblGiaTu,lblDen;
 	protected JTextField txtKichCo;
 	protected JTextField txtMauSac;
@@ -116,6 +116,9 @@ public class SanPhamUI extends JPanel {
 		
 		btnLamMoi = new JButton("");
 		btnLamMoi.setIcon(new ImageIcon(SanPhamUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_checklist_23px.png")));
+		
+		btnLHD = new JButton("Lập hóa đơn");
+		btnLHD.setEnabled(false);
 		GroupLayout gl_pnlSanPham = new GroupLayout(this);
 		gl_pnlSanPham.setHorizontalGroup(
 			gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
@@ -148,10 +151,12 @@ public class SanPhamUI extends JPanel {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtDen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(cmbTimTheoTen, 0, 213, Short.MAX_VALUE)
-							.addGap(10)
+							.addComponent(cmbTimTheoTen, 0, 124, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-							.addGap(33)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnLHD, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)))
 					.addGap(0)
 					.addComponent(pnlRightSanPham, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE)
 					.addGap(0))
@@ -169,32 +174,25 @@ public class SanPhamUI extends JPanel {
 								.addComponent(btnXoaSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
 								.addComponent(btnCapNhatSanPham, GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
 								.addComponent(btnThemSanPham, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_pnlSanPham.createSequentialGroup()
-									.addGap(20)
+							.addGap(20)
+							.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnLHD, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.LEADING, false)
 									.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
 										.addComponent(txtGiaTu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblGiaTu)
-										.addComponent(btnLamMoi)))
-								.addGroup(gl_pnlSanPham.createSequentialGroup()
-									.addGap(20)
+										.addComponent(btnLamMoi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 									.addGroup(gl_pnlSanPham.createParallelGroup(Alignment.BASELINE)
 										.addComponent(txtDen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblDen)))
-								.addGroup(gl_pnlSanPham.createSequentialGroup()
-									.addGap(20)
-									.addComponent(cmbTimTheoTen, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_pnlSanPham.createSequentialGroup()
-									.addGap(20)
-									.addComponent(btnTim))
-								.addGroup(gl_pnlSanPham.createSequentialGroup()
-									.addGap(20)
-									.addComponent(cmbChonTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(lblDen))
+									.addComponent(cmbChonTimKiem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(cmbTimTheoTen, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+									.addComponent(btnTim, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(23)
-							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))
+							.addComponent(scrSanPham, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)))
 					.addGap(0))
 		);
-		gl_pnlSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {cmbChonTimKiem, cmbTimTheoTen, txtGiaTu, txtDen, btnTim});
+		gl_pnlSanPham.linkSize(SwingConstants.VERTICAL, new Component[] {cmbChonTimKiem, cmbTimTheoTen, txtGiaTu, txtDen, btnTim, btnLHD});
 		
 		tblSanPham = new JTable();
 		tblSanPham.setRowHeight(35);
