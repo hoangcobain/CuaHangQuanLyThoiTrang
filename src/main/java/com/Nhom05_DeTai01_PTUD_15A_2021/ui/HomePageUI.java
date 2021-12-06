@@ -180,8 +180,10 @@ public class HomePageUI extends JFrame {
 					break;
 				case 10:
 					if (taiKhoanController.getTaiKhoan().getQuyen().equals(Quyen.ROLE_NHANVIEN.toString())) {
-						JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập");
-						paneContent.setViewportView(pnlGioiThieuUI);
+						String ma = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
+						paneContent.setViewportView(pnlhoaDon);
+						hoaDonController.loadHoaDonTheoMaNV(pnlhoaDon.listHoaDon,ma);
+						
 					}else {
 					paneContent.setViewportView(pnlhoaDon);
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
@@ -615,6 +617,7 @@ public class HomePageUI extends JFrame {
 						pnlLapHoaDon.txtTienKhachDua.setText("0");
 						pnlLapHoaDon.cmbKhuyenMai.setSelectedIndex(0);
 						pnlLapHoaDon.txtChietKhau.setText("0");
+						pnlLapHoaDon.txtDonGia.setText("");
 					}
 				}
 				else {

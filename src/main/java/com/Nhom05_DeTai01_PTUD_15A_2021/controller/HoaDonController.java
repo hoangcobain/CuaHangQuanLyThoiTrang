@@ -26,6 +26,17 @@ public class HoaDonController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	public void loadHoaDonTheoMaNV(DefaultTableModel listHoaDon,String ma){
+		List<HoaDon> list = hoaDonDAO.searchHDByMaNhanVien(ma);
+		listHoaDon.setRowCount(0);
+		HoaDon hoaDon;		
+		for (int i = 0; i < list.size(); i++) {
+			hoaDon = list.get(i);
+			Object[] row = {hoaDon.getMaHoaDon(),hoaDon.getNgayLapHoaDon(),hoaDon.getKhachHang().getTenKhachHang(),
+					hoaDon.getNhanVien().getTenNhanVien(),hoaDon.getTongTien()};
+			listHoaDon.addRow(row);
+		}
+	}
 	public void loadHoaDon(DefaultTableModel listHoaDon){
 		List<HoaDon> list = hoaDonDAO.findAll();
 		listHoaDon.setRowCount(0);
