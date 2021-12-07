@@ -11,24 +11,62 @@ import javax.persistence.ManyToOne;
 @Entity
 @IdClass(ChiTietHoaDon_PK.class)
 public class ChiTietHoaDon {
-	
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "ma_hoa_don", columnDefinition = "VARCHAR(10)")
 	private HoaDon hoaDon;
-	
+
 	@Id
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ma_san_pham", columnDefinition = "VARCHAR(10)")
 	private SanPham sanPham;
-	
+
 	private double donGia;
 	@Column(nullable = false)
 	private int soLuong;
+
+	@Column(nullable = true)
+	private double khuyenMai;
+
+	@Column(nullable = true)
+	private double chietKhau;
+
+	@Column(nullable = true)
+	private double tienKhach;
 	
+
 	public ChiTietHoaDon() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+	
+	
+
+
+
+
+
+	public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, double donGia, int soLuong, double khuyenMai, double chietKhau,
+			double tienKhach) {
+		super();
+		this.hoaDon = hoaDon;
+		this.sanPham = sanPham;
+		this.donGia = donGia;
+		this.soLuong = soLuong;
+		this.khuyenMai = khuyenMai;
+		this.chietKhau = chietKhau;
+		this.tienKhach = tienKhach;
+	}
+
+
+
+
+
+
+
+
 
 	public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, double donGia, int soLuong) {
 		super();
@@ -36,6 +74,32 @@ public class ChiTietHoaDon {
 		this.sanPham = sanPham;
 		this.donGia = donGia;
 		this.soLuong = soLuong;
+	}
+
+
+
+	public double getKhuyenMai() {
+		return khuyenMai;
+	}
+
+	public void setKhuyenMai(double khuyenMai) {
+		this.khuyenMai = khuyenMai;
+	}
+
+	public double getChietKhau() {
+		return chietKhau;
+	}
+
+	public void setChietKhau(double chietKhau) {
+		this.chietKhau = chietKhau;
+	}
+
+	public double getTienKhach() {
+		return tienKhach;
+	}
+
+	public void setTienKhach(double tienKhach) {
+		this.tienKhach = tienKhach;
 	}
 
 	/**
@@ -94,9 +158,19 @@ public class ChiTietHoaDon {
 		this.soLuong = soLuong;
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "ChiTietHoaDon [hoaDon=" + hoaDon + ", sanPham=" + sanPham + ", donGia=" + donGia + ", soLuong="
-				+ soLuong + "]";
-	}	
+				+ soLuong + ", khuyenMai=" + khuyenMai + ", chietKhau=" + chietKhau + ", tienKhach=" + tienKhach + "]";
+	}
+
+
+
+	
+
+	
+
 }

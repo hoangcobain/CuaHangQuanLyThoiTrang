@@ -39,6 +39,10 @@ public class ChiTietHoaDonController {
 	public ChiTietHoaDon getCTHDByHDSP(String maHD, String maSP) {
 		return chiTietHoaDonDAO.getById(new ChiTietHoaDon_PK(maHD, maSP));
 	}
+	
+	public ChiTietHoaDon getCTHDByHD(String maHD) {
+		return chiTietHoaDonDAO.findByMaHoaDon(maHD).get(0);
+	}
 
 	public void capNhatCTHD(ChiTietHoaDon cthd, int sl, double gt) {
 		int slc = cthd.getSanPham().getSoLuong();

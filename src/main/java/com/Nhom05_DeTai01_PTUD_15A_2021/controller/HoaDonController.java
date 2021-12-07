@@ -53,11 +53,23 @@ public class HoaDonController {
 		return hoaDonDAO.findById(id).get();
 	}
 
-	public void search(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month, int year) {
+	public void searchRoleQuanLy(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month, int year) {
 		listHoaDon.setRowCount(0);
 		List<HoaDon> list;
 		logger.warn(day+" "+month+" "+year);
 		list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH, day, month, year);
+		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
+			HoaDon hoaDon = iterator.next();
+			Object[] row = {hoaDon.getMaHoaDon(),hoaDon.getNgayLapHoaDon(),hoaDon.getKhachHang().getTenKhachHang(),
+					hoaDon.getNhanVien().getTenNhanVien(),hoaDon.getTongTien()};
+			listHoaDon.addRow(row);
+		}
+	}
+	public void searchRoleNhanVien(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month, int year) {
+		listHoaDon.setRowCount(0);
+		List<HoaDon> list;
+		logger.warn(day+" "+month+" "+year);
+		list = hoaDonDAO.searchHoaDonByKH(maNV, maKH, day, month, year);
 		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			HoaDon hoaDon = iterator.next();
 			Object[] row = {hoaDon.getMaHoaDon(),hoaDon.getNgayLapHoaDon(),hoaDon.getKhachHang().getTenKhachHang(),

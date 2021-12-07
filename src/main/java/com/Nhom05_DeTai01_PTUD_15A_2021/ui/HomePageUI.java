@@ -60,12 +60,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -180,11 +185,13 @@ public class HomePageUI extends JFrame {
 					break;
 				case 10:
 					if (taiKhoanController.getTaiKhoan().getQuyen().equals(Quyen.ROLE_NHANVIEN.toString())) {
+						xoaTrangRoleNhanVien();
+						loadThongTinNhanVienTheoRoleNhanVien();
 						String ma = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
 						paneContent.setViewportView(pnlhoaDon);
 						hoaDonController.loadHoaDonTheoMaNV(pnlhoaDon.listHoaDon,ma);
-						
 					}else {
+					loadThongTinNhanVienTheoRoleQuanLy();
 					paneContent.setViewportView(pnlhoaDon);
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 					}
@@ -265,21 +272,32 @@ public class HomePageUI extends JFrame {
 		});
 		pnlhoaDon.btnTimKiem.addActionListener(new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
-		    	String maNV, maKH;
+		      	String maNV, maKH;
 				maNV = pnlhoaDon.txtMaNhanVien.getText();
 				maKH = pnlhoaDon.txtMaKhachHang.getText();
 				LocalDate date = null;
-				if(maNV.equals("") && maKH.equals(""))
-					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
-				else {
-					try {
+		    	if (taiKhoanController.getTaiKhoan().getQuyen().equals(Quyen.ROLE_QUANLY.toString())) {
+					if(maNV.equals("") && maKH.equals(""))
+						hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
+					else {
+						try {
+							date = ((Date) pnlhoaDon.txtNgayLap.getModel().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+						} catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, "Chưa chọn ngày");
+							return;
+						}
+						hoaDonController.searchRoleQuanLy(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonthValue(),date.getYear());
+					}
+		    	}
+		    	else {
+		    		try {
 						date = ((Date) pnlhoaDon.txtNgayLap.getModel().getValue()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(null, "Chưa chọn ngày");
 						return;
 					}
-					hoaDonController.search(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonthValue(),date.getYear());
-				}
+					hoaDonController.searchRoleNhanVien(pnlhoaDon.listHoaDon,maNV,maKH,date.getDayOfMonth(),date.getMonthValue(),date.getYear());
+		    }
 		    }
 		});
 		pnlhoaDon.btnXoa.addActionListener (new ActionListener () {
@@ -319,18 +337,99 @@ public class HomePageUI extends JFrame {
 				Runtime run = Runtime.getRuntime();
 				try {
 					run.exec("notepad History//" + id + ".txt");
-				
+			
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "Hóa đơn đã bị xóa trong lịch sử lưu hóa đơn");
 				}
 			}
 		});
 		//		XỬ LÝ CHI TIET HÓA ĐƠN
-		pnlChiTietHoaDon.btnTimSP.addMouseListener(new MouseAdapter() {
+		pnlChiTietHoaDon.btnTimSP.addActionListener(new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				sanPhamController.searchByTenNCC(pnlChiTietHoaDon.listSanPham,pnlChiTietHoaDon.txtTenSanPham.getText(),pnlChiTietHoaDon.txtTenNCC.getText(),pnlChiTietHoaDon.txtKichCo
-						.getText(),pnlChiTietHoaDon.txtMauSac.getText());
+				.getText(),pnlChiTietHoaDon.txtMauSac.getText());
+				
+			}
+		});
+		pnlChiTietHoaDon.btnInHD.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String maKH, maNV, maSP,tenKH;
+				double tongTien= 0,khuyenmai = 0;
+				String maHD = pnlhoaDon.tblHoaDon.getModel().getValueAt(pnlhoaDon.tblHoaDon.getSelectedRow(), 0).toString();
+				String ngayLap =  pnlChiTietHoaDon.txtNgayLap.getText();
+				DefaultTableModel model = (DefaultTableModel) pnlChiTietHoaDon.tblCTHD.getModel();
+				tenKH = pnlChiTietHoaDon.txtTenKhachHang.getText();
+				maKH = pnlChiTietHoaDon.txtMaKhachHang.getText();
+				maNV = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
+				tongTien = Double.parseDouble(pnlhoaDon.tblHoaDon.getModel().getValueAt(pnlhoaDon.tblHoaDon.getSelectedRow(), 4).toString());
+				if(maHD.equals("")) {
+					JOptionPane.showMessageDialog(null, "In hóa đơn không thành công");
+					return;
+				}
+				ChiTietHoaDon chiTietHoaDon = chiTietHoaDonController.getCTHDByHD(maHD);
+				int value = JOptionPane.showConfirmDialog(null, "Bạn có muốn in lại hóa đơn không ?", "Xác nhận", JOptionPane.YES_NO_CANCEL_OPTION);
+				if(value == JOptionPane.YES_OPTION) {
+				try {
+					
+					Writer bw = new BufferedWriter(new OutputStreamWriter(
+							new FileOutputStream("History//" + maHD + ".txt"), "UTF8"));
+					bw.write("\t\t\tTHE H&L SHOP\r\n\r\n");
+					bw.write("\t\t590 CMT8, P.11, Q.3, TPHCM\r\n");
+					bw.write("\t\t\tSĐT: 01212692802\r\n\r\n");
+					bw.write("\t\t\tHÓA ĐƠN BÁN HÀNG\r\n\r\n");
+					bw.write("Mã hóa đơn: " + maHD + "\r\n");
+					bw.write("Thời gian: " + ngayLap + "\r\n");
+					bw.write("NHÂN VIÊN: " + maNV + "\r\n");
+					bw.write("KHÁCH HÀNG: " + maKH + "\r\n");
+					bw.write("TÊN KHÁCH HÀNG: " + tenKH + "\r\n");
+					bw.write("------------------------------------------------------------\r\n");
+					bw.write("Mã\t\tTên nhà cung cấp\tSố lượng\tThành tiền\r\n");
+					bw.write("-----------------------------------------------------------\r\n");
+					// Ghi sản phẩm
+					int quantotal = 0;
+					double tonggia=0;
+					
+					for (int i = 0; i < model.getRowCount(); i++) {
+						String id = (String) model.getValueAt(i, 0);
+						String tenSP = (String) model.getValueAt(i, 1);
+						String tenNCC = (String) model.getValueAt(i, 2);
+						String quantity = String.valueOf(model.getValueAt(i, 3));
+						String intomoney = String.valueOf(model.getValueAt(i, 6));
+						khuyenmai += Double.parseDouble(model.getValueAt(i, 6).toString()) - (Double.parseDouble(model.getValueAt(i, 6).toString()) *(1-(pnlLapHoaDon.cmbKhuyenMai.getSelectedIndex()*0.05)));
+						bw.write((i + 1) + ". " + tenSP + "\r\n");
+						bw.write(id + "\t\t" + tenNCC + "\t\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
+						quantotal += Integer.parseInt(quantity);
+						tonggia += Double.parseDouble(intomoney);
+					}
+					bw.write("------------------------------------------------------------\r\n");
+					bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + tonggia + " VNĐ\r\n");
+					bw.write("------------------------------------------------------------\r\n");
+					bw.write("\t\tKhuyến mãi:\t\t"+ "\t-" + chiTietHoaDon.getKhuyenMai() + " VNĐ\r\n");
+					bw.write("\t\tChiết khấu:\t\t"+ "\t-" + chiTietHoaDon.getChietKhau() + " VNĐ\r\n");
+					bw.write("\t\t--------------------------------------------\r\n");
+					bw.write("\t\tThành tiền:\t\t\t" + (tonggia-chiTietHoaDon.getChietKhau()-chiTietHoaDon.getKhuyenMai()) + " VNĐ\r\n");
+					bw.write("\t\t--------------------------------------------\r\n");
+					bw.write("\t\tTiền khách đưa:\t\t\t" + chiTietHoaDon.getTienKhach() + " VNĐ\r\n");
+					bw.write("\t\tTiền trả lại:\t\t\t" + Double.valueOf(chiTietHoaDon.getTienKhach()-(tonggia-chiTietHoaDon.getChietKhau()-chiTietHoaDon.getKhuyenMai())) + " VNĐ\r\n");
+					bw.write("------------------------------------------------------------\r\n");
+					bw.write("Chương trình ưu đãi: ");
+					bw.write("Không có.\r\n");
+					bw.write("------------------------------------------------------------\r\n");
+					bw.write("Mật khẩu Wifi: HandL\r\n");
+					bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
+					bw.close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null,"In hóa đơn thành công");
+				}
+				else {
+					return ;
+				}
 			}
 		});
 		pnlChiTietHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
@@ -1337,13 +1436,14 @@ public class HomePageUI extends JFrame {
 	}
 
 	protected void thanhToan() {
-		String maKH, maNV, maSP;
-		double giaThanh = 0, tongTien,tienKhachTra = 0, chietKhau=0;
+		String maKH, maNV, maSP,tenKH;
+		double giaThanh = 0, tongTien,tienKhachTra = 0, chietKhau=0,khuyenmai = 0;
 		int soLuong;
 		SanPham sanPham;
 		Set<ChiTietHoaDon> listCTHD = new HashSet<ChiTietHoaDon>();
 		ChiTietHoaDon chiTietHoaDon;
 		DefaultTableModel model = (DefaultTableModel) pnlLapHoaDon.tblCTHD.getModel();
+		tenKH = pnlLapHoaDon.txtTenKhachHang.getText();
 		maKH = pnlLapHoaDon.txtMaKhachHang.getText();
 		maNV = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
 		try {
@@ -1364,9 +1464,10 @@ public class HomePageUI extends JFrame {
 				maSP = model.getValueAt(i, 0).toString();
 				soLuong = Integer.parseInt(model.getValueAt(i, 5).toString());
 				giaThanh = Double.parseDouble(model.getValueAt(i, 6).toString());
+				khuyenmai += Double.parseDouble(model.getValueAt(i, 6).toString()) - (Double.parseDouble(model.getValueAt(i, 6).toString()) *(1-(pnlLapHoaDon.cmbKhuyenMai.getSelectedIndex()*0.05)));
 				sanPham = sanPhamController.getSanPham(maSP);
 				sanPham.setSoLuong(sanPham.getSoLuong()-soLuong);
-				chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, giaThanh, soLuong);
+				chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, giaThanh, soLuong, khuyenmai, chietKhau,tienKhachTra);
 				listCTHD.add(chiTietHoaDon);
 				xoaTrangLapHoaDon();
 			} catch (Exception e) {
@@ -1386,12 +1487,14 @@ public class HomePageUI extends JFrame {
 			bw.write("Mã hóa đơn: " + hoaDon.getMaHoaDon() + "\r\n");
 			bw.write("Thời gian: " + ft.format(now) + "\r\n");
 			bw.write("NHÂN VIÊN: " + maNV + "\r\n");
+			bw.write("KHÁCH HÀNG: " + maKH + "\r\n");
+			bw.write("TÊN KHÁCH HÀNG: " + tenKH + "\r\n");
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Mã\t\tTên nhà cung cấp\tSố lượng\tThành tiền\r\n");
 			bw.write("-----------------------------------------------------------\r\n");
 			// Ghi sản phẩm
 			int quantotal = 0;
-			double khuyenmai = 0,tonggia=0;
+			double tonggia=0;
 			
 			for (int i = 0; i < model.getRowCount(); i++) {
 				String id = (String) model.getValueAt(i, 0);
@@ -1399,7 +1502,6 @@ public class HomePageUI extends JFrame {
 				String tenNCC = (String) model.getValueAt(i, 2);
 				String quantity = String.valueOf(model.getValueAt(i, 5));
 				String intomoney = String.valueOf(model.getValueAt(i, 6));
-				khuyenmai += Double.parseDouble(model.getValueAt(i, 6).toString()) - (Double.parseDouble(model.getValueAt(i, 6).toString()) *(1-(pnlLapHoaDon.cmbKhuyenMai.getSelectedIndex()*0.05)));
 				bw.write((i + 1) + ". " + tenSP + "\r\n");
 				bw.write(id + "\t\t" + tenNCC + "\t\t\t   " + quantity + "\t\t  " + intomoney + "VNĐ\r\n\r\n");
 				quantotal += Integer.parseInt(quantity);
@@ -1408,8 +1510,8 @@ public class HomePageUI extends JFrame {
 			bw.write("------------------------------------------------------------\r\n");
 			bw.write("Tổng cộng:\t\t\t\t   " + quantotal + "\t\t  " + tonggia + " VNĐ\r\n");
 			bw.write("------------------------------------------------------------\r\n");
-			bw.write("\t\tKhuyến mãi:\t" + pnlLapHoaDon.cmbKhuyenMai.getSelectedItem() + "\t-" + khuyenmai + " VNĐ\r\n");
-			bw.write("\t\tChiết khấu:\t" + chietKhau + "\t\t-" + chietKhau + " VNĐ\r\n");
+			bw.write("\t\tKhuyến mãi:\t\t"+ "\t-" + khuyenmai + " VNĐ\r\n");
+			bw.write("\t\tChiết khấu:\t\t"+ "\t-" + chietKhau + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
 			bw.write("\t\tThành tiền:\t\t\t" + (tongTien-chietKhau) + " VNĐ\r\n");
 			bw.write("\t\t--------------------------------------------\r\n");
@@ -1484,6 +1586,25 @@ public class HomePageUI extends JFrame {
 		pnlLapHoaDon.txtTenNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getTenNhanVien());
 		pnlLapHoaDon.txtSoDTNV.setText(taiKhoanController.getTaiKhoan().getNhanVien().getSoDienThoai());
 	}
+	private void loadThongTinNhanVienTheoRoleNhanVien() {
+		pnlhoaDon.txttenNhanVien.setEditable(false);
+		pnlhoaDon.txtemail.setEditable(false);
+		pnlhoaDon.txtsoDT.setEditable(false);
+		pnlhoaDon.txtMaNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien());
+		pnlhoaDon.txttenNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getTenNhanVien());
+		pnlhoaDon.txtemail.setText(taiKhoanController.getTaiKhoan().getNhanVien().getEmail().toString());
+		pnlhoaDon.txtsoDT.setText(taiKhoanController.getTaiKhoan().getNhanVien().getSoDienThoai());
+		pnlhoaDon.btnTimNhanVien.setVisible(false);
+		pnlhoaDon.listHoaDon.setRowCount(0);
+		pnlhoaDon.listKhachHang.setRowCount(0);
+		pnlhoaDon.listNhanVien.setRowCount(0);
+	}
+	private void loadThongTinNhanVienTheoRoleQuanLy() {
+		pnlhoaDon.btnTimNhanVien.setVisible(true);
+		pnlhoaDon.txttenNhanVien.setEditable(true);
+		pnlhoaDon.txtemail.setEditable(true);
+		pnlhoaDon.txtsoDT.setEditable(true);
+	}
 	private void loadSanPhamVaoHoaDon() {
 		pnlLapHoaDon.txtMaSanPham.setText(pnlSanPham.txtMaSanPham.getText());
 		pnlLapHoaDon.txtTenSanPham.setText(pnlSanPham.txtTenSanPham.getText());
@@ -1518,7 +1639,6 @@ public class HomePageUI extends JFrame {
 	}
 
 	protected void xoaTrangHoaDon(JButton btnCTHD) {
-		pnlhoaDon.txtMaHoaDon.setText("");
 		pnlhoaDon.txtMaKhachHang.setText("");
 		pnlhoaDon.txtMaNhanVien.setText("");
 		pnlhoaDon.txtNgayLap.getModel().setValue(null);
@@ -1526,6 +1646,13 @@ public class HomePageUI extends JFrame {
 		btnCTHD.setEnabled(false);
 		pnlhoaDon.btnXemPhiu.setEnabled(false);
 		pnlhoaDon.tblHoaDon.clearSelection();
+	}
+	private void xoaTrangRoleNhanVien() {
+		pnlhoaDon.txtMaHoaDon.setText("");
+		pnlhoaDon.txtMaKhachHang.setText("");
+		pnlhoaDon.txtTongTien.setText("");
+		pnlhoaDon.tblHoaDon.clearSelection();
+		pnlhoaDon.txtNgayLap.getModel().setValue(null);
 	}
 
 	protected void loadNhaCungCap() {
