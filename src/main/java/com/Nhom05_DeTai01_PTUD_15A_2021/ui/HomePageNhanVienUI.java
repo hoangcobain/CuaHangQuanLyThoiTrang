@@ -170,8 +170,9 @@ public class HomePageNhanVienUI extends JFrame {
 					break;
 				case 9:
 					loadThongTinNhanVienTheoRoleNhanVien();
+					String ma = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
 					paneContent.setViewportView(pnlhoaDon);
-					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
+					hoaDonController.loadHoaDonTheoMaNV(pnlhoaDon.listHoaDon,ma);
 					break;
 				case 10:
 					paneContent.setViewportView(pnlLapHoaDon);

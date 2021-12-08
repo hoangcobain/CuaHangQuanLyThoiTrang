@@ -200,6 +200,7 @@ public class HomePageUI extends JFrame {
 					loadNhanVien();
 					break;
 				case 10:
+					xoaTrangRoleQuanLy();
 					paneContent.setViewportView(pnlhoaDon);
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 					break;
@@ -1630,12 +1631,14 @@ public class HomePageUI extends JFrame {
 		pnlhoaDon.btnXemPhiu.setEnabled(false);
 		pnlhoaDon.tblHoaDon.clearSelection();
 	}
-	private void xoaTrangRoleNhanVien() {
+	private void xoaTrangRoleQuanLy() {
 		pnlhoaDon.txtMaHoaDon.setText("");
 		pnlhoaDon.txtMaKhachHang.setText("");
 		pnlhoaDon.txtTongTien.setText("");
 		pnlhoaDon.tblHoaDon.clearSelection();
 		pnlhoaDon.txtNgayLap.getModel().setValue(null);
+		pnlhoaDon.listKhachHang.setRowCount(0);
+		pnlhoaDon.listNhanVien.setRowCount(0);
 	}
 
 	protected void loadNhaCungCap() {
