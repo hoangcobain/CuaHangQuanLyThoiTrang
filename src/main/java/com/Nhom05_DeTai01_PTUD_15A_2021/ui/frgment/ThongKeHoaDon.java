@@ -17,11 +17,30 @@ public class ThongKeHoaDon extends JPanel {
 	
 	private Table table;
 
+	private DefaultCategoryDataset dataset2;
+	private DefaultTableModel listHoaDon;
+
+	public DefaultCategoryDataset getDataset2() {
+		return dataset2;
+	}
+
+	public void setDataset2(DefaultCategoryDataset dataset2) {
+		this.dataset2 = dataset2;
+	}
+
+	public DefaultTableModel getListHoaDon() {
+		return listHoaDon;
+	}
+
+	public void setListHoaDon(DefaultTableModel listHoaDon) {
+		this.listHoaDon = listHoaDon;
+	}
+
 	public ThongKeHoaDon() {
 		setBorder(null);
 		setBackground(Color.WHITE);
 		
-		DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+		dataset2 = new DefaultCategoryDataset();
 		dataset2.addValue(20, "A", "1");
 		dataset2.addValue(10, "A", "2");
 		dataset2.addValue(30, "A", "3");
@@ -41,14 +60,16 @@ public class ThongKeHoaDon extends JPanel {
 		boolean[] editColumn = new boolean[] {false, false, false, false, false};
 		Object[][] body = new Object[][] {};
 		
-		table = new Table();
-		table.setModel(new DefaultTableModel(body,header){
+		listHoaDon = new DefaultTableModel(body,header){
 			private static final long serialVersionUID = 1L;
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return editColumn[column];
 			}
-		});
+		};
+		
+		table = new Table();
+		table.setModel(listHoaDon);
 		panelContent.setViewportView(table);
 		
 		table.addRow(new Object[] {"1","1",1,1,"2"});

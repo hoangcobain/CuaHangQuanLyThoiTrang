@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +93,27 @@ public class HoaDonController {
 
 	public HoaDon lapHoaDon(HoaDon hoaDon) {
 		return hoaDonDAO.save(hoaDon);
+	}
+	
+	public long soLuongHoaDon() {
+		return hoaDonDAO.count();
+	}
+	public void loadThongKe(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, List<NhanVien> list2) {
+		List<HoaDon> list = hoaDonDAO.findAll();
+		listHoaDon.setRowCount(0);
+		HoaDon hoaDon;		
+		for (int i = 0; i < list.size(); i++) {
+			hoaDon = list.get(i);
+			Object[] row = {hoaDon.getMaHoaDon(),hoaDon.getNgayLapHoaDon(),hoaDon.getKhachHang().getTenKhachHang(),
+					hoaDon.getNhanVien().getTenNhanVien(),hoaDon.getTongTien()};
+			listHoaDon.addRow(row);
+		}
+		dataset2.clear();
+		list2.forEach(nhanVien ->{
+			long sl = hoaDonDAO.countByNhanVien(nhanVien);
+			if (sl > 0) {
+				dataset2.setValue(sl, "NhanVien", nhanVien.getMaNhanVien());
+			}			
+		});
 	}
 }

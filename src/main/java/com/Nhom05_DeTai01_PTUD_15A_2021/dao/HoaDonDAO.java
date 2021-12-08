@@ -24,4 +24,6 @@ public interface HoaDonDAO extends JpaRepository<HoaDon, String>{
 	@Query(value = "SELECT * FROM [dbo].[hoa_don] WHERE ?1=[ma_nhan_vien]",
 			nativeQuery = true)
 	List<HoaDon> searchHDByMaNhanVien(String ma);
+	
+	long countByNhanVien(NhanVien nhanVien);
 }

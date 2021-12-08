@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.Nhom05_DeTai01_PTUD_15A_2021.entity.LoaiSanPham;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.SanPham;
 
 public interface SanPhamDAO extends JpaRepository<SanPham, String>{
@@ -26,4 +27,6 @@ public interface SanPhamDAO extends JpaRepository<SanPham, String>{
 	@Query(value = "SELECT * FROM [dbo].[san_pham] WHERE ?1=[size]",
 			nativeQuery = true)
 	List<SanPham> searchSPBySize(String size);
+	
+	long countByLoaiSanPham(LoaiSanPham loaiSanPham);
 }

@@ -15,11 +15,31 @@ public class ThongKeKhachHang extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Table table;
+
+	private DefaultPieDataset dataset;
+	private DefaultTableModel listKhachHang;
+	
+	public DefaultPieDataset getDataset() {
+		return dataset;
+	}
+
+	public void setDataset(DefaultPieDataset dataset) {
+		this.dataset = dataset;
+	}
+
+	public DefaultTableModel getListKhachHang() {
+		return listKhachHang;
+	}
+
+	public void setListKhachHang(DefaultTableModel listKhachHang) {
+		this.listKhachHang = listKhachHang;
+	}
+
 	public ThongKeKhachHang() {
 		setBorder(null);
 		setBackground(Color.WHITE);
 		
-		DefaultPieDataset dataset = new DefaultPieDataset();
+		dataset = new DefaultPieDataset();
 		dataset.setValue("A", 20);
 		dataset.setValue("B", 20);
 		dataset.setValue("C", 40);
@@ -33,38 +53,21 @@ public class ThongKeKhachHang extends JPanel {
 		panelContent.getVerticalScrollBar().setBackground(Color.WHITE);
 		panelContent.getViewport().setBackground(Color.WHITE);
 		
-		Object[] header = {"Mã hóa đơn","Ngày lập","Tổng Tiền","Mã nhân viên","Mã khách hàng"};
+		Object[] header = {"Mã khách hàng","Tên","Số điện thoại","Địa chỉ","Giới tính"};
 		boolean[] editColumn = new boolean[] {false, false, false, false, false};
 		Object[][] body = new Object[][] {};
 		
-		table = new Table();
-		table.setModel(new DefaultTableModel(body,header){
+		listKhachHang = new DefaultTableModel(body,header){
 			private static final long serialVersionUID = 1L;
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return editColumn[column];
 			}
-		});
-		panelContent.setViewportView(table);
+		};
 		
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
-		table.addRow(new Object[] {"1","1",1,1,"2"});
+		table = new Table();
+		table.setModel(listKhachHang);
+		panelContent.setViewportView(table);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

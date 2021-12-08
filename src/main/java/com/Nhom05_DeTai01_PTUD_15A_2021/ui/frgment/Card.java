@@ -96,8 +96,16 @@ public class Card extends JPanel {
 
 	public void setColor2(Color color2) {
 		this.color2 = color2;
-	}
+	}	
 	
+	public JLabel getLbValue() {
+		return lbValue;
+	}
+
+	public void setLbValue(JLabel lbValue) {
+		this.lbValue = lbValue;
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D) g;

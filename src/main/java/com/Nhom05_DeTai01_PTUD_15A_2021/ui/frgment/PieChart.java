@@ -15,7 +15,7 @@ public class PieChart extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public PieChart(DefaultPieDataset dataset) {
-		JFreeChart pieChart = ChartFactory.createPieChart("Titel name", dataset, false, true, false);
+		JFreeChart pieChart = ChartFactory.createPieChart("Giới tính khách hàng sử dụng", dataset, false, true, false);
 		PiePlot piePlot = (PiePlot) pieChart.getPlot();
 		piePlot.setBackgroundPaint(Color.WHITE);
 		removeAll();

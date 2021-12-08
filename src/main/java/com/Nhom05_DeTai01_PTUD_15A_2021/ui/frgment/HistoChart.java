@@ -17,12 +17,12 @@ public class HistoChart extends JLabel{
 	private static final long serialVersionUID = 1L;
 
 	public HistoChart(DefaultCategoryDataset dataset) {
-		JFreeChart barChart = ChartFactory.createBarChart("Title Name", "X Axis", "Y Axis",  dataset, PlotOrientation.VERTICAL, false, true, false);
+		JFreeChart barChart = ChartFactory.createBarChart("Thống Kê Sản Phẩm", "Loại Sản Phẩm", "Số lượng",  dataset, PlotOrientation.VERTICAL, false, true, false);
 		CategoryPlot categoryPlot = barChart.getCategoryPlot();
 		categoryPlot.setBackgroundPaint(Color.WHITE);
 		
 		BarRenderer barRenderer = (BarRenderer) categoryPlot.getRenderer();
-		barRenderer.setSeriesPaint(0, new Color(212, 71, 255));
+		barRenderer.setSeriesPaint(0, new Color(71, 191, 255));
 		removeAll();
 		setLayout(new BorderLayout(0, 0));
 		add(new ChartPanel(barChart), BorderLayout.CENTER);

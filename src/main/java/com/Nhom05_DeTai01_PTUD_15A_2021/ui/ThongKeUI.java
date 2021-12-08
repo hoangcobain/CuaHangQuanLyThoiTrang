@@ -19,15 +19,16 @@ import javax.swing.JScrollPane;
 
 public class ThongKeUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-	ThongKeSanPham thongKeSanPham = new ThongKeSanPham();
-	ThongKeHoaDon thongKeHoaDon = new ThongKeHoaDon();
-	ThongKeKhachHang thongKeKhachHang = new ThongKeKhachHang();
+	protected ThongKeSanPham thongKeSanPham = new ThongKeSanPham();
+	protected ThongKeHoaDon thongKeHoaDon = new ThongKeHoaDon();
+	protected ThongKeKhachHang thongKeKhachHang = new ThongKeKhachHang();
 	private JScrollPane panelContent = new JScrollPane();
+	protected Card card1, card2, card3;
 	public ThongKeUI() {
-		setBorder(null);
+		setBorder(null);	
 		setBackground(Color.WHITE);
 		
-		Card card1 = new Card();
+		card1 = new Card();
 		card1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -39,7 +40,7 @@ public class ThongKeUI extends JPanel {
 		card1.setColor2(new Color(238, 212, 255));
 		card1.setDataCard(new ModelCard("money", "Hóa đơn", "1000$", "Doanh thu của cửa hàng"));
 		
-		Card card2 = new Card();
+		card2 = new Card();
 		card2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -50,7 +51,7 @@ public class ThongKeUI extends JPanel {
 		card2.setColor2(new Color(212, 224, 255));
 		card2.setDataCard(new ModelCard("money", "Sản Phẩm", "200", "Các sản phầm còn trong kho"));
 		
-		Card card3 = new Card();
+		card3 = new Card();
 		card3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

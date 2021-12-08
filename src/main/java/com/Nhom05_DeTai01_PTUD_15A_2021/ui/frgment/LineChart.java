@@ -15,16 +15,26 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class LineChart extends JPanel {
 	private static final long serialVersionUID = 1L;
+	private JFreeChart lineChart;
+
+	public JFreeChart getLineChart() {
+		return lineChart;
+	}
+
+	public void setLineChart(JFreeChart lineChart) {
+		this.lineChart = lineChart;
+	}
 
 	public LineChart(DefaultCategoryDataset dataset) {
-		JFreeChart lineChart = ChartFactory.createLineChart("Title Name", "X Axis", "Y Axis",  dataset, PlotOrientation.VERTICAL, false, true, false);
+		lineChart = ChartFactory.createLineChart("Thống kê hóa đơn", "", "Số lương", dataset, PlotOrientation.VERTICAL,
+				false, true, false);
 		CategoryPlot categoryPlot = lineChart.getCategoryPlot();
 		categoryPlot.setBackgroundPaint(Color.WHITE);
-		
+
 		LineAndShapeRenderer lineAndShapeRenderer = (LineAndShapeRenderer) categoryPlot.getRenderer();
 		lineAndShapeRenderer.setSeriesPaint(0, new Color(212, 71, 255));
 		categoryPlot.setRenderer(lineAndShapeRenderer);
-		
+
 		removeAll();
 		setLayout(new BorderLayout(0, 0));
 		add(new ChartPanel(lineChart), BorderLayout.CENTER);

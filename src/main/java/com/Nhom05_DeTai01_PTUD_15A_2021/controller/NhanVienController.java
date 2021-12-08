@@ -85,5 +85,9 @@ public class NhanVienController {
 		}		
 		return nhanVien;
 	}
+	
+	public List<NhanVien> getAll() {
+		return nhanVienDAO.findAll();
+	}
 
 }

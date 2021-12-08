@@ -7,6 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +19,18 @@ public class KhachHangController {
 	@Autowired
 	private KhachHangDAO khachHangDAO;
 
-
 	public void searchKhachHang(DefaultTableModel listKhachHang, String ten, String sdt, int gioiTinh) {
 
-		List<KhachHang> list; 
-		if (ten.equals("") && sdt.equals("")) 
+		List<KhachHang> list;
+		if (ten.equals("") && sdt.equals(""))
 			list = khachHangDAO.findAll();
 		else
 			list = khachHangDAO.search(ten, sdt, gioiTinh);
 		listKhachHang.setRowCount(0);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();
-			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai(),khachHang.getDiaChi()};
+			String[] row = { khachHang.getMaKhachHang(), khachHang.getTenKhachHang(), khachHang.getSoDienThoai(),
+					khachHang.getDiaChi() };
 			listKhachHang.addRow(row);
 		}
 	}
@@ -42,46 +43,62 @@ public class KhachHangController {
 		return khachHangDAO.findAll();
 	}
 
-
-	public void loadKhachHang(DefaultTableModel listKhachHang,JComboBox<String> cmbTimKiemKH) {
+	public void loadKhachHang(DefaultTableModel listKhachHang, JComboBox<String> cmbTimKiemKH) {
 		List<KhachHang> list = khachHangDAO.findAll();
 		listKhachHang.setRowCount(0);
 		cmbTimKiemKH.removeAllItems();
-		cmbTimKiemKH.setModel(new DefaultComboBoxModel<String>(new String[] {"---Tìm theo tên,số điện thoại---"}));
+		cmbTimKiemKH.setModel(new DefaultComboBoxModel<String>(new String[] { "---Tìm theo tên,số điện thoại---" }));
 		cmbTimKiemKH.setEditable(true);
 		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
 			KhachHang khachHang = (KhachHang) iterator.next();
 			String gioiTinh = "Nam";
-			if(khachHang.isGioiTinh())
+			if (khachHang.isGioiTinh())
 				gioiTinh = "Nữ";
-			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai()
-					,khachHang.getDiaChi(),gioiTinh};
+			String[] row = { khachHang.getMaKhachHang(), khachHang.getTenKhachHang(), khachHang.getSoDienThoai(),
+					khachHang.getDiaChi(), gioiTinh };
 			cmbTimKiemKH.addItem(khachHang.getSoDienThoai());
 			cmbTimKiemKH.addItem(khachHang.getTenKhachHang());
-			listKhachHang.addRow(row);			
-		}
-	}
-
-
-	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt,String ten) {
-		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt,ten);
-		listKhachHang.setRowCount(0);
-		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
-			KhachHang khachHang = (KhachHang) iterator.next();
-			String gioiTinh = "Nam";
-			if(khachHang.isGioiTinh())
-				gioiTinh = "Nữ";
-			String[] row = {khachHang.getMaKhachHang(),khachHang.getTenKhachHang(),khachHang.getSoDienThoai(),khachHang.getDiaChi(),gioiTinh};
 			listKhachHang.addRow(row);
 		}
 	}
 
-
+	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt, String ten) {
+		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt, ten);
+		listKhachHang.setRowCount(0);
+		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
+			KhachHang khachHang = (KhachHang) iterator.next();
+			String gioiTinh = "Nam";
+			if (khachHang.isGioiTinh())
+				gioiTinh = "Nữ";
+			String[] row = { khachHang.getMaKhachHang(), khachHang.getTenKhachHang(), khachHang.getSoDienThoai(),
+					khachHang.getDiaChi(), gioiTinh };
+			listKhachHang.addRow(row);
+		}
+	}
 
 	public KhachHang themKhachHang(KhachHang khachHang) {
 		return khachHangDAO.save(khachHang);
 	}
 
+	public long soLuongKhachHang() {
+		return khachHangDAO.count();
+	}
 
+	public void loadThongKe(DefaultTableModel listKhachHang, DefaultPieDataset dataset) {
+		List<KhachHang> list = khachHangDAO.findAll();
+		listKhachHang.setRowCount(0);
+		for (Iterator<KhachHang> iterator = list.iterator(); iterator.hasNext();) {
+			KhachHang khachHang = (KhachHang) iterator.next();
+			String gioiTinh = "Nam";
+			if (khachHang.isGioiTinh())
+				gioiTinh = "Nữ";
+			String[] row = { khachHang.getMaKhachHang(), khachHang.getTenKhachHang(), khachHang.getSoDienThoai(),
+					khachHang.getDiaChi(), gioiTinh };
+			listKhachHang.addRow(row);
+		}
+		dataset.clear();
+		dataset.setValue("Nam", khachHangDAO.countByGioiTinh(false));
+		dataset.setValue("Nữ", khachHangDAO.countByGioiTinh(true));
+	}
 
 }

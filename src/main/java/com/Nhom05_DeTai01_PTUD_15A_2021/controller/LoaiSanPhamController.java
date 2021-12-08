@@ -47,4 +47,8 @@ public class LoaiSanPhamController {
 	public LoaiSanPham getLoaiSPByName(String name) {
 		return loaiSanPhamDAO.findLoaiSPByName(name).get(0);
 	}
+	
+	public List<LoaiSanPham> getAll() {
+		return loaiSanPhamDAO.findAll();
+	}
 }
