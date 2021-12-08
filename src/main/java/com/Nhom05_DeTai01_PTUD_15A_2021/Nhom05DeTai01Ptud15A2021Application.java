@@ -63,11 +63,6 @@ public class Nhom05DeTai01Ptud15A2021Application {
 //			nhanVien.setTaiKhoan(taiKhoan);
 //			
 //			nhanVien = nhanVienDAO.save(nhanVien);
-//			
-//			
-//			
-//			
-//			
 //		});
 //	}
 }

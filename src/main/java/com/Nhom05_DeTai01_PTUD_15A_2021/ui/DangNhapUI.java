@@ -33,10 +33,10 @@ public class DangNhapUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtTaiKhoan;
 	private JPasswordField pwdMatKhau;
-	private int mouseX , mouseY;
+	private int mouseX, mouseY;
 	private JPanel contentPane;
 	protected JLabel lblQuenMatKHau;
-	
+
 	@Autowired
 	private TaiKhoanController controller;
 
@@ -53,7 +53,7 @@ public class DangNhapUI extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		KGradientPanel gradientPanel = new KGradientPanel();
 		gradientPanel.setBounds(0, 0, 1045, 647);
 		gradientPanel.addMouseListener(new MouseAdapter() {
@@ -66,7 +66,7 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				setLocation(getX() + e.getX() - mouseX , getY() +e.getY() - mouseY);
+				setLocation(getX() + e.getX() - mouseX, getY() + e.getY() - mouseY);
 			}
 		});
 		gradientPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -74,7 +74,7 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.kGradientFocus = -1;
 		gradientPanel.kStartColor = new Color(119, 136, 153);
 		gradientPanel.kEndColor = new Color(119, 136, 153);
-		
+
 		txtTaiKhoan = new JTextField();
 		txtTaiKhoan.setBounds(289, 228, 468, 20);
 		txtTaiKhoan.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -83,12 +83,12 @@ public class DangNhapUI extends JFrame {
 		txtTaiKhoan.setBorder(new MatteBorder(0, 0, 2, 0, (Color) Color.WHITE));
 		txtTaiKhoan.setOpaque(false);
 		txtTaiKhoan.setColumns(10);
-		
+
 		pwdMatKhau = new JPasswordField();
 		pwdMatKhau.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyChar()==KeyEvent.VK_ENTER)
+				if (e.getKeyChar() == KeyEvent.VK_ENTER)
 					dangNhap();
 			}
 		});
@@ -98,15 +98,15 @@ public class DangNhapUI extends JFrame {
 		pwdMatKhau.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		pwdMatKhau.setOpaque(false);
 		pwdMatKhau.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		
+
 		JLabel lblTaiKhoan = new JLabel("Tài khoản");
 		lblTaiKhoan.setBounds(289, 203, 125, 14);
 		lblTaiKhoan.setForeground(Color.WHITE);
-		
+
 		JLabel lblMatKhau = new JLabel("Mật khẩu");
 		lblMatKhau.setBounds(289, 279, 125, 14);
 		lblMatKhau.setForeground(Color.WHITE);
-		
+
 		KButton btnDangNhap = new KButton();
 		btnDangNhap.kHoverColor = new Color(119, 136, 153);
 		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -130,7 +130,7 @@ public class DangNhapUI extends JFrame {
 		btnDangNhap.kEndColor = Color.WHITE;
 		btnDangNhap.kStartColor = new Color(105, 105, 105);
 		btnDangNhap.setText("Đăng nhập");
-		
+
 		JLabel btnDangXuat = new JLabel("X");
 		btnDangXuat.setBounds(1018, 0, 12, 25);
 		btnDangXuat.addMouseListener(new MouseAdapter() {
@@ -141,16 +141,17 @@ public class DangNhapUI extends JFrame {
 		});
 		btnDangXuat.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		btnDangXuat.setForeground(Color.WHITE);
-		
+
 		JLabel lblImageHL = new JLabel("H&L");
 		lblImageHL.setBounds(88, 58, 209, 68);
 		lblImageHL.setFont(new Font("Segoe UI", Font.BOLD, 40));
 		lblImageHL.setForeground(Color.WHITE);
-		
+
 		JLabel lblUserimage = new JLabel("");
-		lblUserimage.setIcon(new ImageIcon(DangNhapUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_user_100px.png")));
+		lblUserimage.setIcon(new ImageIcon(
+				DangNhapUI.class.getResource("/com/Nhom05_DeTai01_PTUD_15A_2021/icon/icons8_user_100px.png")));
 		lblUserimage.setBounds(472, 83, 100, 100);
-		
+
 		lblUserimage.setForeground(Color.WHITE);
 		lblUserimage.setFont(new Font("Segoe UI", Font.BOLD, 30));
 		contentPane.setLayout(null);
@@ -164,7 +165,7 @@ public class DangNhapUI extends JFrame {
 		gradientPanel.add(lblImageHL);
 		gradientPanel.add(lblUserimage);
 		contentPane.add(gradientPanel);
-		
+
 		lblQuenMatKHau = new JLabel("Quên mật khẩu...?");
 		lblQuenMatKHau.addMouseListener(new MouseAdapter() {
 			@Override
@@ -190,15 +191,24 @@ public class DangNhapUI extends JFrame {
 
 	protected void dangNhap() {
 		String password = String.valueOf(pwdMatKhau.getPassword());
-		if(controller.Login(txtTaiKhoan.getText(), password)) {
+		if (controller.Login(txtTaiKhoan.getText(), password)) {
 			try {
-				HomePageUI homePageUI = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(HomePageUI.class);
-				homePageUI.setVisible(true);
-				homePageUI.panelMenu.lblUser.setText(controller.getTaiKhoan().getTaiKhoan());
-				homePageUI.panelMenu.lblEmail.setText(controller.getTaiKhoan().getNhanVien().getEmail().toString());
+				if (controller.getTaiKhoan().getQuyen().equalsIgnoreCase("ROLE_NHANVIEN")) {
+					HomePageNhanVienUI homePageNhanVienUI = Nhom05DeTai01Ptud15A2021Application.getApp()
+							.getBean(HomePageNhanVienUI.class);
+					homePageNhanVienUI.setVisible(true);
+					homePageNhanVienUI.panelMenu.lblUser.setText(controller.getTaiKhoan().getTaiKhoan());
+					homePageNhanVienUI.panelMenu.lblEmail
+							.setText(controller.getTaiKhoan().getNhanVien().getEmail().toString());
+				} else {
+					HomePageUI homePageUI = Nhom05DeTai01Ptud15A2021Application.getApp().getBean(HomePageUI.class);
+					homePageUI.setVisible(true);
+					homePageUI.panelMenu.lblUser.setText(controller.getTaiKhoan().getTaiKhoan());
+					homePageUI.panelMenu.lblEmail.setText(controller.getTaiKhoan().getNhanVien().getEmail().toString());
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
-			}			
+			}
 			this.dispose();
 		}
 	}

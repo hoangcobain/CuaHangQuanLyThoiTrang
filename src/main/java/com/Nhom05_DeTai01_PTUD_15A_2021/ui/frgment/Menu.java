@@ -32,29 +32,14 @@ public class Menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */	
-	public Menu() {
+	public Menu(MenuList<Object> lstMenu) {
 		setOpaque(false);
 		
 		JPanel panelHead = new JPanel();
 		panelHead.setBorder(null);
 		panelHead.setOpaque(false);
 		
-		lstMenu = new MenuList<Object>();
-		lstMenu.addItem(new ModelMenu(""," Sản Phẩm",MenuType.TITLE));
-		lstMenu.addItem(new ModelMenu("gift","Sản Phẩm",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("product","Loại Sản Phẩm",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("supplier","Nguồn Hàng",MenuType.MENU));
-		
-		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
-		lstMenu.addItem(new ModelMenu(""," Thông Tin",MenuType.TITLE));
-		lstMenu.addItem(new ModelMenu("customer","Khách Hàng",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("employees","Nhân Viên",MenuType.MENU));
-		
-		lstMenu.addItem(new ModelMenu("","",MenuType.EMPTY));
-		lstMenu.addItem(new ModelMenu(""," Cửa Hàng",MenuType.TITLE));
-		lstMenu.addItem(new ModelMenu("bill","Quản Lý Hóa Đơn",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("page","Lập Hóa Đơn",MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("trend","Thống Kê",MenuType.MENU));
+		this.lstMenu = lstMenu;
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
