@@ -1486,7 +1486,6 @@ public class HomePageNhanVienUI extends JFrame {
 
 	protected void xoaTrangHoaDon(JButton btnCTHD) {
 		pnlhoaDon.txtMaKhachHang.setText("");
-		pnlhoaDon.txtMaNhanVien.setText("");
 		pnlhoaDon.txtNgayLap.getModel().setValue(null);
 		pnlhoaDon.txtTongTien.setText("");
 		btnCTHD.setEnabled(false);
