@@ -1393,6 +1393,12 @@ public class HomePageUI extends JFrame {
 		});
 
 //		THỐNG KÊ
+		pnlThongKe.thongKeHoaDon.getBtnThongKe().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				hoaDonController.thongKe(pnlThongKe.thongKeHoaDon.getListHoaDon(), pnlThongKe.thongKeHoaDon.getDataset2(),
+						pnlThongKe.thongKeHoaDon.getComboBox(),pnlThongKe.thongKeHoaDon.getTxtNgayThongKe());
+			}
+		});
 
 	}
 
@@ -1400,15 +1406,15 @@ public class HomePageUI extends JFrame {
 		pnlThongKe.card3.getLbValue().setText(khachHangController.soLuongKhachHang() + " Khách Hàng");
 		pnlThongKe.card2.getLbValue().setText(sanPhamController.soLuongSanPham() + " Sản Phẩm");
 		pnlThongKe.card1.getLbValue().setText(hoaDonController.soLuongHoaDon() + " Hóa Đơn");
-		
+
 		sanPhamController.loadThongKe(pnlThongKe.thongKeSanPham.getListSanPham(),
 				pnlThongKe.thongKeSanPham.getDataset2(), loaiSanPhamController.getAll());
 
 		khachHangController.loadThongKe(pnlThongKe.thongKeKhachHang.getListKhachHang(),
 				pnlThongKe.thongKeKhachHang.getDataset());
-		
-		hoaDonController.loadThongKe(pnlThongKe.thongKeHoaDon.getListHoaDon(),
-				pnlThongKe.thongKeHoaDon.getDataset2(), nhanVienController.getAll());
+
+		hoaDonController.loadThongKe(pnlThongKe.thongKeHoaDon.getListHoaDon(), pnlThongKe.thongKeHoaDon.getDataset2(),
+				nhanVienController.getAll());
 	}
 
 	protected void xoaTrangNhanVien() {
