@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Lê Hoàng Long - mssv:19439111 - Nhóm 5
+ * 
+ * Ngày tạo:15/10/2021
+ * Mô tả: Giao diện sản phẩm
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;

@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng,Đoàn Thế Long - mssv:19473871,19475471 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: lớp controller dùng để thao tác với bảng Khach_Hang trong cơ sở dữ liệu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
 import java.util.Iterator;
@@ -18,7 +24,13 @@ import com.Nhom05_DeTai01_PTUD_15A_2021.entity.KhachHang;
 public class KhachHangController {
 	@Autowired
 	private KhachHangDAO khachHangDAO;
-
+	
+	/**
+	 * Lấy nhân viên theo sdt, tên,giới tính từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param sdt,ten,gioiTinh
+	 * @return 
+	 */
 	public void searchKhachHang(DefaultTableModel listKhachHang, String ten, String sdt, int gioiTinh) {
 
 		List<KhachHang> list;
@@ -34,15 +46,28 @@ public class KhachHangController {
 			listKhachHang.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy thông tin 1 khách hàng theo mã khách hàng trong cơ sở dữ liệu
+	 * 
+	 * @param id
+	 * @return KhachHang
+	 */
 	public KhachHang getKhachHang(String id) {
 		return khachHangDAO.findById(id).get();
 	}
-
+	/**
+	 * Lấy thông tin tất cả khách hàng trong cơ sở dữ liệu
+	 * 
+	 * @return danh sách khách hàng
+	 */
 	public List<KhachHang> getKhachHangs() {
 		return khachHangDAO.findAll();
 	}
-
+	/**
+	 * Load thông tin khách hàng từ cơ sở dữ liệu vào table loại sản phẩm
+	 * 
+	 * @param listKhachHang,cmbTimKiemKH
+	 */
 	public void loadKhachHang(DefaultTableModel listKhachHang, JComboBox<String> cmbTimKiemKH) {
 		List<KhachHang> list = khachHangDAO.findAll();
 		listKhachHang.setRowCount(0);
@@ -61,7 +86,12 @@ public class KhachHangController {
 			listKhachHang.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy thông tin khách hàng theo tên,số điện thoại khách hàng từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param listKhachHang,ten,sdt
+	 * @return 
+	 */
 	public void searchKhachHangBySDT(DefaultTableModel listKhachHang, String sdt, String ten) {
 		List<KhachHang> list = khachHangDAO.searchHoaDonBySDT(sdt, ten);
 		listKhachHang.setRowCount(0);
@@ -75,11 +105,20 @@ public class KhachHangController {
 			listKhachHang.addRow(row);
 		}
 	}
-
+	/**
+	 * Hàm dùng để insert 1 khách hàng vào cơ sở dữ liệu
+	 * 
+	 * @param khachHang
+	 * @return KhachHang
+	 */
 	public KhachHang themKhachHang(KhachHang khachHang) {
 		return khachHangDAO.save(khachHang);
 	}
-
+	/**
+	 * Hàm dùng để đếm số lượng khách hàng có trong cơ sở dữ liệu
+	 * 
+	 * @return long
+	 */
 	public long soLuongKhachHang() {
 		return khachHangDAO.count();
 	}

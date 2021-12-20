@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Trương Nhật Long - mssv:18036331 - Nhóm 5
+ * 
+ * Ngày tạo:10/12/2021
+ * Mô tả: Giao diện thống kê hóa đơn
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui.frgment;
 
 import javax.swing.JPanel;

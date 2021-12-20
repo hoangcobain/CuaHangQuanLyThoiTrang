@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng - mssv:19473871 - Nhóm 5
+ * 
+ * Ngày tạo:20/10/2021
+ * Mô tả: Lớp thực thể nhà cung cấp
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.entity;
 
 import java.util.ArrayList;

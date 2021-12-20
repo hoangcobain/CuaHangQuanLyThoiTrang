@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng - mssv:19473871 - Nhóm 5
+ * 
+ * Ngày tạo:16/10/2021
+ * Mô tả: Giao diện quên mật khẩu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;

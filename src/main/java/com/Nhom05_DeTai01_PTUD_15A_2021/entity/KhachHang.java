@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Đoàn Thế Long- mssv:19475471 - Nhóm 5
+ * 
+ * Ngày tạo:20/10/2021
+ * Mô tả: Lớp thực thể khách hàng
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.entity;
 
 import java.util.ArrayList;

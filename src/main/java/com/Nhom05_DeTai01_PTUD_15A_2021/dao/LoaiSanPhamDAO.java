@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Lê Hoàng Long - mssv:19439111 - Nhóm 5
+ * 
+ * Ngày tạo:24/10/2021
+ * Mô tả: Câu truy vấn cơ sở dữ liệu loại sản phẩm 
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.dao;
 
 import java.util.List;

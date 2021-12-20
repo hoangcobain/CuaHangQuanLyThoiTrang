@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Trương Nhật Long - mssv:18036331 - Nhóm 5
+ * 
+ * Ngày tạo:19/10/2021
+ * Mô tả: Lớp thực thể chi tiết hóa đơn
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.entity;
 
 import javax.persistence.CascadeType;

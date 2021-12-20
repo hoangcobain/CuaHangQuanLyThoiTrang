@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng,Lê Hoàng Long - mssv:19473871,19439111 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: lớp controller dùng để thao tác với bảng San_Pham trong cơ sở dữ liệu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
 import java.util.Iterator;
@@ -27,7 +33,13 @@ public class SanPhamController {
 	private LoaiSanPhamDAO loaiSanPhamDAO;
 	@Autowired
 	private NhaCungCapDAO nhaCungCapDAO;
-
+	
+	/**
+	 * Lấy sản phẩm theo tên,nhà cung cấp,kích cỡ,màu sắc từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param listSanPham,ten,ncc,size,mauSac
+	 * @return 
+	 */
 	public void searchByTenNCC(DefaultTableModel listSanPham, String ten, String ncc, String size, String mauSac) {
 		listSanPham.setRowCount(0);
 		List<SanPham> list;
@@ -42,7 +54,12 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy sản phẩm theo tên sản phẩm từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param listSanPham,ten
+	 * @return 
+	 */
 	public void searchByTenSP(DefaultTableModel listSanPham, String ten) {
 		listSanPham.setRowCount(0);
 		List<SanPham> list = sanPhamDAO.searchSPByTen(ten);
@@ -54,7 +71,12 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Tìm sản phẩm theo giá từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param giatu,dentu
+	 * @return 
+	 */
 	public void searchByGiaThanh(DefaultTableModel listSanPham, double giatu, double dentu) {
 		listSanPham.setRowCount(0);
 		List<SanPham> list = sanPhamDAO.searchSPByPrice(giatu, dentu);
@@ -66,7 +88,12 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Tìm sản phẩm theo kích cỗ từ cơ sở dữ liệu và load lên table
+	 * 
+	 * @param giatu,dentu
+	 * @return 
+	 */
 	public void searchBySize(DefaultTableModel listSanPham, String size) {
 		listSanPham.setRowCount(0);
 		List<SanPham> list = sanPhamDAO.searchSPBySize(size);
@@ -78,11 +105,21 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy 1 sản phẩm theo mã từ cơ sở dữ liệu
+	 * 
+	 * @param maSP
+	 * @return SanPham
+	 */
 	public SanPham getSanPham(String maSP) {
 		return sanPhamDAO.getById(maSP);
 	}
-
+	/**
+	 * Load thông tin sản phẩm từ cơ sở dữ liệu vào table sản phẩm
+	 * 
+	 * @param cmbTenLoai,cmbTenNCC,listSanPham
+	 * @return 
+	 */
 	public void load(JComboBox<String> cmbTenLoai, JComboBox<String> cmbTenNCC, DefaultTableModel listSanPham) {
 		List<LoaiSanPham> listL = loaiSanPhamDAO.findAll();
 
@@ -109,7 +146,12 @@ public class SanPhamController {
 		cmbTenLoai.setSelectedIndex(0);
 		cmbTenNCC.setSelectedIndex(0);
 	}
-
+	/**
+	 * Lấy sản phẩm theo tên bằng combobox trong cơ sở dữ liệu và load lên table
+	 * 
+	 * @param cmbTen,listSanPham
+	 * @return 
+	 */
 	public void TimKiemTheoTen(JComboBox<String> cmbTen, DefaultTableModel listSanPham) {
 		List<SanPham> listSP = sanPhamDAO.findAll();
 		cmbTen.removeAllItems();
@@ -124,7 +166,12 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy sản phẩm theo kích cỡ bằng combobox trong cơ sở dữ liệu và load lên table
+	 * 
+	 * @param cmbTen,listSanPham
+	 * @return 
+	 */
 	public void TimKiemTheoSize(JComboBox<String> cmbTen, DefaultTableModel listSanPham) {
 		List<SanPham> listSP = sanPhamDAO.findAll();
 		cmbTen.removeAllItems();
@@ -139,15 +186,29 @@ public class SanPhamController {
 			listSanPham.addRow(row);
 		}
 	}
-
+	/**
+	 * Hàm dùng để insert 1 sản phẩm vào cơ sở dữ liệu
+	 * 
+	 * @param sanPham
+	 * @return SanPham
+	 */
 	public SanPham saveSP(SanPham sanPham) {
 		return sanPhamDAO.save(sanPham);
 	}
-
+	/**
+	 * Hàm dùng để delete 1 sản phẩm trong cơ sở dữ liệu
+	 * 
+	 * @param text
+	 * @return 
+	 */
 	public void xoaSanPham(String text) {
 		sanPhamDAO.deleteById(text);
 	}
-
+	/**
+	 * Hàm dùng để đếm số lượng sản phẩm có trong cơ sở dữ liệu
+	 * 
+	 * @return long
+	 */
 	public long soLuongSanPham() {
 		return sanPhamDAO.count();
 	}

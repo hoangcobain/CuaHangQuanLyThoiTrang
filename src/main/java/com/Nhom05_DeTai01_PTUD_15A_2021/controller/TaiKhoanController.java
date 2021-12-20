@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Trương Nhật Long - mssv:18036331 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: lớp controller dùng để thao tác với bảng Tai_Khoan trong cơ sở dữ liệu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
 import java.util.List;
@@ -25,7 +31,12 @@ public class TaiKhoanController {
 	public TaiKhoan getTaiKhoan() {
 		return taiKhoan;
 	}
-
+	/**
+	 * Hàm dùng để kiểm tra đăng nhập tài khoản nhân viên
+	 * 
+	 * @param username,password
+	 * @return trả về true nếu đăng nhập thành công trả về false nếu đăng nhập thất bại
+	 */
 	public boolean Login(String username, String password) {
 		try {
 			List<TaiKhoan> list = taiKhoanDAO.LayTaiKhoan(username);
@@ -50,7 +61,12 @@ public class TaiKhoanController {
 		System.out.println("DANG XUAT");
 		taiKhoan = null;
 	}
-
+	/**
+	 * Hàm dùng để đổi mật khẩu tài khoản nhân viên
+	 * 
+	 * @param password.password2
+	 * @return trả về true nếu đổi mật khẩu thành công trả về false nếu đổi mật khẩu thất bại
+	 */
 	public boolean doiMatKhau(char[] password, char[] password2) {
 		System.out.println("DOI MAT KHAU: "+taiKhoan.getMatKhau());
 		String matKhauCu = String.valueOf(password);
@@ -66,16 +82,31 @@ public class TaiKhoanController {
 			taiKhoan.setMatKhau(encoder.encode(password));
 			taiKhoanDAO.save(taiKhoan);
 	}
+	/**
+	 * Hàm trả về mật khẩu đang đăng nhập
+	 * 
+	 * @return String
+	 */
 	public String layMatKhau() {	
 		return taiKhoan.getMatKhau();
 	}
-	
+	/**
+	 * Hàm khởi tạo tài khoản nhân viên
+	 * 
+	 * @param sdt,string,nhanVien
+	 * @return TaiKhoan
+	 */
 	public TaiKhoan taoTaiKhoan(String sdt, String string, NhanVien nhanVien) {
 		TaiKhoan taiKhoan = new TaiKhoan(sdt, encoder.encode(string), Quyen.ROLE_NHANVIEN);
 		taiKhoan.setNhanVien(nhanVien);
 		return taiKhoanDAO.save(taiKhoan);
 	}
-
+	/**
+	 * Hàm insert tài khoản nhân viên vào cơ sở dữ liệu
+	 * 
+	 * @param taiKhoan2
+	 * @return TaiKhoan
+	 */
 	public TaiKhoan save(TaiKhoan taiKhoan2) {
 		return taiKhoanDAO.save(taiKhoan2);
 	}

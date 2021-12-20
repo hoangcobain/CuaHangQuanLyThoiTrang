@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng,Trương Nhật Long - mssv:19473871,18036331 - Nhóm 5
+ * 
+ * Ngày tạo:16/10/2021
+ * Mô tả: Giao diện chi tiết hóa đơn
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui;
 
 import java.awt.Color;

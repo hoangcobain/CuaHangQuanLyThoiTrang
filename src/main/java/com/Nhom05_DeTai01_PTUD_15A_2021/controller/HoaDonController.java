@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng,Trương Nhật Long - mssv:19473871,18036331 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: lớp controller dùng để thao tác với bảng Hoa_Don trong cơ sở dữ liệu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
 import java.time.LocalDate;
@@ -37,7 +43,12 @@ public class HoaDonController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private List<HoaDon> list;
-
+	/**
+	 * Lấy hóa đơn theo mã nhân viên trong cơ sở dữ liệu và load lên table hóa đơn
+	 * 
+	 * @param listHoaDon,ma
+	 * @return 
+	 */
 	public void loadHoaDonTheoMaNV(DefaultTableModel listHoaDon, String ma) {
 		List<HoaDon> list = hoaDonDAO.searchHDByMaNhanVien(ma);
 		listHoaDon.setRowCount(0);
@@ -49,7 +60,11 @@ public class HoaDonController {
 			listHoaDon.addRow(row);
 		}
 	}
-
+	/**
+	 * Load thông tin hóa đơn từ cơ sở dữ liệu vào table hóa đơn
+	 * 
+	 * @param listKhachHang,cmbTimKiemKH
+	 */
 	public void loadHoaDon(DefaultTableModel listHoaDon) {
 		List<HoaDon> list = hoaDonDAO.findAll();
 		listHoaDon.setRowCount(0);
@@ -61,11 +76,21 @@ public class HoaDonController {
 			listHoaDon.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy thông tin 1 hóa đơn trong cơ sở dữ liệu 
+	 * 
+	 * @param id
+	 * @return HoaDon
+	 */
 	public HoaDon getHoaDonById(String id) {
 		return hoaDonDAO.findById(id).get();
 	}
-
+	/**
+	 * Lấy thông tin hóa đơn theo role quản lý trong cơ sở dữ liệu và load lên table hóa đơn
+	 * 
+	 * @param listHoaDon,maNV,maKH,day,month,year
+	 * @return 
+	 */
 	public void searchRoleQuanLy(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month, int year) {
 		listHoaDon.setRowCount(0);
 		List<HoaDon> list;
@@ -78,7 +103,12 @@ public class HoaDonController {
 			listHoaDon.addRow(row);
 		}
 	}
-
+	/**
+	 * Lấy thông tin hóa đơn theo role nhân viên trong cơ sở dữ liệu và load lên table hóa đơn
+	 * 
+	 * @param listHoaDon,maNV,maKH,day,month,year
+	 * @return 
+	 */
 	public void searchRoleNhanVien(DefaultTableModel listHoaDon, String maNV, String maKH, int day, int month,
 			int year) {
 		listHoaDon.setRowCount(0);
@@ -92,11 +122,21 @@ public class HoaDonController {
 			listHoaDon.addRow(row);
 		}
 	}
-
+	/**
+	 * Hàm dùng để delete 1 hóa đơn trong cơ sở dữ liệu
+	 * 
+	 * @param id
+	 * @return 
+	 */
 	public void xoaHoaDon(String id) {
 		hoaDonDAO.deleteById(id);
 	}
-
+	/**
+	 * Hàm dùng để update 1 hóa đơn trong cơ sở dữ liệu
+	 * 
+	 * @param maHD,khachHang,nhanVienByid,date
+	 * @return 
+	 */
 	public void capNhanHoaDon(String maHD, KhachHang khachHang, NhanVien nhanVienById, Date date) {
 		HoaDon hoaDon = getHoaDonById(maHD);
 		hoaDon.setKhachHang(khachHang);
@@ -104,15 +144,28 @@ public class HoaDonController {
 		hoaDon.setNgayLapHoaDon(date);
 		hoaDonDAO.save(hoaDon);
 	}
-
+	/**
+	 * Hàm dùng để insert 1 hóa đơn trong cơ sở dữ liệu
+	 * 
+	 * @param hoaDon
+	 * @return HoaDon
+	 */
 	public HoaDon lapHoaDon(HoaDon hoaDon) {
 		return hoaDonDAO.save(hoaDon);
 	}
-
+	/**
+	 * Hàm dùng để đếm số lượng hóa đơn có trong cơ sở dữ liệu
+	 * 
+	 * @return long
+	 */
 	public long soLuongHoaDon() {
 		return hoaDonDAO.count();
 	}
-
+	/**
+	 * Hàm dùng để thống kê hóa đơn vào load vào table
+	 * 
+	 * @return
+	 */
 	public void loadThongKe(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, List<NhanVien> list2) {
 		List<HoaDon> list = hoaDonDAO.findAll();
 		listHoaDon.setRowCount(0);
@@ -131,7 +184,11 @@ public class HoaDonController {
 			}
 		});
 	}
-
+	/**
+	 * Hàm thống kê hóa đơn trong cơ sở dữ liệu trong mốc thời gian
+	 * @param listHoaDon,dataset2,comboBox,txtNgayThongKe
+	 * @return
+	 */
 	public void thongKe(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, JComboBox comboBox,
 			JDatePickerImpl txtNgayThongKe) {
 		int loai = comboBox.getSelectedIndex();
@@ -160,7 +217,11 @@ public class HoaDonController {
 		}
 
 	}
-
+	/**
+	 * Hàm thống kê hóa đơn theo năm trong cơ sở dữ liệu 
+	 * @param listHoaDon,dataset2,date
+	 * @return
+	 */
 	private void thongKeTheoNam(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, LocalDate date) {
 		listHoaDon.setRowCount(0);
 		dataset2.clear();
@@ -174,7 +235,11 @@ public class HoaDonController {
 			date = date.plusMonths(1);
 		}
 	}
-
+	/**
+	 * Hàm thống kê hóa đơn theo tháng trong cơ sở dữ liệu 
+	 * @param listHoaDon,dataset2,date
+	 * @return
+	 */
 	private void thongKeTheoThang(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, LocalDate date) {
 		listHoaDon.setRowCount(0);
 		dataset2.clear();
@@ -203,7 +268,11 @@ public class HoaDonController {
 			date = date.plusDays(1);
 		}
 	}
-
+	/**
+	 * Hàm thống kê hóa đơn thêm vào table thống kê
+	 * @param list2,listHoaDon
+	 * @return
+	 */
 	private void themVaoTable(List<HoaDon> list2, DefaultTableModel listHoaDon) {
 		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			HoaDon hoaDon = iterator.next();
@@ -212,7 +281,11 @@ public class HoaDonController {
 			listHoaDon.addRow(row);
 		}
 	}
-
+	/**
+	 * Hàm thống kê hóa đơn theo tuần trong cơ sở dữ liệu 
+	 * @param listHoaDon,dataset2,date
+	 * @return
+	 */
 	private void thongKeTheoTuan(DefaultTableModel listHoaDon, DefaultCategoryDataset dataset2, LocalDate date) {
 		listHoaDon.setRowCount(0);
 		dataset2.clear();

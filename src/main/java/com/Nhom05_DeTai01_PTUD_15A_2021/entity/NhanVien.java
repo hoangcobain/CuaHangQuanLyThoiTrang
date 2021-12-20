@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Trương Nhật Long - mssv:18036331 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: Lớp thực thể nhân viên
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.entity;
 
 import java.util.ArrayList;

@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Đoàn Thế Long - mssv:19475471 - Nhóm 5
+ * 
+ * Ngày tạo:25/10/2021
+ * Mô tả: Câu truy vấn cơ sở dữ liệu khách hàng
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.dao;
 
 import java.util.List;

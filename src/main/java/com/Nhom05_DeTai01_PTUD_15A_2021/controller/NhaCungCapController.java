@@ -1,3 +1,9 @@
+/**
+ * Tác giả: Nguyễn Viết Hoàng - mssv:19473871 - Nhóm 5
+ * 
+ * Ngày tạo:27/10/2021
+ * Mô tả: lớp controller dùng để thao tác với bảng Nha_Cung_Cap trong cơ sở dữ liệu
+ */
 package com.Nhom05_DeTai01_PTUD_15A_2021.controller;
 
 import java.util.Iterator;
@@ -22,11 +28,21 @@ public class NhaCungCapController {
 	
 	@Autowired
 	NhaCungCapDAO nhaCungCapDAO;
-	
+	/**
+	 * Lấy thông tin nhà cung cấp theo tên nhà cung cấp từ cơ sở dữ liệu
+	 * 
+	 * @param name
+	 * @return NhaCungCap
+	 */
 	public NhaCungCap getNCCByName(String name) {
 		return nhaCungCapDAO.findNCCByName(name).get(0);
 	}
-	
+	/**
+	 * Load thông tin nhà cung cấp từ cơ sở dữ liệu vào table nhà cung cấp
+	 * 
+	 * @param listNCC,cmbTimKiem
+	 * @return 
+	 */
 	public void load(DefaultTableModel listNCC,JComboBox<String> cmbTimKiem) {
 		listNCC.setRowCount(0);
 		List<NhaCungCap> list = nhaCungCapDAO.findAll();
@@ -40,6 +56,12 @@ public class NhaCungCapController {
 			listNCC.addRow(row);
 		}
 	}
+	/**
+	 * Lấy thông tin nhà cung cấp theo tên,số điện thoại nhà cung cấp từ cơ sở dữ liệu vào table nhà cung cấp
+	 * 
+	 * @param listNhaCC,sdt,ten
+	 * @return 
+	 */
 	public void searchNCC(DefaultTableModel listNhaCC, String sdt,String ten) {
 		List<NhaCungCap> list = nhaCungCapDAO.searchNCCBySDTAndName(sdt, ten);
 		listNhaCC.setRowCount(0);
@@ -49,7 +71,12 @@ public class NhaCungCapController {
 			listNhaCC.addRow(row);
 		}
 	}
-
+	/**
+	 * Hàm dùng để insert 1 nhà cung cấp vào cơ sở dữ liệu
+	 * 
+	 * @param nhaCungCap
+	 * @return NhaCungCap
+	 */
 	public NhaCungCap save(NhaCungCap nhaCungCap) {
 		try {
 			nhaCungCap = nhaCungCapDAO.save(nhaCungCap);
@@ -59,6 +86,12 @@ public class NhaCungCapController {
 		
 		return nhaCungCap;
 	}
+	/**
+	 * Lấy thông tin nhà cung cấp theo mã 
+	 * 
+	 * @param id
+	 * @return NhaCungCap
+	 */
 	public NhaCungCap getNhaCCById(String id) {
 		return nhaCungCapDAO.findById(id).get();
 	}
