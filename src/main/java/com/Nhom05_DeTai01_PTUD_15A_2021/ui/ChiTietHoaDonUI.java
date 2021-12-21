@@ -195,7 +195,7 @@ public class ChiTietHoaDonUI extends JPanel {
 		
 		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp", "Số lượng", "Kích cỡ", "Màu sắc", "Giá thành"});
 		tblCTHD = new JTable();
-		tblCTHD.setRowHeight(25);
+		tblCTHD.setRowHeight(35);
 		tblCTHD.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblCTHD.setModel(listCTHD);
@@ -384,7 +384,7 @@ public class ChiTietHoaDonUI extends JPanel {
 		gl_pnlCenter.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaSanPham, lblSoLuong, lblDonGia, lblTSanPham, lblTenNCC, lblGiaThanh, lblKichCo, lblMauSac});
 		listSanPham = new DefaultTableModel(null, new String[] {"Mã", "Tên SP", "Tên NCC", "Số lượng", "Kích thước", "Màu sắc", "Đơn giá"});
 		tblSanPham = new JTable();
-		tblSanPham.setRowHeight(25);
+		tblSanPham.setRowHeight(35);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblSanPham.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblSanPham.setModel(listSanPham);

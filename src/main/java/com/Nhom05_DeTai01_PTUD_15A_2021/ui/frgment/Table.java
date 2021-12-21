@@ -1,6 +1,7 @@
 package com.Nhom05_DeTai01_PTUD_15A_2021.ui.frgment;
 
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -16,6 +17,7 @@ public class Table extends JTable {
 		setBackground(Color.WHITE);
 		setShowHorizontalLines(true);
 		setRowHeight(40);
+		setFont(new Font("Tahoma", Font.PLAIN, 20));
 		getTableHeader().setReorderingAllowed(false);
 		getTableHeader().setDefaultRenderer(new TableCellRenderer() {
 			@Override

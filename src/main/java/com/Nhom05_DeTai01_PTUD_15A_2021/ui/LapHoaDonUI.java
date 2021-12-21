@@ -59,6 +59,7 @@ public class LapHoaDonUI extends JPanel {
 	protected JTextField txtMaNhanVien;
 	protected JTextField txtTenNhanVien;
 	protected JTextField txtSoDTNV;
+	protected JButton btnTimTheoMa;
 
 	public LapHoaDonUI() {
 		setBackground(Color.WHITE);
@@ -166,9 +167,9 @@ public class LapHoaDonUI extends JPanel {
 
 		tblCTHD = new JTable();
 		tblCTHD.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tblCTHD.setRowHeight(25);
+		tblCTHD.setRowHeight(35);
 		tblCTHD.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
-		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp","Kích cỡ","Màu sắc", "Số lượng", "Giá thành"});
+		listCTHD = new DefaultTableModel(null,new String[] {"Mã sản phẩm", "Tên sản phẩm", "Tên nhà cung cấp","Kích cỡ","Màu sắc", "Số lượng", "Đơn giá"});
 		tblCTHD.setModel(listCTHD);
 		scrSanPham.setViewportView(tblCTHD);
 
@@ -211,7 +212,6 @@ public class LapHoaDonUI extends JPanel {
 		btnXoaTrang.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		txtMaSanPham = new JTextField();
-		txtMaSanPham.setEditable(false);
 		txtMaSanPham.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMaSanPham.setColumns(10);
 
@@ -237,7 +237,7 @@ public class LapHoaDonUI extends JPanel {
 		btnTimSP.setFocusable(false);
 		btnTimSP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		lblGiaThanh = new JLabel("Giá thành");
+		lblGiaThanh = new JLabel("Đơn giá");
 		lblGiaThanh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		txtGiaThanh = new JTextField();
@@ -252,7 +252,7 @@ public class LapHoaDonUI extends JPanel {
 		txtMauSac.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMauSac.setColumns(10);
 		
-		lblDonGia = new JLabel("Đơn giá");
+		lblDonGia = new JLabel("Giá thành");
 		lblDonGia.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		txtDonGia = new JTextField();
@@ -314,6 +314,9 @@ public class LapHoaDonUI extends JPanel {
 		txtSoDTNV.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtSoDTNV.setEditable(false);
 		txtSoDTNV.setColumns(10);
+		
+		btnTimTheoMa = new JButton("Tìm");
+		btnTimTheoMa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GroupLayout gl_pnlCenTer = new GroupLayout(pnlCenTer);
 		gl_pnlCenTer.setHorizontalGroup(
 			gl_pnlCenTer.createParallelGroup(Alignment.LEADING)
@@ -355,12 +358,15 @@ public class LapHoaDonUI extends JPanel {
 								.addComponent(lblMuSc, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_pnlCenTer.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtMaSanPham, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
 								.addComponent(txtTenSanPham, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
 								.addComponent(txtSoLuong, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
 								.addComponent(txtTenNCC, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
 								.addComponent(txtSize, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-								.addComponent(txtMauSac, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)))
+								.addComponent(txtMauSac, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+								.addGroup(gl_pnlCenTer.createSequentialGroup()
+									.addComponent(txtMaSanPham, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnTimTheoMa, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_pnlCenTer.createSequentialGroup()
 							.addComponent(lblGiaThanh)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -394,7 +400,9 @@ public class LapHoaDonUI extends JPanel {
 							.addComponent(lblMaKhachHang, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 							.addComponent(txtMaKhachHang, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnTim))
-						.addComponent(txtMaSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_pnlCenTer.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(btnTimTheoMa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(txtMaSanPham, Alignment.LEADING)))
 					.addGroup(gl_pnlCenTer.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pnlCenTer.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -458,16 +466,15 @@ public class LapHoaDonUI extends JPanel {
 						.addComponent(lblMaNhanVien, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(17, Short.MAX_VALUE))
 		);
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {btnXoaTrang, btnTimSP});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {btnThem, btnXoa});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblDonGia, txtDonGia});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenNCC, lblTenNCC});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblMaSanPham, txtMaSanPham});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenSanPham, lblTenSanPham});
-		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblSoLuong, lblNewLabel, txtSize, lblMuSc});
 		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenKhachHang, txtSDTKH, txtTenNhanVien, txtSoDTNV});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblSoLuong, lblNewLabel, txtSize, lblMuSc});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenSanPham, lblTenSanPham});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblMaSanPham, txtMaSanPham});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {txtTenNCC, lblTenNCC});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {lblDonGia, txtDonGia});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {btnThem, btnXoa});
+		gl_pnlCenTer.linkSize(SwingConstants.VERTICAL, new Component[] {btnXoaTrang, btnTimSP});
 		gl_pnlCenTer.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblMaSanPham, lblSoLuong, lblTenNCC, lblNewLabel, lblGiaThanh, lblMuSc});
-		listSanPham = new DefaultTableModel(null,new String[] {"Mã", "Tên SP", "Nhà CCấp", "Số lượng","Kích cỡ","Màu sắc","Đơn giá"});
 		pnlCenTer.setLayout(gl_pnlCenTer);
 		setLayout(gl_contentPane);
 	}

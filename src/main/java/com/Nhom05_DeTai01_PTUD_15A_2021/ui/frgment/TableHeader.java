@@ -14,7 +14,7 @@ public class TableHeader extends JLabel {
 		super(text);
 		setOpaque(true);
 		setBackground(Color.WHITE);
-		setFont(new Font("Tahoma", 1, 12));
+		setFont(new Font("Tahoma", Font.PLAIN, 20));
 		setForeground(new Color(102,102,102));
 		setBorder(new EmptyBorder(10,5,10,5));
 	}

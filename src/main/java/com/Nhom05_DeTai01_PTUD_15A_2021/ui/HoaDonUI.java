@@ -248,7 +248,7 @@ public class HoaDonUI extends JPanel {
 		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnCapNhat, btnXoa, btnXoaTrang, btnTimKiem});
 		
 		tblHoaDon = new JTable();
-		tblHoaDon.setRowHeight(25);
+		tblHoaDon.setRowHeight(35);
 		tblHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblHoaDon.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tblHoaDon.setModel(listHoaDon);
@@ -328,7 +328,7 @@ public class HoaDonUI extends JPanel {
 		
 		tableKhachHang = new JTable();
 		tableKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tableKhachHang.setRowHeight(25);
+		tableKhachHang.setRowHeight(35);
 		tableKhachHang.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listKhachHang = new DefaultTableModel(null,new String[] {"Mã khách hàng", "Tên", "Số điện thoại", "Địa chỉ"});
 		tableKhachHang.setModel(listKhachHang);
@@ -410,7 +410,7 @@ public class HoaDonUI extends JPanel {
 		gl_pnlNhanVien.linkSize(SwingConstants.VERTICAL, new Component[] {txtemail, btnTimNhanVien});
 		
 		tableNhanVien = new JTable();
-		tableNhanVien.setRowHeight(25);
+		tableNhanVien.setRowHeight(35);
 		tableNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tableNhanVien.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		listNhanVien = new DefaultTableModel(null,new String[] {"Mã nhân viên", "Tên", "Số điện thoại", "Email"});

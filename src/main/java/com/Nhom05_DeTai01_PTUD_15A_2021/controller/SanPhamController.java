@@ -112,7 +112,7 @@ public class SanPhamController {
 	 * @return SanPham
 	 */
 	public SanPham getSanPham(String maSP) {
-		return sanPhamDAO.getById(maSP);
+		return sanPhamDAO.findById(maSP).orElse(null);
 	}
 	/**
 	 * Load thông tin sản phẩm từ cơ sở dữ liệu vào table sản phẩm

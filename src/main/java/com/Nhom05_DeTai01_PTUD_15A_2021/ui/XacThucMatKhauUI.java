@@ -29,7 +29,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.Nhom05_DeTai01_PTUD_15A_2021.controller.NhanVienController;
+import com.Nhom05_DeTai01_PTUD_15A_2021.controller.TaiKhoanController;
 import com.Nhom05_DeTai01_PTUD_15A_2021.entity.NhanVien;
+import com.Nhom05_DeTai01_PTUD_15A_2021.entity.TaiKhoan;
 import com.k33ptoo.components.KButton;
 import com.k33ptoo.components.KGradientPanel;
 import javax.swing.JPasswordField;
@@ -44,6 +46,8 @@ public class XacThucMatKhauUI extends JFrame {
 
 	@Autowired
 	private NhanVienController controller;
+	@Autowired
+	private TaiKhoanController tkcontroller;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
@@ -109,9 +113,10 @@ public class XacThucMatKhauUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Nhập mật khẩu không khớp");
 					return;
 				}
-				NhanVien nhanVien = controller.getNhanVien();
-				nhanVien.getTaiKhoan().setMatKhau(encoder.encode(matKhauLai));
-				controller.saveNhanVien(nhanVien);
+				NhanVien nhanVien = controller.getNhanVien();		
+				TaiKhoan taiKhoan = nhanVien.getTaiKhoan();
+				taiKhoan.setMatKhau(encoder.encode(matKhauMoi));
+				tkcontroller.save(taiKhoan);
 				JOptionPane.showMessageDialog(null, "Tài khoản: "+ nhanVien.getTaiKhoan().getTaiKhoan()+" đổi mật khẩu thành công");
 				dispose();
 			}

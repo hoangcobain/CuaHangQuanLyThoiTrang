@@ -547,60 +547,6 @@ public class HomePageNhanVienUI extends JFrame {
 				loadSanPham();
 			}
 		});
-//		pnlLapHoaDon.tblSanPham.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				int index = pnlLapHoaDon.tblSanPham.getSelectedRow();
-//				String id = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 0).toString();
-//				String tenSP = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 1).toString();
-//				String tenNcc = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 2).toString();
-//				String kichCo = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 4).toString();
-//				String mauSac = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 5).toString();
-//				String donGia = pnlLapHoaDon.tblSanPham.getModel().getValueAt(index, 6).toString();
-//
-//				pnlLapHoaDon.txtMaSanPham.setText(id);
-//				pnlLapHoaDon.txtTenNCC.setText(tenNcc);
-//				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
-//				pnlLapHoaDon.txtSize.setText(kichCo);
-//				pnlLapHoaDon.txtMauSac.setText(mauSac);
-//				pnlLapHoaDon.txtDonGia.setText(donGia);
-//				try {
-//					int soLuong = Integer.parseInt(pnlLapHoaDon.txtSoLuong.getText());
-//					double dg = Double.parseDouble(donGia);
-//					pnlLapHoaDon.txtGiaThanh.setText(soLuong*dg+"");
-//				} catch (Exception e2) {
-//					pnlLapHoaDon.txtGiaThanh.setText("Lỗi số lượng hoặc đơn giá");
-//				}
-//			}
-//		});
-//		pnlLapHoaDon.tblCTHD.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				JTable table = pnlLapHoaDon.tblCTHD;
-//				int index = table.getSelectedRow();
-//				String maSp = table.getModel().getValueAt(index, 0).toString();
-//				String tenSP = table.getModel().getValueAt(index, 1).toString();
-//				String tenNCC = table.getModel().getValueAt(index, 2).toString();
-//				String size = table.getModel().getValueAt(index, 3).toString();
-//				String mauSac = table.getModel().getValueAt(index, 4).toString();
-//				String soLuong = table.getModel().getValueAt(index, 5).toString();
-//				String giaThanh = table.getModel().getValueAt(index, 6).toString();
-//				pnlLapHoaDon.txtMaSanPham.setText(maSp);
-//				pnlLapHoaDon.txtTenSanPham.setText(tenSP);
-//				pnlLapHoaDon.txtTenNCC.setText(tenNCC);
-//				pnlLapHoaDon.txtSize.setText(size);
-//				pnlLapHoaDon.txtMauSac.setText(mauSac);
-//				pnlLapHoaDon.txtSoLuong.setText(soLuong);
-//				pnlLapHoaDon.txtGiaThanh.setText(giaThanh);
-//				try {
-//					int sl = Integer.parseInt(soLuong);
-//					double gt = Double.parseDouble(giaThanh);
-//					pnlLapHoaDon.txtDonGia.setText(gt/sl+"");
-//				} catch (Exception e2) {
-//					pnlLapHoaDon.txtDonGia.setText("Lỗi số lượng hoặc giá thành");
-//				}
-//			}
-//		});
 		pnlLapHoaDon.btnXoaTrang.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -648,7 +594,7 @@ public class HomePageNhanVienUI extends JFrame {
 					return;
 				}
 				String soLuong = pnlLapHoaDon.txtSoLuong.getText();
-				String giaThanh = pnlLapHoaDon.txtGiaThanh.getText();
+				String donGia = pnlLapHoaDon.txtDonGia.getText();
 				SanPham sanPham = sanPhamController.getSanPham(maSP);
 				String tenSP = sanPham.getTenSanPham();
 				String tenNCC = sanPham.getNhaCungCap().getTenNCC();
@@ -657,20 +603,21 @@ public class HomePageNhanVienUI extends JFrame {
 				int slSP = sanPham.getSoLuong();
 				try {
 					int sl = Integer.parseInt(soLuong);
-					double gt = Double.parseDouble(giaThanh);
+					double dg = Double.parseDouble(donGia);
 					if (sl <= 0 || sl > slSP) {
 						JOptionPane.showMessageDialog(null,
 								"Nhập số lượng sai: 0 < SỐ LƯỢNG <= " + slSP + "(Sản phẩm trong kho)");
 						pnlLapHoaDon.txtSoLuong.selectAll();
 						pnlLapHoaDon.txtSoLuong.requestFocus();
 					} else {
-						String[] row = { maSP, tenSP, tenNCC, size, mauSac, sl + "", gt + "" };
-						removeRowCTHD(maSP);
+						int luu = sl + removeRowCTHD(maSP);
+						String[] row = { maSP.toUpperCase(), tenSP, tenNCC, size, mauSac, luu + "", dg*luu + "" };
 						pnlLapHoaDon.listCTHD.addRow(row);
 						loadTongTien();
 					}
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Yêu cầu nhập số lượng");
+					e2.printStackTrace();
 				}
 			}
 		});
@@ -720,6 +667,27 @@ public class HomePageNhanVienUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				paneContent.setViewportView(pnlKhachHang);
 				loadKhachHang();
+			}
+		});
+		pnlLapHoaDon.btnTimTheoMa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String ma = pnlLapHoaDon.txtMaSanPham.getText().trim();
+				if(pnlLapHoaDon.txtMaSanPham.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Bạn cần phải nhập mã sản phẩm");
+					return ;
+				}
+				SanPham sp = sanPhamController.getSanPham(ma);
+				if(sp == null) {
+					JOptionPane.showMessageDialog(null, " Mã sản phẩm không đúng");
+					return ;
+				}
+				pnlLapHoaDon.txtTenSanPham.setText(sp.getTenSanPham());
+				pnlLapHoaDon.txtDonGia.setText(sp.getGiaThanh()+"");
+				pnlLapHoaDon.txtMauSac.setText(sp.getMauSac());
+				pnlLapHoaDon.txtSize.setText(sp.getSize());
+				pnlLapHoaDon.txtTenNCC.setText(sp.getNhaCungCap().getTenNCC());
+				
 			}
 		});
 		// XỬ LÝ KHÁCH HÀNG
@@ -1419,13 +1387,16 @@ public class HomePageNhanVienUI extends JFrame {
 		pnlLapHoaDon.txtTongTien.setText(tongTien + "");
 	}
 
-	protected void removeRowCTHD(String maSP) {
+	protected int removeRowCTHD(String maSP) {
 		DefaultTableModel model = (DefaultTableModel) pnlLapHoaDon.tblCTHD.getModel();
 		for (int i = 0; i < model.getRowCount(); ++i) {
-			if (model.getValueAt(i, 0).equals(maSP)) {
+			if (model.getValueAt(i, 0).equals(maSP.toUpperCase())) {
+				int a = Integer.parseInt(model.getValueAt(i, 5).toString());
 				model.removeRow(i);
+				return a;
 			}
 		}
+		return 0;
 	}
 
 	protected void xoaTrangLapHoaDon() {
@@ -1459,6 +1430,10 @@ public class HomePageNhanVienUI extends JFrame {
 		pnlLapHoaDon.txtTenNCC.setText(pnlSanPham.cmbTenNCC.getSelectedItem().toString());
 		pnlLapHoaDon.txtDonGia.setText(pnlSanPham.txtGiaThanh.getText());
 		pnlSanPham.btnLHD.setEnabled(false);
+		
+		pnlLapHoaDon.txtMaNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien());
+		pnlLapHoaDon.txtTenNhanVien.setText(taiKhoanController.getTaiKhoan().getNhanVien().getTenNhanVien());
+		pnlLapHoaDon.txtSoDTNV.setText(taiKhoanController.getTaiKhoan().getNhanVien().getSoDienThoai());
 	}
 
 	protected void xoaTrangCTHD() {
