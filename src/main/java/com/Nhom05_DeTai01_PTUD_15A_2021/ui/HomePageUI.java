@@ -128,7 +128,7 @@ public class HomePageUI extends JFrame {
 		lstMenu.addItem(new ModelMenu("", "", MenuType.EMPTY));
 		lstMenu.addItem(new ModelMenu("", " Cửa Hàng", MenuType.TITLE));
 		lstMenu.addItem(new ModelMenu("bill", "Quản Lý Hóa Đơn", MenuType.MENU));
-		lstMenu.addItem(new ModelMenu("page", "Lập Hóa Đơn", MenuType.MENU));
+//		lstMenu.addItem(new ModelMenu("page", "Lập Hóa Đơn", MenuType.MENU));
 		lstMenu.addItem(new ModelMenu("trend", "Thống Kê", MenuType.MENU));
 
 		panelMenu = new Menu(lstMenu);
@@ -183,11 +183,11 @@ public class HomePageUI extends JFrame {
 					paneContent.setViewportView(pnlhoaDon);
 					hoaDonController.loadHoaDon(pnlhoaDon.listHoaDon);
 					break;
+//				case 11:
+//					paneContent.setViewportView(pnlLapHoaDon);
+//					loadHoaDon();
+//					break;
 				case 11:
-					paneContent.setViewportView(pnlLapHoaDon);
-					loadHoaDon();
-					break;
-				case 12:
 					loadThongKe();
 					paneContent.setViewportView(pnlThongKe);
 					break;
