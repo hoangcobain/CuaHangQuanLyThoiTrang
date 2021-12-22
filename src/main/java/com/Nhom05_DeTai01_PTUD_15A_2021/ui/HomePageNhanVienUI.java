@@ -708,7 +708,7 @@ public class HomePageNhanVienUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Tên không được để trống");
 					pnlKhachHang.txtTenNhanVien.requestFocus();
 					pnlKhachHang.txtTenNhanVien.selectAll();
-				} else if (ten.matches("[0-9]")) {
+				} else if (ten.matches("[0-9]*")) {
 					JOptionPane.showMessageDialog(null, "Tên khách hàng không được có số");
 					pnlKhachHang.txtTenNhanVien.requestFocus();
 					pnlKhachHang.txtTenNhanVien.selectAll();
@@ -716,6 +716,10 @@ public class HomePageNhanVienUI extends JFrame {
 					JOptionPane.showMessageDialog(null, "Số điện thoại phải đủ 10 số và không được để trống");
 					pnlKhachHang.txtSoDienThoai.requestFocus();
 					pnlKhachHang.txtSoDienThoai.selectAll();
+				}else if (diaChi.matches("[0-9]*") && !diaChi.equals("")) {
+					JOptionPane.showMessageDialog(null, "Địa chỉ phải có chữ");
+					pnlKhachHang.txtDiaChi.requestFocus();
+					pnlKhachHang.txtDiaChi.selectAll();
 				} else {
 					KhachHang khachHang = new KhachHang(ten, gioiTinh, sodt, diaChi);
 					khachHang = khachHangController.themKhachHang(khachHang);

@@ -97,11 +97,11 @@ public class NhanVienUI extends JPanel {
 		);
 		gl_contentPane.linkSize(SwingConstants.VERTICAL, new Component[] {pnlChucNang, pnlTimKiem, pnlDienThongTin});
 		
-		JLabel lblMaNhanVien = new JLabel("Mã khách hàng:");
+		JLabel lblMaNhanVien = new JLabel("Mã nhân viên");
 		lblMaNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JLabel lblTenNhanVien = new JLabel("Tên khách hàng:");
+		JLabel lblTenNhanVien = new JLabel("Tên nhân viên");
 		lblTenNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTenNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
