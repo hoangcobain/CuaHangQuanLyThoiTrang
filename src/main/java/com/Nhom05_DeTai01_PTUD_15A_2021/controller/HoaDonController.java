@@ -114,7 +114,10 @@ public class HoaDonController {
 		listHoaDon.setRowCount(0);
 		List<HoaDon> list;
 		logger.warn(day + " " + month + " " + year);
-		list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH, day, month, year);
+		if(maKH.equals(""))
+			list = hoaDonDAO.searchHoaDonByNVKH(maNV, maKH, day, month, year);
+		else
+			list = hoaDonDAO.searchHoaDonByNVandKH(maNV, maKH, day, month, year);
 		for (Iterator<HoaDon> iterator = list.iterator(); iterator.hasNext();) {
 			HoaDon hoaDon = iterator.next();
 			Object[] row = { hoaDon.getMaHoaDon(), hoaDon.getNgayLapHoaDon(), hoaDon.getKhachHang().getTenKhachHang(),
