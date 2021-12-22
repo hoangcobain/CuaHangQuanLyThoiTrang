@@ -1171,7 +1171,7 @@ public class HomePageUI extends JFrame {
 					pnlNhanVien.txtTenNhanVien.requestFocus();
 					pnlNhanVien.txtTenNhanVien.selectAll();
 				}
-				else if (diaChi.matches("[0-9]*")) {
+				else if (diaChi.matches("[0-9]*") && !diaChi.equals("")) {
 					JOptionPane.showMessageDialog(null, "Địa chỉ phải có chữ");
 					pnlNhanVien.txtDiaChi.requestFocus();
 					pnlNhanVien.txtDiaChi.selectAll();
@@ -1308,11 +1308,20 @@ public class HomePageUI extends JFrame {
 					pnlNguonHang.txtTen.requestFocus();
 					pnlNguonHang.txtTen.selectAll();
 					;
-				} else if (!(sdt.length() > 0 && sdt.matches("[0-9]{10}"))) {
-					JOptionPane.showMessageDialog(null, "Số điện thoại phải đủ 10 số và không được để trống");
+				}
+				else if (ten.matches("[0-9]*")) {
+					JOptionPane.showMessageDialog(null, "Tên phải có chữ");
 					pnlNguonHang.txtTen.requestFocus();
 					pnlNguonHang.txtTen.selectAll();
+				}else if (!(sdt.length() > 0 && sdt.matches("[0-9]{10}"))) {
+					JOptionPane.showMessageDialog(null, "Số điện thoại phải đủ 10 số và không được để trống");
+					pnlNguonHang.txtSDT.requestFocus();
+					pnlNguonHang.txtSDT.selectAll();
 					;
+				}else if (diachi.matches("[0-9]*") && !diachi.equals("")) {
+					JOptionPane.showMessageDialog(null, "Địa chỉ phải có chữ");
+					pnlNguonHang.txtDiaChi.requestFocus();
+					pnlNguonHang.txtDiaChi.selectAll();
 				} else {
 					NhaCungCap nhaCungCap = new NhaCungCap(ten, diachi, sdt);
 					nhaCungCapController.save(nhaCungCap);
