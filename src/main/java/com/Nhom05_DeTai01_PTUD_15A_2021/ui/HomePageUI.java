@@ -531,11 +531,19 @@ public class HomePageUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String maSP = pnlChiTietHoaDon.txtMaSanPham.getText();
+				if(maSP.equals("")) {
+					JOptionPane.showMessageDialog(null, "Chưa chọn sản phẩm");
+					return ;
+				}
 				String maHD = pnlChiTietHoaDon.txtMaHoaDon.getText();
 				String soLuong = pnlChiTietHoaDon.txtSoLuong.getText();
 				String giaThanh = pnlChiTietHoaDon.txtGiaThanh.getText();
 				try {
 					int sl = Integer.parseInt(soLuong);
+					if(sl <= 0) {
+						JOptionPane.showMessageDialog(null, "Bạn phải nhập số lượng > 0");
+						return ;
+					}
 					double gt = Double.parseDouble(giaThanh);
 					try {
 						ChiTietHoaDon cthd = chiTietHoaDonController.getCTHDByHDSP(maHD, maSP);
@@ -1607,8 +1615,8 @@ public class HomePageUI extends JFrame {
 	protected void xoaTrangCTHD() {
 		pnlChiTietHoaDon.txtDonGia.setText("0.0");
 		pnlChiTietHoaDon.txtSoLuong.setText("0");
-		pnlChiTietHoaDon.txtMaSanPham.setText("0.0");
-		pnlChiTietHoaDon.txtGiaThanh.setText("");
+		pnlChiTietHoaDon.txtMaSanPham.setText("");
+		pnlChiTietHoaDon.txtGiaThanh.setText("0.0");
 		pnlChiTietHoaDon.txtTenSanPham.setText("");
 		pnlChiTietHoaDon.txtTenNCC.setText("");
 		pnlChiTietHoaDon.txtKichCo.setText("");

@@ -169,6 +169,8 @@ public class HomePageNhanVienUI extends JFrame {
 					loadKhachHang();
 					break;
 				case 9:
+					pnlhoaDon.btnCapNhat.setEnabled(false);
+					pnlhoaDon.btnXoa.setEnabled(false);
 					loadThongTinNhanVienTheoRoleNhanVien();
 					String ma = taiKhoanController.getTaiKhoan().getNhanVien().getMaNhanVien();
 					paneContent.setViewportView(pnlhoaDon);
@@ -279,6 +281,7 @@ public class HomePageNhanVienUI extends JFrame {
 		pnlhoaDon.btnXoa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				String id = pnlhoaDon.txtMaHoaDon.getText();
 				if (!id.equals("")) {
 					hoaDonController.xoaHoaDon(id);
@@ -1458,6 +1461,9 @@ public class HomePageNhanVienUI extends JFrame {
 		pnlChiTietHoaDon.txtNgayLap.setText(hoaDon.getNgayLapHoaDon().toString());
 		pnlChiTietHoaDon.txtTenKhachHang.setText(hoaDon.getKhachHang().getTenKhachHang());
 		pnlChiTietHoaDon.txtTenNhanVien.setText(hoaDon.getNhanVien().getTenNhanVien());
+		pnlChiTietHoaDon.btnCapNhat.setEnabled(false);
+		pnlChiTietHoaDon.btnXoa.setEnabled(false);
+		
 	}
 
 	protected void xoaTrangHoaDon(JButton btnCTHD) {
